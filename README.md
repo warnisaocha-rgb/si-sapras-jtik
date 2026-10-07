@@ -8,7 +8,7 @@ Program Studi **Teknik Komputer**, Jurusan Teknik Informatika dan Komputer (JTIK
 ## 📌 Identitas Proyek & Kelompok
 
 * **Judul Penelitian:**  
-  *Rancang Bangun Antarmuka Pengguna Sistem Informasi Peminjaman Sarana Prasarana (SI-SAPRAS) di Jurusan Teknik Informatika dan Komputer (JTIK) Universitas Negeri Makassar Berbasis User-Centered Design*
+  *Rancang Bangun Antarmuka Pengguna Sistem Informasi Peminjaman Sarana Prasarana (SI-SAPRAS) di Jurusan Teknik Informatika dan Komputer (JTIK) Universitas Negeri Makassar Berbasis Human-Centered Design (HCD)*
 * **Kelompok:** Kelompok 2 (HCI)
 * **Dosen Pengampu:** Ayu Lestari, S.Pd., M.Pd.
 
