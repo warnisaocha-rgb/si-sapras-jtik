@@ -698,7 +698,7 @@
                   <span class="text-[9px] font-black px-1.5 py-0.5 rounded bg-[#22C55E] text-white">04. ENV</span>
                   <h4 class="text-xs font-black text-slate-900 mt-1 font-display">Lingkungan</h4>
                   <p class="text-[11px] text-slate-700 font-medium mt-1 leading-relaxed">
-                    Ruang kelas yang mendesak sebelum jam kuliah dimulai serta kondisi fisik laboratorium dan Bengkel IT.</p></div></div></div>
+                    Ruang kelas yang mendesak sebelum jam kuliah dimulai serta kondisi fisik laboratorium, Bengkel IT, dan ruang administrasi.</p></div></div></div>
 
           </div>
         `
@@ -959,9 +959,9 @@
 
     // Auto-clean obsolete caches from earlier testing so official proposal loads cleanly
     try {
-      if (localStorage.getItem('sapras_proposal_synced_v6') !== 'true') {
+      if (localStorage.getItem('sapras_proposal_synced_v7') !== 'true') {
         localStorage.clear();
-        localStorage.setItem('sapras_proposal_synced_v6', 'true');
+        localStorage.setItem('sapras_proposal_synced_v7', 'true');
       }
     } catch(e) {}
 

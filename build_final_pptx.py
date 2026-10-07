@@ -357,7 +357,7 @@ def build_final_presentation():
         ("1. Pengguna (Users)", "Mahasiswa yang mencari & meminjam barang, Ketua Tingkat yang melapor peminjaman bangku, teknisi lab inventaris.", C_PINK),
         ("2. Tugas (Tasks)", "Mengecek ketersediaan alat, mengisi formulir peminjaman, melapor mutasi bangku kelas, konfirmasi pengembalian.", C_YELLOW),
         ("3. Peralatan (Equipment)", "Telepon pintar (smartphone) milik mahasiswa dan komputer meja (desktop PC) milik teknisi/pengelola lab.", C_BLUE),
-        ("4. Lingkungan (Environment)", "Ruang kelas yang mendesak sebelum jam kuliah dimulai serta kondisi fisik laboratorium dan Bengkel IT.", C_GREEN)
+        ("4. Lingkungan (Environment)", "Ruang kelas yang mendesak sebelum jam kuliah dimulai serta kondisi fisik laboratorium, Bengkel IT, dan ruang administrasi.", C_GREEN)
     ]
     for idx, (ct_t, ct_d, ct_col) in enumerate(contexts):
         cx = Inches(0.9 + idx * 2.92)
