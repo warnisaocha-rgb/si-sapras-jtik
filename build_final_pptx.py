@@ -148,7 +148,7 @@ def build_final_presentation():
     p.font.color.rgb = C_DARK
 
     p = tf1.add_paragraph()
-    p.text = "Rancang Bangun Antarmuka Pengguna Sistem Informasi Peminjaman Sarana Prasarana di JTIK Berbasis Human-Centered Design (HCD)"
+    p.text = "Rancang Bangun Antarmuka Pengguna Sistem Informasi Peminjaman Sarana Prasarana di JTIK Berbasis User-Centered Design (UCD)"
     p.font.name = FONT_FAMILY
     p.font.size = Pt(13)
     p.font.color.rgb = C_MUTED
@@ -346,11 +346,11 @@ def build_final_presentation():
     p.font.name = FONT_FAMILY; p.font.size = Pt(11); p.font.color.rgb = C_DARK
 
     # ==========================================
-    # SLIDE 6: BAB II - HCD (ISO 9241-210)
+    # SLIDE 6: BAB II - UCD (ISO 9241-210)
     # ==========================================
     s6 = prs.slides.add_slide(blank_layout)
-    add_base_slide(s6, "sisapras.jtik.unm.ac.id/metode-hcd", "ISO 9241-210")
-    add_header(s6, "BAB II — PENDEKATAN DESAIN", "Perancangan Berpusat pada Manusia (Human-Centered Design / HCD)", "Standar ISO 9241-210 (Wiryawan, 2011) dan 4 butir konteks penggunaan faktual di JTIK")
+    add_base_slide(s6, "sisapras.jtik.unm.ac.id/metode-ucd", "ISO 9241-210")
+    add_header(s6, "BAB II — PENDEKATAN DESAIN", "Perancangan Berpusat pada Pengguna (User-Centered Design / UCD)", "Standar ISO 9241-210 (Wiryawan, 2011) dan 4 butir konteks penggunaan faktual di JTIK")
 
     # 4 Konteks Penggunaan Faktual JTIK
     contexts = [
@@ -453,7 +453,7 @@ def build_final_presentation():
     p.text = "1. Pendekatan Desain"
     p.font.name = FONT_FAMILY; p.font.size = Pt(14); p.font.bold = True; p.font.color.rgb = C_DARK
     p = tf.add_paragraph()
-    p.text = "\n• Metode:\nHuman-Centered Design (HCD).\n\n• Alasan Pemilihan:\nBerangkat dari masalah nyata di JTIK agar rancangan antarmuka didasarkan pada kebutuhan empiris pengguna.\n\n• Fokus Proposal UTS:\nPengumpulan data wawancara, analisis kebutuhan, penyusunan HTA & User Flow, serta perancangan antarmuka."
+    p.text = "\n• Metode:\nUser-Centered Design (UCD).\n\n• Alasan Pemilihan:\nBerangkat dari masalah nyata di JTIK agar rancangan antarmuka didasarkan pada kebutuhan empiris pengguna.\n\n• Fokus Proposal UTS:\nPengumpulan data wawancara, analisis kebutuhan, penyusunan HTA & User Flow, serta perancangan antarmuka."
     p.font.name = FONT_FAMILY; p.font.size = Pt(11); p.font.color.rgb = C_DARK
 
     # Card 2
