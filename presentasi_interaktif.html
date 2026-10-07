@@ -845,11 +845,7 @@
                   <h3 class="text-xs font-black text-slate-900 mt-1 mb-2 font-display">Wawancara Mendalam</h3>
                   <div class="space-y-1.5 text-xs text-slate-800 font-medium">
                     <p>• <strong>Wawancara Mendalam:</strong> Menggali alur pengelolaan, kendala pencatatan buku konvensional, sebaran alat laboratorium, dan kebutuhan bukti bebas pinjam.</p>
-                    <p>• <strong>Informasi Empiris:</strong> Data kualitatif dijadikan acuan utama dalam menentukan susunan tombol, navigasi layar, dan formulir sistem.</p>
                   </div>
-                </div>
-                <div class="mt-2 p-2 rounded-xl bg-white border border-slate-900 text-[10px] font-bold text-amber-950">
-                  Data kualitatif dijadikan acuan susunan tombol dan formulir.
                 </div>
               </div>
 
@@ -963,9 +959,9 @@
 
     // Auto-clean obsolete caches from earlier testing so official proposal loads cleanly
     try {
-      if (localStorage.getItem('sapras_proposal_synced_v4') !== 'true') {
+      if (localStorage.getItem('sapras_proposal_synced_v5') !== 'true') {
         localStorage.clear();
-        localStorage.setItem('sapras_proposal_synced_v4', 'true');
+        localStorage.setItem('sapras_proposal_synced_v5', 'true');
       }
     } catch(e) {}
 

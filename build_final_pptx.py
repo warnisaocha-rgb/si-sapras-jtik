@@ -461,11 +461,11 @@ def build_final_presentation():
     tb = s9.shapes.add_textbox(Inches(4.99), Inches(2.35), Inches(3.34), Inches(4.2))
     tf = tb.text_frame; tf.word_wrap = True
     p = tf.paragraphs[0]
-    p.text = "2. Teknik Pengumpulan Data"
+    p.text = "2. Teknik Pengumpulan"
     p.font.name = FONT_FAMILY; p.font.size = Pt(14); p.font.bold = True; p.font.color.rgb = C_DARK
     p = tf.add_paragraph()
-    p.text = "\n• Wawancara Mendalam:\nWawancara langsung untuk menggali prosedur operasional dan hambatan nyata dalam pengelolaan sarpras JTIK.\n\n• Fokus Penggalian:\nKendala pencatatan buku konvensional, sebaran alat di 3 ruangan, fenomena bangku kelas, dan verifikasi bebas sarpras.\n\n• Tujuan Data:\nMenjadi landasan penyusunan HTA, User Flow, serta arsitektur solusi sistem informasi."
-    p.font.name = FONT_FAMILY; p.font.size = Pt(10.5); p.font.color.rgb = C_DARK
+    p.text = "\nWawancara Mendalam\n\n• Wawancara Mendalam:\nMenggali alur pengelolaan, kendala pencatatan buku konvensional, sebaran alat laboratorium, dan kebutuhan bukti bebas pinjam."
+    p.font.name = FONT_FAMILY; p.font.size = Pt(11); p.font.color.rgb = C_DARK
 
     # Card 3
     add_card(s9, Inches(8.78), Inches(2.2), Inches(3.64), Inches(4.5), C_GREEN)
