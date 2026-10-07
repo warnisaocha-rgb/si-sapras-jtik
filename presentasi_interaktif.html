@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SI-SAPRAS JTIK — Presentasi UTS Desain Antarmuka Pengguna</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      user-select: none;
+    }
+    .font-display {
+      font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Neo-Brutalism & Digitalisme Hard Shadows */
+    .hard-shadow {
+      box-shadow: 5px 5px 0px #0f172a;
+    }
+    .hard-shadow-sm {
+      box-shadow: 3px 3px 0px #0f172a;
+    }
+    .hard-shadow-lg {
+      box-shadow: 8px 8px 0px #0f172a;
+    }
+
+    /* Interactive Hover Lift */
+    .sticker-hover {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sticker-hover:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 6px 6px 0px #0f172a;
+    }
+
+    /* Floating Sparkles */
+    @keyframes floatSparkle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(10deg); }
+    }
+    .animate-sparkle {
+      animation: floatSparkle 3s ease-in-out infinite;
+    }
+
+    /* Slide transition */
+    .slide-enter {
+      opacity: 0;
+      transform: translateY(10px) scale(0.99);
+    }
+    .slide-active {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dotted background */
+    .bg-dot-pattern {
+      background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 8px;
+      border: 1px solid #0f172a;
+    }
+    /* Fullscreen Mode: Hanya Layar PPT/Slide Mockup yang Tampil (Crop Bebas Elemen Luar) */
+    #slideViewport:fullscreen,
+    #slideViewport:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      min-height: 100vh !important;
+      border-radius: 0px !important;
+      border: none !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #FFFFFF !important;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF7F2] bg-dot-pattern text-slate-900 min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <!-- Top Decorative Floating Banner -->
+  <header class="relative z-20 border-b-2 border-slate-900 bg-white/95 backdrop-blur-md px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-sm">
+    <div class="flex items-center space-x-3">
+      <!-- Logo Icon Badge -->
+      <div class="w-9 h-9 rounded-xl bg-[#FFDF00] border-2 border-slate-900 flex items-center justify-center hard-shadow-sm font-black text-sm">
+        ✨
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-sm font-black tracking-tight text-slate-900 font-display">SI-SAPRAS JTIK</h1>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E9D5FF] text-purple-900 border border-slate-900 -rotate-1 inline-block">PROPOSAL UTS</span>
+          <span class="hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#BAF7D0] text-emerald-900 border border-slate-900 rotate-1">HCD METHOD</span>
+        </div>
+        <p class="text-[11px] text-slate-600 font-medium">Desain Antarmuka Pengguna • JTIK FT Universitas Negeri Makassar</p>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Pills (Canva Tabs Style) -->
+    <nav class="hidden lg:flex items-center space-x-1.5 bg-[#F1F5F9] p-1 rounded-xl border-2 border-slate-900 text-[11px] font-bold">
+      <button onclick="goToSlide(0)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="0">🏠 Cover</button>
+      <button onclick="goToSlide(1)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="1">📌 Masalah</button>
+      <button onclick="goToSlide(2)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="2">🎯 Tujuan</button>
+      <button onclick="goToSlide(3)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="3">🔍 Lingkup</button>
+      <button onclick="goToSlide(4)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="4">🎨 UI vs IMK</button>
+      <button onclick="goToSlide(5)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="5">🔄 Siklus HCD</button>
+      <button onclick="goToSlide(6)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="6">🧩 HTA & Flow</button>
+      <button onclick="goToSlide(7)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="7">📚 5 Jurnal</button>
+      <button onclick="goToSlide(8)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="8">🎤 Wawancara W1</button>
+      <button onclick="goToSlide(9)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="9">📋 5 Pertanyaan</button>
+      <button onclick="goToSlide(10)" class="tab-btn px-2.5 py-1 rounded-lg transition" data-slide="10">🎉 Selesai</button>
+    </nav>
+
+    <!-- Top Right Action Buttons -->
+    <div class="flex items-center space-x-2">
+      <!-- Edit Mode Toggle Button -->
+      <button id="editToggleBtn" onclick="toggleEditMode()" title="Edit Teks Langsung di Layar" class="px-2.5 py-1 rounded-lg bg-[#FEF08A] hover:bg-[#FACC15] text-slate-950 border-2 border-slate-900 text-xs font-extrabold flex items-center space-x-1 transition hard-shadow-sm">
+        <span>✏️ Edit Teks</span>
+      </button>
+
+      <!-- Reset Custom Text Button -->
+      <button onclick="resetCurrentSlideText()" title="Reset Teks ke Asli Proposal" class="px-2 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border-2 border-slate-900 text-xs font-bold transition hard-shadow-sm">
+        <span>↺ Reset</span>
+      </button>
+
+      <!-- Sound FX Toggle -->
+      <button id="soundToggle" onclick="toggleAudio()" title="Sound FX Toggle" class="w-8 h-8 rounded-lg bg-white border-2 border-slate-900 text-slate-800 hover:bg-amber-100 flex items-center justify-center transition hard-shadow-sm">
+        <span id="soundOnIcon" class="text-xs">🔔</span>
+        <span id="soundOffIcon" class="text-xs hidden">🔕</span>
+      </button>
+
+      <!-- Fullscreen Button -->
+      <button id="fsBtnTop" onclick="toggleFullScreen()" title="Layar Penuh (F)" class="px-2.5 py-1 rounded-lg bg-[#38BDF8] hover:bg-[#0EA5E9] text-slate-950 border-2 border-slate-900 text-xs font-bold flex items-center space-x-1.5 transition hard-shadow-sm">
+        <span>⛶ Layar Penuh</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Slide Canvas (Chunky Web Browser Window Mockup) -->
+  <main class="relative z-10 flex-1 flex items-center justify-center p-3 sm:p-5 lg:p-6">
+    <div id="slideViewport" class="w-full max-w-6xl aspect-[16/9] min-h-[580px] max-h-[820px] rounded-2xl bg-white border-[2.5px] border-slate-900 hard-shadow-lg relative overflow-hidden flex flex-col">
+      
+      <!-- Browser Top Chrome Bar (Colorful Digitalism Header) -->
+      <div class="h-11 bg-[#F8FAFC] border-b-2 border-slate-900 px-4 flex items-center justify-between shrink-0">
+        <!-- 3 Traffic Lights with Dark Border -->
+        <div class="flex items-center space-x-2">
+          <div class="w-3.5 h-3.5 rounded-full bg-[#FF5F56] border-[1.5px] border-slate-900 shadow-sm"></div>
+          <div class="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] border-[1.5px] border-slate-900 shadow-sm"></div>
+          <div class="w-3.5 h-3.5 rounded-full bg-[#27C93F] border-[1.5px] border-slate-900 shadow-sm"></div>
+        </div>
+
+        <!-- URL Address Pill Bar -->
+        <div class="flex-1 max-w-lg mx-3 sm:mx-6">
+          <div class="bg-white border-2 border-slate-900 rounded-full px-3.5 py-1 flex items-center justify-between space-x-2 text-xs font-semibold text-slate-700 hard-shadow-sm">
+            <div class="flex items-center space-x-2 truncate">
+              <span class="text-xs">🔒</span>
+              <span class="truncate text-slate-800 font-mono text-[11px]" id="urlText">https://sisapras.jtik.unm.ac.id/portal</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-bold hidden sm:inline">100% SECURE</span>
+          </div>
+        </div>
+
+        <!-- Right Badge Status & Embedded Controls -->
+        <div class="flex items-center space-x-2">
+          <span id="windowBadge" class="hidden sm:inline-block text-[10px] font-black px-2.5 py-0.5 rounded-md bg-[#FED7AA] text-orange-950 border border-slate-900 rotate-1">
+            ✨ PROPOSAL READY
+          </span>
+          <div class="flex items-center space-x-1 pl-1.5 border-l-2 border-slate-900/20">
+            <button onclick="prevSlide()" title="Sebelumnya (←)" class="w-6 h-6 rounded-md bg-white hover:bg-slate-100 text-slate-900 border border-slate-900 text-xs font-black transition flex items-center justify-center hard-shadow-sm active:translate-y-0.5">
+              ‹
+            </button>
+            <span id="fsSlideCounter" class="text-[11px] font-mono font-black px-2 py-0.5 rounded-md bg-[#FEF08A] text-slate-950 border border-slate-900">
+              01/11
+            </span>
+            <button onclick="nextSlide()" title="Selanjutnya (→)" class="w-6 h-6 rounded-md bg-[#F43F5E] hover:bg-[#E11D48] text-white border border-slate-900 text-xs font-black transition flex items-center justify-center hard-shadow-sm active:translate-y-0.5">
+              ›
+            </button>
+            <button onclick="toggleFullScreen()" title="Layar Penuh / Keluar Layar Penuh (F)" class="px-2 py-0.5 rounded-md bg-[#38BDF8] hover:bg-[#0EA5E9] text-slate-950 border border-slate-900 text-[10px] font-black transition flex items-center space-x-1 hard-shadow-sm">
+              <span id="fsIcon">⛶</span>
+              <span class="hidden md:inline" id="fsText">Penuh</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide Body Container (Injected by JS) -->
+      <div id="slideInner" class="flex-1 p-5 sm:p-7 lg:p-8 flex flex-col justify-between slide-active overflow-y-auto bg-gradient-to-b from-[#FFFDF9] to-[#FAF8F5]">
+        <!-- Injected dynamic content here -->
+      </div>
+
+      <!-- Bottom Animated Progress Bar -->
+      <div class="h-2 bg-slate-200 w-full relative border-t-2 border-slate-900">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-[#F472B6] via-[#FBBF24] via-[#38BDF8] to-[#4ADE80] transition-all duration-300" style="width: 9%;"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bottom Interactive Remote Controls -->
+  <footer class="relative z-20 px-6 py-2.5 flex items-center justify-between border-t-2 border-slate-900 bg-white">
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2 text-xs font-bold text-slate-700">
+        <span class="px-2 py-0.5 rounded-md bg-[#E2E8F0] border border-slate-900 text-slate-900">SLIDE</span>
+        <span id="slideCounterText" class="px-2 py-0.5 rounded-md bg-[#FEF08A] text-slate-950 border border-slate-900 font-mono text-xs font-black">01 / 11</span>
+      </div>
+      <div class="hidden sm:flex items-center space-x-1 text-[11px] font-semibold text-slate-500">
+        <span>Tekan</span>
+        <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-400 text-slate-800">←</kbd>
+        <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-400 text-slate-800">→</kbd>
+        <span>atau</span>
+        <kbd class="px-2 py-0.5 rounded bg-slate-100 border border-slate-400 text-slate-800">Spasi</kbd>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex items-center space-x-2">
+      <button onclick="prevSlide()" class="px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 border-2 border-slate-900 text-xs font-bold transition hard-shadow-sm active:translate-y-0.5 active:shadow-none flex items-center space-x-1.5">
+        <span>←</span>
+        <span>Sebelumnya</span>
+      </button>
+
+      <button onclick="nextSlide()" class="px-4 py-1.5 rounded-xl bg-[#F43F5E] hover:bg-[#E11D48] text-white border-2 border-slate-900 text-xs font-extrabold transition hard-shadow-sm active:translate-y-0.5 active:shadow-none flex items-center space-x-1.5">
+        <span>Selanjutnya</span>
+        <span>→</span>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    // Web Audio Click sound
+    let audioEnabled = true;
+    const audioCtx = (window.AudioContext || window.webkitAudioContext) ? new (window.AudioContext || window.webkitAudioContext)() : null;
+    function playTick() {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(650, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.05);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('soundOnIcon').classList.toggle('hidden', !audioEnabled);
+      document.getElementById('soundOffIcon').classList.toggle('hidden', audioEnabled);
+    }
+
+    function toggleFullScreen() {
+      const vp = document.getElementById('slideViewport');
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (vp.requestFullscreen) {
+          vp.requestFullscreen().catch(() => {});
+        } else if (vp.webkitRequestFullscreen) {
+          vp.webkitRequestFullscreen();
+        } else if (vp.msRequestFullscreen) {
+          vp.msRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      const fsIcon = document.getElementById('fsIcon');
+      if (fsIcon) fsIcon.innerText = isFs ? '✕' : '⛶';
+      const fsText = document.getElementById('fsText');
+      if (fsText) fsText.innerText = isFs ? 'Tutup' : 'Penuh';
+      const fsBtnTop = document.getElementById('fsBtnTop');
+      if (fsBtnTop) fsBtnTop.innerHTML = isFs ? '<span>✕ Keluar</span>' : '<span>⛶ Layar Penuh</span>';
+    });
+
+    // SLIDE DATA WITH VIBRANT CANVA-STYLE PALETTE & DECORATIONS
+    const slidesData = [
+      // 0: COVER (Vibrant & Playful Digitalism Hero)
+      {
+        url: "sisapras.jtik.unm.ac.id/portal",
+        badge: "✨ WELCOME",
+        tag: "SEMINAR PROPOSAL UTS • DESAIN ANTARMUKA PENGGUNA",
+        title: "SI-SAPRAS JTIK",
+        subtitle: "Rancang Bangun Antarmuka Pengguna Sistem Informasi Peminjaman Sarana Prasarana di JTIK FT UNM Berbasis User-Centered Design",
+        content: `
+          <div class="flex-1 flex flex-col lg:flex-row items-center justify-between gap-6 my-auto relative">
+            
+            <!-- Left Side: Title, Subtitle, Team & Lecturer (58% width) -->
+            <div class="flex-1 text-left flex flex-col justify-center">
+              
+              <!-- Floating Decorative Sticker Badges -->
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="px-3 py-1 rounded-full bg-[#FEF08A] text-amber-950 font-black text-xs border-2 border-slate-900 hard-shadow-sm -rotate-2 inline-block">
+                  ✦ KELOMPOK 2 (HCI) • TEKNIK KOMPUTER ✦
+                </span>
+                <span class="px-3 py-1 rounded-full bg-[#BAF7D0] text-emerald-950 font-black text-xs border-2 border-slate-900 hard-shadow-sm rotate-2 inline-block">
+                  ★ USER-CENTERED DESIGN (UCD) ★
+                </span>
+              </div>
+
+              <!-- Big Playful Title -->
+              <div class="inline-block relative mb-2">
+                <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight font-display">
+                  SI-SAPRAS JTIK
+                </h1>
+                <div class="w-full h-3 bg-[#F472B6] -mt-3 -z-10 rounded-full opacity-60"></div>
+              </div>
+
+              <p class="text-slate-700 text-xs sm:text-sm font-semibold leading-relaxed mb-4 max-w-xl">
+                Rancang Bangun Antarmuka Pengguna Sistem Informasi Peminjaman Sarana Prasarana di Jurusan Teknik Informatika dan Komputer (JTIK FT UNM) Berbasis User-Centered Design
+              </p>
+
+              <!-- 4 Colorful Team Cards (Canva Sticker Cards Style) -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full max-w-xl mb-4">
+                <!-- Asyifa -->
+                <div class="p-2.5 rounded-xl bg-[#FCE7F3] border-2 border-slate-900 hard-shadow-sm sticker-hover text-left">
+                  <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-[#F472B6] text-white border border-slate-900 uppercase">ANGGOTA 1</span>
+                  <p class="text-xs font-black text-slate-900 mt-0.5 truncate">Asyifa Nur Cahya</p>
+                  <p class="text-[10px] text-slate-700 font-mono font-bold">250210500014</p>
+                </div>
+                <!-- Aisyah -->
+                <div class="p-2.5 rounded-xl bg-[#E0F2FE] border-2 border-slate-900 hard-shadow-sm sticker-hover text-left">
+                  <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-[#38BDF8] text-white border border-slate-900 uppercase">ANGGOTA 2</span>
+                  <p class="text-xs font-black text-slate-900 mt-0.5 truncate">Sitti Aisyah N.A.</p>
+                  <p class="text-[10px] text-slate-700 font-mono font-bold">250210500030</p>
+                </div>
+                <!-- Warnisyah -->
+                <div class="p-2.5 rounded-xl bg-[#DCFCE7] border-2 border-slate-900 hard-shadow-sm sticker-hover text-left">
+                  <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-[#4ADE80] text-slate-950 border border-slate-900 uppercase">ANGGOTA 3</span>
+                  <p class="text-xs font-black text-slate-900 mt-0.5 truncate">Warnisyah Armin</p>
+                  <p class="text-[10px] text-slate-700 font-mono font-bold">250210500034</p>
+                </div>
+                <!-- Rezky -->
+                <div class="p-2.5 rounded-xl bg-[#FEF3C7] border-2 border-slate-900 hard-shadow-sm sticker-hover text-left">
+                  <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-[#FBBF24] text-slate-950 border border-slate-900 uppercase">ANGGOTA 4</span>
+                  <p class="text-xs font-black text-slate-900 mt-0.5 truncate">Rezky Awalya</p>
+                  <p class="text-[10px] text-slate-700 font-mono font-bold">250210500043</p>
+                </div>
+              </div>
+
+              <!-- Sticky Note Style Lecturer Box -->
+              <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#FEF08A] border-2 border-slate-900 hard-shadow-sm -rotate-1 self-start">
+                <span class="text-sm">👩‍🏫</span>
+                <span class="text-xs font-bold text-slate-800">Dosen Pengampu:</span>
+                <span class="text-xs font-extrabold text-slate-950">Ayu Lestari, S.Pd., M.Pd.</span>
+              </div>
+
+            </div>
+
+            <!-- Right Side: Real Documentation Photo (Team & Kepala Lab W1) -->
+            <div class="w-full lg:w-[45%] flex items-center justify-center shrink-0">
+              <div class="relative group w-full max-w-[430px]">
+                <!-- Hard Shadow Behind Image -->
+                <div class="absolute inset-0 bg-slate-900 rounded-2xl translate-x-2 translate-y-2"></div>
+                
+                <!-- Main Framed Image -->
+                <div class="relative rounded-2xl border-[2.5px] border-slate-900 bg-white p-2 overflow-hidden transition group-hover:-translate-y-1">
+                  <img src="foto_wawancara_w1.jpg" alt="Dokumentasi Wawancara W1 di Bengkel IT JTIK FT UNM" class="w-full aspect-[16/9] object-cover rounded-xl border border-slate-300" />
+                  
+                  <!-- Floating Badge on Top of Image -->
+                  <div class="absolute top-3.5 right-3.5 animate-sparkle">
+                    <span class="px-2.5 py-0.5 rounded-full bg-[#FEF08A] text-slate-950 border-2 border-slate-900 font-black text-[10px] hard-shadow-sm">
+                      📸 DOKUMENTASI WAWANCARA
+                    </span>
+                  </div>
+
+                  <!-- Floating Badge on Bottom of Image -->
+                  <div class="absolute bottom-3.5 left-3.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-[#E0F2FE] text-sky-950 border-2 border-slate-900 font-black text-[10px] hard-shadow-sm">
+                      📍 BENGKEL IT • KEPALA LAB (W1)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        `
+      },
+
+      // 1: LATAR BELAKANG
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-01/latar-belakang",
+        badge: "📌 KONDISI FAKTUAL",
+        tag: "BAB I — PENDAHULUAN",
+        title: "Latar Belakang & Permasalahan Faktual JTIK",
+        subtitle: "Kondisi empiris peminjaman barang, sebaran lokasi, dan mebelair ruang kelas teori",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-3">
+              
+              <!-- Card 1: Pencatatan Buku -->
+              <div class="p-4 rounded-2xl bg-[#FFE4E6] border-2 border-slate-900 hard-shadow-sm flex flex-col justify-between sticker-hover">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#FB7185] text-white border border-slate-900">01. BUKU TULIS</span>
+                    <span class="text-sm">📝</span>
+                  </div>
+                  <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Pencatatan Konvensional</h3>
+                  <div class="space-y-1.5 text-xs text-slate-800 leading-relaxed">
+                    <p>• <strong>Kondisi:</strong> Peminjaman barang masih banyak dicatat dengan menulis pada buku.</p>
+                    <p>• <strong>Kendala:</strong> Informasi jumlah, stok, dan lokasi barang belum diketahui langsung.</p>
+                  </div>
+                </div>
+                <div class="mt-3 pt-2 border-t-2 border-slate-900/30 text-[11px] font-bold text-rose-950 bg-white/70 p-2 rounded-lg border border-slate-900">
+                  🎯 Solusi UI: Layanan terpadu digital SI-SAPRAS JTIK.
+                </div>
+              </div>
+
+              <!-- Card 2: Sebaran Lokasi -->
+              <div class="p-4 rounded-2xl bg-[#E0F2FE] border-2 border-slate-900 hard-shadow-sm flex flex-col justify-between sticker-hover">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#38BDF8] text-slate-950 border border-slate-900">02. SEBARAN LOKASI</span>
+                    <span class="text-sm">📍</span>
+                  </div>
+                  <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Sebaran 3 Ruangan</h3>
+                  <div class="space-y-1.5 text-xs text-slate-800 leading-relaxed">
+                    <p>• <strong>Kondisi:</strong> Barang berada di Bengkel IT, laboratorium, dan ruang admin.</p>
+                    <p>• <strong>Kendala:</strong> Pengguna harus mencari atau menanyakan terlebih dahulu atau cari sendiri.</p>
+                  </div>
+                </div>
+                <div class="mt-3 pt-2 border-t-2 border-slate-900/30 text-[11px] font-bold text-sky-950 bg-white/70 p-2 rounded-lg border border-slate-900">
+                  🎯 Solusi UI: Pemetaan visual letak alat terpusat.
+                </div>
+              </div>
+
+              <!-- Card 3: Bangku Ruang Teori -->
+              <div class="p-4 rounded-2xl bg-[#DCFCE7] border-2 border-slate-900 hard-shadow-sm flex flex-col justify-between sticker-hover">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#4ADE80] text-slate-950 border border-slate-900">03. BANGKU KELAS</span>
+                    <span class="text-sm">🪑</span>
+                  </div>
+                  <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Fenomena Bangku Kelas</h3>
+                  <div class="space-y-1.5 text-xs text-slate-800 leading-relaxed">
+                    <p>• <strong>Kondisi:</strong> Jumlah kursi di ruang kelas sering tidak mencukupi kebutuhan.</p>
+                    <p>• <strong>Kendala:</strong> Pengguna mengambil/meminjam kursi dari kelas lain tanpa pencatatan.</p>
+                  </div>
+                </div>
+                <div class="mt-3 pt-2 border-t-2 border-slate-900/30 text-[11px] font-bold text-emerald-950 bg-white/70 p-2 rounded-lg border border-slate-900">
+                  🎯 Solusi UI: Monitoring kuota kursi & lapor mutasi bangku.
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Mini Map Banner -->
+            <div class="p-3 rounded-xl bg-[#FEF9C3] border-2 border-slate-900 hard-shadow-sm flex flex-wrap items-center justify-between text-xs font-semibold">
+              <span class="flex items-center space-x-1.5 text-slate-900">
+                <span>📍 Titik Pengelolaan Sarpras JTIK FT UNM:</span>
+              </span>
+              <div class="flex space-x-2 mt-1 sm:mt-0 font-bold">
+                <span class="px-2.5 py-0.5 rounded-full bg-[#E0E7FF] border border-slate-900 text-indigo-950">🏢 Bengkel IT (Alat Utama & W1)</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-[#CCFBF1] border border-slate-900 text-teal-950">💻 Laboratorium Komputer</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-white border border-slate-900 text-slate-800">📂 Ruang Administrasi JTIK</span>
+              </div>
+            </div>
+          </div>
+        `
+      },
+
+      // 2: RUMUSAN MASALAH VS TUJUAN
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-01/fokus-penelitian",
+        badge: "🎯 1-TO-1 MATCH",
+        tag: "BAB I — FOKUS PENELITIAN",
+        title: "Rumusan Masalah vs. Tujuan Penelitian",
+        subtitle: "Penyelarasan satu-ke-satu antara pertanyaan perancangan dan target capaian luaran",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+              
+              <!-- Rumusan Masalah -->
+              <div class="p-4 rounded-2xl bg-[#F3E8FF] border-2 border-slate-900 hard-shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-2 py-0.5 rounded-full bg-[#C084FC] text-white border border-slate-900 text-[10px] font-black uppercase">PERTANYAAN RANCANGAN</span>
+                  <span class="text-sm">❓</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Rumusan Masalah</h3>
+                <ul class="space-y-2 text-xs text-slate-800 font-medium">
+                  <li class="p-2 rounded-xl bg-white border-2 border-slate-900">
+                    <span class="text-purple-900 font-extrabold block">1. Kebutuhan Informasi:</span>
+                    Kebutuhan informasi apa yang dimiliki pengguna dalam mengetahui jumlah, ketersediaan, kondisi, dan lokasi sarpras sebelum meminjam?
+                  </li>
+                  <li class="p-2 rounded-xl bg-white border-2 border-slate-900">
+                    <span class="text-purple-900 font-extrabold block">2. Alur Tugas & Urutan Layar:</span>
+                    Bagaimana tugas mencari, meminjam, menggunakan, lapor pakai, dan mengembalikan diterjemahkan menjadi urutan layar SI-SAPRAS JTIK?
+                  </li>
+                  <li class="p-2 rounded-xl bg-white border-2 border-slate-900">
+                    <span class="text-purple-900 font-extrabold block">3. Susunan Elemen UI:</span>
+                    Bagaimana kebutuhan informasi dan tugas diterjemahkan menjadi susunan antarmuka yang sesuai dengan proses di JTIK?
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Tujuan Penelitian -->
+              <div class="p-4 rounded-2xl bg-[#FEF08A] border-2 border-slate-900 hard-shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-2 py-0.5 rounded-full bg-[#FACC15] text-slate-950 border border-slate-900 text-[10px] font-black uppercase">TARGET CAPAIAN</span>
+                  <span class="text-sm">🎯</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Tujuan Penelitian</h3>
+                <ul class="space-y-2 text-xs text-slate-800 font-medium">
+                  <li class="p-2 rounded-xl bg-white border-2 border-slate-900">
+                    <span class="text-amber-950 font-extrabold block">1. Identifikasi Kebutuhan Informasi:</span>
+                    Mengidentifikasi kebutuhan pengguna terkait jumlah, ketersediaan, kondisi, dan lokasi sarana prasarana sebelum meminjam.
+                  </li>
+                  <li class="p-2 rounded-xl bg-white border-2 border-slate-900">
+                    <span class="text-amber-950 font-extrabold block">2. Menyusun Alur Tugas:</span>
+                    Menyusun tugas mencari, meminjam, menggunakan, lapor pakai, dan mengembalikan menjadi alur layar SI-SAPRAS JTIK.
+                  </li>
+                  <li class="p-2 rounded-xl bg-white border-2 border-slate-900">
+                    <span class="text-amber-950 font-extrabold block">3. Menghasilkan Rancangan Antarmuka:</span>
+                    Menghasilkan rancangan susunan informasi dan elemen antarmuka yang sesuai dengan proses peminjaman di JTIK.
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        `
+      },
+
+      // 3: BATASAN & RUANG LINGKUP
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-01/ruang-lingkup",
+        badge: "🔍 SCOPE DEFINITION",
+        tag: "BAB I — RUANG LINGKUP",
+        title: "Batasan dan Ruang Lingkup Perancangan",
+        subtitle: "Penetapan batas tegas tugas utama yang dirancang vs. fitur yang ditunda",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+              
+              <!-- In Scope -->
+              <div class="p-4 rounded-2xl bg-[#DCFCE7] border-2 border-slate-900 hard-shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-[#22C55E] text-white border border-slate-900 text-[10px] font-black">FOKUS UTAMA DESAIN</span>
+                  <span class="text-sm font-bold text-emerald-800">IN-SCOPE</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Tugas Utama Dirancang</h3>
+                <div class="space-y-1.5 text-xs text-slate-800 font-semibold">
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-emerald-600 font-black">✓</span>
+                    <span>Mencari informasi barang, melihat jumlah, dan ketersediaan stok.</span>
+                  </div>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-emerald-600 font-black">✓</span>
+                    <span>Mengetahui lokasi barang di Bengkel IT, Lab, dan Ruang Admin.</span>
+                  </div>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-emerald-600 font-black">✓</span>
+                    <span>Alur pengajuan pinjam, lapor pemakaian, hingga menyelesaikan peminjaman.</span>
+                  </div>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-emerald-600 font-black">✓</span>
+                    <span>Informasi inventaris yang berkaitan dengan proses peminjaman.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Out of Scope -->
+              <div class="p-4 rounded-2xl bg-[#FEE2E2] border-2 border-slate-900 hard-shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-[#EF4444] text-white border border-slate-900 text-[10px] font-black">PENGEMBANGAN LANJUTAN</span>
+                  <span class="text-sm font-bold text-rose-800">OUT-OF-SCOPE</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-2 font-display">Fitur yang Ditunda</h3>
+                <div class="space-y-1.5 text-xs text-slate-800 font-semibold">
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-rose-600 font-black">✕</span>
+                    <span>Dashboard perekaman aktivitas laboratorium secara otomatis.</span>
+                  </div>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-rose-600 font-black">✕</span>
+                    <span>Perekaman sensor penggunaan listrik di laboratorium.</span>
+                  </div>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-rose-600 font-black">✕</span>
+                    <span>Modul unit usaha untuk penyewaan barang komersial.</span>
+                  </div>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 flex items-start space-x-2">
+                    <span class="text-rose-600 font-black">✕</span>
+                    <span>Pembuatan kode program, basis data, dan implementasi sistem berjalan.</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Sticky Note Penegasan Luaran -->
+            <div class="p-3 rounded-xl bg-[#FEF08A] border-2 border-slate-900 hard-shadow-sm flex items-center space-x-2.5 text-xs font-semibold">
+              <span class="text-base">📌</span>
+              <p class="text-slate-900">
+                <strong>Bentuk Luaran Penelitian:</strong> Dokumen rancangan antarmuka pengguna SI-SAPRAS JTIK (analisis kebutuhan, struktur tugas HTA, alur pengguna, dan rancangan antarmuka).
+              </p>
+            </div>
+          </div>
+        `
+      },
+
+      // 4: UI VS IMK
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-02/teori-dasar",
+        badge: "🎨 TEORI DASAR",
+        tag: "BAB II — TINJAUAN PUSTAKA",
+        title: "Desain Antarmuka Pengguna vs. IMK",
+        subtitle: "Menjelaskan wujud visual terapan di layar dan payung keilmuan interaksi manusia-komputer",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+              
+              <!-- Card UI -->
+              <div class="p-4 rounded-2xl bg-[#FCE7F3] border-2 border-slate-900 hard-shadow-sm sticker-hover">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-[#EC4899] text-white border border-slate-900 text-[10px] font-black">WUJUD VISUAL</span>
+                  <span class="text-sm">💻</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-1 font-display">Desain Antarmuka Pengguna (UI)</h3>
+                <p class="text-[11px] text-pink-900 italic font-semibold mb-2">Auliazmi et al. (2021); Lastiansah (2012)</p>
+                <div class="space-y-1.5 text-xs text-slate-800 font-medium">
+                  <p>• <strong>Hakikat:</strong> Sarana dialog dan interaksi antara manusia dengan komputer agar informasi disajikan mudah, menarik, dan komunikatif.</p>
+                  <p>• <strong>Komponen Layar:</strong> Semua hal yang terlihat di layar: tombol, formulir isian, maupun navigasi menu.</p>
+                  <p>• <strong>Batasan:</strong> Dibatasi pada tampilan visual dan navigasi (tidak mencakup backend atau koding).</p>
+                </div>
+              </div>
+
+              <!-- Card IMK -->
+              <div class="p-4 rounded-2xl bg-[#E0F2FE] border-2 border-slate-900 hard-shadow-sm sticker-hover">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-[#0284C7] text-white border border-slate-900 text-[10px] font-black">PAYUNG ILMU</span>
+                  <span class="text-sm">🧠</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-1 font-display">Interaksi Manusia–Komputer (IMK)</h3>
+                <p class="text-[11px] text-sky-900 italic font-semibold mb-2">Alan Dix, Finlay, Abowd, & Beale (2004)</p>
+                <div class="space-y-1.5 text-xs text-slate-800 font-medium">
+                  <p>• <strong>Cakupan Luas:</strong> Seluruh aspek hubungan antara manusia dan teknologi, termasuk kebiasaan dan cara berpikir pengguna.</p>
+                  <p>• <strong>Peran Desain UI:</strong> Wujud nyata dari tampilan layar tempat interaksi tersebut terjadi.</p>
+                  <p>• <strong>Penerapan SI-SAPRAS:</strong> Menyusun tampilan pencarian alat, pemetaan lokasi, dan alur peminjaman agar mudah dipahami.</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-white border-2 border-slate-900 hard-shadow-sm text-center text-xs text-slate-800 font-bold">
+              🔗 <span class="text-purple-700 font-extrabold">Hubungan:</span> IMK merumuskan cara berpikir dan kebiasaan manusia, sedangkan <strong>Desain UI</strong> adalah wujud nyata di layar tempat interaksi dieksekusi.
+            </div>
+          </div>
+        `
+      },
+
+      // 5: HCD ISO 9241-210
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-02/metode-hcd",
+        badge: "🔄 ISO 9241-210",
+        tag: "BAB II — PENDEKATAN DESAIN",
+        title: "Perancangan Berpusat pada Manusia (HCD / UCD)",
+        subtitle: "Standar ISO 9241-210 (Wiryawan, 2011) dan 4 butir konteks penggunaan faktual di JTIK",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            
+            <div class="mb-3">
+              <span class="text-xs font-black text-slate-800 block mb-2 font-display">✦ 4 BUTIR KONTEKS PENGGUNAAN FAKTUAL DI JTIK:</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+                
+                <div class="p-3 rounded-2xl bg-[#FCE7F3] border-2 border-slate-900 hard-shadow-sm">
+                  <span class="text-[9px] font-black px-1.5 py-0.5 rounded bg-[#EC4899] text-white">01. USERS</span>
+                  <h4 class="text-xs font-black text-slate-900 mt-1 font-display">Pengguna</h4>
+                  <p class="text-[11px] text-slate-700 font-medium mt-1 leading-relaxed">
+                    Mahasiswa yang mencari & meminjam barang, Ketua Tingkat yang melapor peminjaman bangku, teknisi lab inventaris.
+                  </p>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-[#FEF08A] border-2 border-slate-900 hard-shadow-sm">
+                  <span class="text-[9px] font-black px-1.5 py-0.5 rounded bg-[#EAB308] text-slate-950">02. TASKS</span>
+                  <h4 class="text-xs font-black text-slate-900 mt-1 font-display">Tugas</h4>
+                  <p class="text-[11px] text-slate-700 font-medium mt-1 leading-relaxed">
+                    Mengecek ketersediaan alat, mengisi formulir peminjaman, melapor mutasi bangku kelas, konfirmasi pengembalian.
+                  </p>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-[#E0F2FE] border-2 border-slate-900 hard-shadow-sm">
+                  <span class="text-[9px] font-black px-1.5 py-0.5 rounded bg-[#0284C7] text-white">03. EQUIP</span>
+                  <h4 class="text-xs font-black text-slate-900 mt-1 font-display">Peralatan</h4>
+                  <p class="text-[11px] text-slate-700 font-medium mt-1 leading-relaxed">
+                    Telepon pintar (smartphone) milik mahasiswa dan komputer meja (desktop PC) milik teknisi/pengelola lab.
+                  </p>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-[#DCFCE7] border-2 border-slate-900 hard-shadow-sm">
+                  <span class="text-[9px] font-black px-1.5 py-0.5 rounded bg-[#22C55E] text-white">04. ENV</span>
+                  <h4 class="text-xs font-black text-slate-900 mt-1 font-display">Lingkungan</h4>
+                  <p class="text-[11px] text-slate-700 font-medium mt-1 leading-relaxed">
+                    Ruang kelas yang mendesak sebelum jam kuliah dimulai serta kondisi fisik laboratorium dan Bengkel IT.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-white border-2 border-slate-900 hard-shadow-sm text-center text-xs text-slate-800 font-bold">
+              🔄 <strong>Siklus Desain:</strong> Pahami Konteks Pakai ➔ Tentukan Kebutuhan User ➔ Rancang Solusi Antarmuka ➔ Evaluasi Desain.
+            </div>
+
+          </div>
+        `
+      },
+
+      // 6: HTA & USER FLOW
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-02/struktur-tugas",
+        badge: "🧩 HTA & FLOW",
+        tag: "BAB II — STRUKTUR TUGAS",
+        title: "Hierarchical Task Analysis (HTA) & User Flow",
+        subtitle: "Dekomposisi tugas terstruktur dan alur perpindahan antarmuka (Dix et al., 2004)",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+              
+              <!-- HTA -->
+              <div class="p-4 rounded-2xl bg-[#F3E8FF] border-2 border-slate-900 hard-shadow-sm">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="px-2 py-0.5 rounded-full bg-[#9333EA] text-white border border-slate-900 text-[10px] font-black">DIX ET AL. (2004)</span>
+                  <span class="text-sm">🌳</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-1 font-display">Hierarchical Task Analysis (HTA)</h3>
+                <div class="space-y-1 text-xs text-slate-800 font-medium">
+                  <p>• <strong>Goal (0):</strong> Meminjam sarana praktikum laboratorium.</p>
+                  <p>• <strong>Sub-goals:</strong> 1. Cari ketersediaan, 2. Pilih lokasi, 3. Isi formulir.</p>
+                  <p>• <strong>Operations:</strong> Ketik nama barang pada kolom pencarian, klik simpan.</p>
+                  <p>• <strong>Plan:</strong> Aturan urutan logis langkah yang dijalankan.</p>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 text-[11px] font-bold text-purple-950 mt-1">
+                    📌 Stopping Rule: Berhenti saat langkah sudah sederhana di layar tunggal. Ditandai garis tebal di bawah kotak (maks 3 tingkat).
+                  </div>
+                </div>
+              </div>
+
+              <!-- User Flow -->
+              <div class="p-4 rounded-2xl bg-[#CCFBF1] border-2 border-slate-900 hard-shadow-sm">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="px-2 py-0.5 rounded-full bg-[#0D9488] text-white border border-slate-900 text-[10px] font-black">SUBBAB 2.4</span>
+                  <span class="text-sm">🗺️</span>
+                </div>
+                <h3 class="text-sm font-black text-slate-900 mb-1 font-display">Alur Pengguna (User Flow)</h3>
+                <div class="space-y-1 text-xs text-slate-800 font-medium">
+                  <p>• <strong>Pemetaan Tugas:</strong> Memetakan tugas utama pengguna pada SI-SAPRAS JTIK.</p>
+                  <p>• <strong>Urutan Kegiatan:</strong> Peminjaman alat di 3 ruangan serta pelaporan mutasi bangku kelas diatur secara jelas.</p>
+                  <p>• <strong>Visual Layar:</strong> Mengubah logika HTA menjadi urutan perpindahan halaman dan keputusan aksi nyata.</p>
+                  <div class="p-2 rounded-xl bg-white border-2 border-slate-900 text-[11px] font-bold text-teal-950 mt-1">
+                    📌 Sinergi: HTA menyusun struktur logis apa yang dikerjakan, User Flow memvisualkan lewat mana pengguna berjalan.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `
+      },
+
+      // 7: 5 KAJIAN PENELITIAN RELEVAN
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-02/penelitian-terdahulu",
+        badge: "📚 5 JURNAL RESMI",
+        tag: "BAB II — KAJIAN LITERATUR",
+        title: "5 Kajian Antarmuka Relevan (State of the Art)",
+        subtitle: "Rujukan penelitian terdahulu yang mendasari perancangan SI-SAPRAS JTIK",
+        content: `
+          <div class="flex-1 flex flex-col justify-center overflow-y-auto">
+            <div class="space-y-2">
+              
+              <div class="p-2.5 rounded-xl bg-[#FCE7F3] border-2 border-slate-900 hard-shadow-sm flex items-center justify-between text-xs">
+                <div>
+                  <span class="font-extrabold text-slate-900">1. Caylen Marli & Indah Lestari (2025)</span>
+                  <p class="text-slate-700 text-[11px]">Facility Management System PCR. Segmentasi clustering manual, evaluasi SUS (77) & UEQ.</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-white border border-slate-900 font-bold text-pink-900 text-[11px] shrink-0">
+                  Vol 14 No 3
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-[#E0F2FE] border-2 border-slate-900 hard-shadow-sm flex items-center justify-between text-xs">
+                <div>
+                  <span class="font-extrabold text-slate-900">2. Julius Arvyll U. Cepeda & Alec Jiro C. Saludes (2025)</span>
+                  <p class="text-slate-700 text-[11px]">ICT Equipment SPUP Filipina. Agile Scrum, ISO 25010 & TAM, rekomendasi responsivitas seluler.</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-white border border-slate-900 font-bold text-sky-900 text-[11px] shrink-0">
+                  Vol 1 No 5
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-[#DCFCE7] border-2 border-slate-900 hard-shadow-sm flex items-center justify-between text-xs">
+                <div>
+                  <span class="font-extrabold text-slate-900">3. Setya Hadi Nugroho & Waris Marsisno (2025)</span>
+                  <p class="text-slate-700 text-[11px]">Peminjaman Barang & Ruang Polstat STIS. SDLC Prototyping, pengujian Black Box & survei PSSUQ.</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-white border border-slate-900 font-bold text-emerald-900 text-[11px] shrink-0">
+                  Vol 2025 No 1
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-[#FEF3C7] border-2 border-slate-900 hard-shadow-sm flex items-center justify-between text-xs">
+                <div>
+                  <span class="font-extrabold text-slate-900">4. Waliadi Gunawan, Abdul Ghofur, dkk. (2025)</span>
+                  <p class="text-slate-700 text-[11px]">Monitoring Alat Lab Akbid Bina Husada. Waterfall, PHP & MySQL, kendala padam listrik/offline.</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-white border border-slate-900 font-bold text-amber-900 text-[11px] shrink-0">
+                  Vol 7 No 1
+                </span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-[#F3E8FF] border-2 border-slate-900 hard-shadow-sm flex items-center justify-between text-xs">
+                <div>
+                  <span class="font-extrabold text-slate-900">5. Dimas Jayadi & Ucuk Darusalam (2022)</span>
+                  <p class="text-slate-700 text-[11px]">Sistem Peminjaman Alat Lab Android. FAST Framework & Firebase, untuk asisten lab Computer Vision.</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-white border border-slate-900 font-bold text-purple-900 text-[11px] shrink-0">
+                  Vol 6 No 1
+                </span>
+              </div>
+
+            </div>
+          </div>
+        `
+      },
+
+      // 8: METODE PENELITIAN & NARASUMBER
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-03/metodologi",
+        badge: "🎤 WAWANCARA & OBSERVASI",
+        tag: "BAB III — METODE PENELITIAN",
+        title: "Pendekatan Perancangan, Teknik, & Narasumber",
+        subtitle: "Pengumpulan data empiris di Bengkel IT dan Laboratorium JTIK FT UNM",
+        content: `
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-2">
+              
+              <!-- Pendekatan -->
+              <div class="p-3.5 rounded-2xl bg-[#FCE7F3] border-2 border-slate-900 hard-shadow-sm flex flex-col justify-between">
+                <div>
+                  <span class="px-2 py-0.5 rounded-full bg-[#EC4899] text-white text-[9px] font-black">3.1 METODE</span>
+                  <h3 class="text-xs font-black text-slate-900 mt-1 mb-2 font-display">Human-Centered Design</h3>
+                  <div class="space-y-1.5 text-xs text-slate-800 font-medium">
+                    <p>• Berangkat dari masalah nyata di JTIK agar rancangan didasarkan pada kebutuhan empiris pengguna.</p>
+                    <p>• Fokus Proposal UTS: Pengumpulan data, analisis kebutuhan, HTA, User Flow, & rancangan antarmuka.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Teknik Pengumpulan -->
+              <div class="p-3.5 rounded-2xl bg-[#FEF08A] border-2 border-slate-900 hard-shadow-sm flex flex-col justify-between">
+                <div>
+                  <span class="px-2 py-0.5 rounded-full bg-[#EAB308] text-slate-950 text-[9px] font-black">3.2 TEKNIK DATA</span>
+                  <h3 class="text-xs font-black text-slate-900 mt-1 mb-2 font-display">Wawancara & Observasi</h3>
+                  <div class="space-y-1 text-xs text-slate-800 font-medium">
+                    <p>• <strong>Wawancara:</strong> Info langsung proses pengelolaan sarpras & kendala pengelola.</p>
+                    <p>• <strong>Observasi:</strong> Pengamatan jenis & jumlah barang, lokasi rak, pencatatan buku, & kursi kelas.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Narasumber W1 -->
+              <div class="p-3.5 rounded-2xl bg-[#DCFCE7] border-2 border-slate-900 hard-shadow-sm flex flex-col justify-between">
+                <div>
+                  <span class="px-2 py-0.5 rounded-full bg-[#22C55E] text-white text-[9px] font-black">3.3 NARASUMBER</span>
+                  <h3 class="text-xs font-black text-slate-900 mt-1 mb-1 font-display">W1 - Kepala Laboratorium</h3>
+                  <div class="space-y-0.5 text-xs text-slate-800 font-medium">
+                    <p>• <strong>Metode:</strong> Wawancara Mendalam</p>
+                    <p>• <strong>Tempat:</strong> Bengkel IT JTIK FT UNM</p>
+                    <p>• <strong>Tanggal:</strong> 6 Oktober 2026</p>
+                    <p>• <strong>Etika:</strong> Izin resmi & kode penyamaran W1.</p>
+                  </div>
+                  <div class="mt-2 rounded-xl overflow-hidden border-2 border-slate-900 hard-shadow-sm">
+                    <img src="foto_wawancara_w1.jpg" alt="Dokumentasi W1 & Kelompok 2" class="w-full h-16 sm:h-20 object-cover" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `
+      },
+
+      // 9: 5 INSTRUMEN PERTANYAAN WAWANCARA (3.4)
+      {
+        url: "sisapras.jtik.unm.ac.id/bab-03/instrumen",
+        badge: "📋 5 PERTANYAAN RESMI",
+        tag: "BAB III — INSTRUMEN PENELITIAN",
+        title: "3.4 Instrumen Pengumpulan Data Wawancara",
+        subtitle: "Lima butir pertanyaan wawancara mendalam dengan Kepala Laboratorium (W1)",
+        content: `
+          <div class="flex-1 flex flex-col justify-center overflow-y-auto">
+            <div class="p-3 rounded-2xl bg-white border-2 border-slate-900 hard-shadow-sm">
+              <span class="text-xs font-black text-slate-900 block mb-2 font-display">✦ 5 BUTIR PERTANYAAN PEDOMAN WAWANCARA:</span>
+              <div class="space-y-2 text-xs font-semibold text-slate-800">
+                <div class="p-2 rounded-xl bg-[#FCE7F3] border border-slate-900">
+                  <span class="text-pink-900 font-black">1. Pendataan Inventaris:</span>
+                  Bagaimana proses pengecekan dan pendataan alat serta bahan yang menjadi inventaris laboratorium saat ini?
+                </div>
+                <div class="p-2 rounded-xl bg-[#E0F2FE] border border-slate-900">
+                  <span class="text-sky-900 font-black">2. Lokasi Penyimpanan:</span>
+                  Bagaimana cara mengetahui lokasi penyimpanan setiap barang atau alat yang ada di laboratorium?
+                </div>
+                <div class="p-2 rounded-xl bg-[#DCFCE7] border border-slate-900">
+                  <span class="text-emerald-900 font-black">3. Bukti Penggunaan:</span>
+                  Bagaimana proses pencatatan atau pemberian bukti penggunaan alat dan bahan setelah digunakan oleh pengguna?
+                </div>
+                <div class="p-2 rounded-xl bg-[#FEF3C7] border border-slate-900">
+                  <span class="text-amber-900 font-black">4. Pelaporan Penggunaan:</span>
+                  Bagaimana proses pelaporan penggunaan alat dilakukan setelah peminjaman selesai?
+                </div>
+                <div class="p-2 rounded-xl bg-[#F3E8FF] border border-slate-900">
+                  <span class="text-purple-900 font-black">5. Bebas Peminjaman:</span>
+                  Bagaimana proses penerbitan atau pencetakan bukti bebas peminjaman alat saat ini?
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+
+      // 10: ANALISIS DATA & PENUTUP
+      {
+        url: "sisapras.jtik.unm.ac.id/closing",
+        badge: "🎉 SELESAI & DISKUSI",
+        tag: "BAB III — ANALISIS & PENUTUP",
+        title: "Teknik Analisis Data & Sesi Tanya Jawab",
+        subtitle: "Pengelompokan temuan wawancara menjadi spesifikasi kebutuhan antarmuka",
+        content: `
+          <div class="flex-1 flex flex-col justify-center items-center text-center my-auto">
+            
+            <!-- Analisis Deskriptif Banner -->
+            <div class="p-3 rounded-2xl bg-[#E0F2FE] border-2 border-slate-900 hard-shadow-sm max-w-2xl mb-4 text-left text-xs font-semibold text-slate-800">
+              <span class="text-sky-950 font-black block mb-1">✦ 3.5 TEKNIK ANALISIS DATA DESKRIPTIF:</span>
+              <p>• Data wawancara ditelaah dan dikelompokkan ke kategori permasalahan, aktivitas, dan informasi.</p>
+              <p>• Temuan dirumuskan menjadi kebutuhan pengguna (bukan langsung solusi/fitur).</p>
+              <p>• Kebutuhan diprioritaskan berdasarkan frekuensi kemunculan dan dampaknya.</p>
+            </div>
+            
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-2 font-display">
+              Terima Kasih!
+            </h2>
+            
+            <p class="max-w-lg text-slate-700 text-xs sm:text-sm font-semibold leading-relaxed mb-4">
+              Sesi Diskusi, Masukan, dan Tanya Jawab Konstruktif<br>
+              <strong>Kelompok 2 (HCI) • Program Studi Teknik Komputer</strong><br>
+              Jurusan Teknik Informatika dan Komputer — Universitas Negeri Makassar (2026)
+            </p>
+
+            <div class="flex items-center space-x-3">
+              <button onclick="goToSlide(0)" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-900 border-2 border-slate-900 text-xs font-bold transition hard-shadow-sm">
+                ↻ Ulang Slide 1
+              </button>
+              <button onclick="goToSlide(1)" class="px-4 py-2 rounded-xl bg-[#F43F5E] hover:bg-[#E11D48] text-white border-2 border-slate-900 text-xs font-extrabold transition hard-shadow-sm">
+                🔍 Tinjau Masalah Bab 1
+              </button>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    let currentSlide = 0;
+
+    let isEditMode = false;
+
+    function showNotification(msg) {
+      let toast = document.getElementById('liveToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'liveToast';
+        toast.className = 'fixed bottom-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-slate-900 text-white border-2 border-[#FFDF00] hard-shadow-sm text-xs font-bold transition-all duration-300';
+        document.body.appendChild(toast);
+      }
+      toast.innerText = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => { if (toast) toast.style.opacity = '0'; }, 3500);
+    }
+
+    // Auto-clean obsolete caches from earlier testing so official proposal loads cleanly
+    try {
+      if (localStorage.getItem('sapras_proposal_synced_v4') !== 'true') {
+        localStorage.clear();
+        localStorage.setItem('sapras_proposal_synced_v4', 'true');
+      }
+    } catch(e) {}
+
+    function toggleEditMode() {
+      isEditMode = !isEditMode;
+      const btn = document.getElementById('editToggleBtn');
+      const inner = document.getElementById('slideInner');
+      
+      if (isEditMode) {
+        btn.innerHTML = '<span>💾 Simpan Teks</span>';
+        btn.className = 'px-3 py-1 rounded-lg bg-[#22C55E] text-white border-2 border-slate-900 text-xs font-black transition hard-shadow-sm flex items-center space-x-1 animate-pulse';
+        inner.contentEditable = "true";
+        inner.classList.add('outline-dashed', 'outline-2', 'outline-pink-500');
+        showNotification('✏️ Mode Edit Aktif! Klik langsung pada teks mana saja untuk mengetik/mengubah isinya.');
+      } else {
+        btn.innerHTML = '<span>✏️ Edit Teks</span>';
+        btn.className = 'px-2.5 py-1 rounded-lg bg-[#FEF08A] hover:bg-[#FACC15] text-slate-950 border-2 border-slate-900 text-xs font-bold transition hard-shadow-sm flex items-center space-x-1';
+        inner.contentEditable = "false";
+        inner.classList.remove('outline-dashed', 'outline-2', 'outline-pink-500');
+        try {
+          localStorage.setItem('v3_slide_edit_' + currentSlide, inner.innerHTML);
+        } catch(e) {}
+        showNotification('✅ Perubahan teks berhasil disimpan!');
+      }
+    }
+
+    function resetCurrentSlideText() {
+      try {
+        localStorage.removeItem('v3_slide_edit_' + currentSlide);
+        localStorage.removeItem('saved_slide_custom_' + currentSlide);
+      } catch(e) {}
+      renderSlide(currentSlide);
+      showNotification('↺ Teks slide dikembalikan ke isi asli proposal!');
+    }
+
+    function renderSlide(index) {
+      const slide = slidesData[index];
+      const container = document.getElementById('slideInner');
+      
+      document.getElementById('urlText').innerText = `https://${slide.url}`;
+      document.getElementById('windowBadge').innerText = slide.badge;
+
+      container.classList.remove('slide-active');
+      container.classList.add('slide-enter');
+
+      setTimeout(() => {
+        // Check if user previously edited and saved this slide in current version
+        const savedCustom = localStorage.getItem('v3_slide_edit_' + index);
+        if (savedCustom) {
+          container.innerHTML = savedCustom;
+        } else {
+          let headerHtml = '';
+          // Jangan tampilkan header atas duplikat pada Slide 0 (Cover) karena Cover sudah punya hero title
+          if (index > 0) {
+            headerHtml = `
+              <!-- Header Area Inside Browser Window -->
+              <div class="mb-3 shrink-0">
+                <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#E2E8F0] text-slate-800 border border-slate-900 tracking-wider inline-block mb-1.5 font-display">
+                  ✦ ${slide.tag}
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight font-display">${slide.title}</h2>
+                <p class="text-xs text-slate-600 font-semibold mt-0.5">${slide.subtitle}</p>
+              </div>
+            `;
+          }
+          container.innerHTML = headerHtml + slide.content;
+        }
+
+        if (isEditMode) {
+          container.contentEditable = "true";
+          container.classList.add('outline-dashed', 'outline-2', 'outline-pink-500');
+        } else {
+          container.contentEditable = "false";
+          container.classList.remove('outline-dashed', 'outline-2', 'outline-pink-500');
+        }
+
+        const progressPct = ((index + 1) / slidesData.length) * 100;
+        document.getElementById('slideProgressBar').style.width = progressPct + '%';
+
+        const padIndex = String(index + 1).padStart(2, '0');
+        const padTotal = String(slidesData.length).padStart(2, '0');
+        document.getElementById('slideCounterText').innerText = `${padIndex} / ${padTotal}`;
+        const fsSlideEl = document.getElementById('fsSlideCounter');
+        if (fsSlideEl) fsSlideEl.innerText = `${padIndex}/${padTotal}`;
+
+        // Update tabs active state
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          const s = parseInt(btn.getAttribute('data-slide'));
+          if (s === index) {
+            btn.className = "tab-btn px-2.5 py-1 rounded-lg bg-[#FFDF00] text-slate-950 font-black border border-slate-900 shadow-sm transition";
+          } else {
+            btn.className = "tab-btn px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-950 hover:bg-slate-200 transition";
+          }
+        });
+
+        container.classList.remove('slide-enter');
+        container.classList.add('slide-active');
+      }, 100);
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < slidesData.length) {
+        currentSlide = index;
+        playTick();
+        renderSlide(currentSlide);
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < slidesData.length - 1) {
+        goToSlide(currentSlide + 1);
+      } else {
+        goToSlide(0);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      // JANGAN pindah slide jika sedang mode edit teks atau fokus di area ketikan!
+      if (isEditMode || (document.activeElement && (document.activeElement.isContentEditable || document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA'))) {
+        return;
+      }
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    renderSlide(0);
+  </script>
+</body>
+</html>
