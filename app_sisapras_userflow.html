@@ -464,11 +464,56 @@
             <p class="text-slate-500 font-normal mt-0.5">Lengkapi tanggal, waktu, keperluan, dan jumlah unit.</p>
           </div>
 
-          <form onsubmit="handleFormReview(event)" class="space-y-3">
-            <div>
-              <label class="block text-slate-700 mb-1">Barang Terpilih:</label>
-              <input type="text" id="formItemName" value="Laptop ASUS Core i7" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-100 font-bold text-slate-700 outline-none" readonly>
+          <form onsubmit="handleFormReview(event)" class="space-y-4">
+            <!-- SEKSI 1: DATA DIRI MAHASISWA PEMINJAM (REVISI CANVA) -->
+            <div class="p-4 rounded-2xl bg-indigo-50/80 border-2 border-indigo-200 space-y-3">
+              <div class="flex items-center justify-between border-b border-indigo-100 pb-2">
+                <div class="flex items-center space-x-2">
+                  <span class="text-base">🎓</span>
+                  <div>
+                    <h4 class="text-xs font-black text-indigo-950 uppercase tracking-wide">Data Diri Mahasiswa Peminjam</h4>
+                    <p class="text-[10px] text-indigo-700 font-normal">Identitas pemohon terverifikasi otomatis dari akun login mahasiswa.</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0">
+                  ✓ SIAKAD Terverifikasi
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-slate-700 text-[11px] mb-1 font-bold">Nama Lengkap Mahasiswa *</label>
+                  <input type="text" id="formStudentName" value="Warnisyah Armin" class="w-full p-2.5 rounded-xl border border-indigo-200 bg-white font-bold text-slate-900 outline-none text-xs focus:ring-2 focus:ring-indigo-300" required>
+                </div>
+                <div>
+                  <label class="block text-slate-700 text-[11px] mb-1 font-bold">NIM (Nomor Induk Mahasiswa) *</label>
+                  <input type="text" id="formStudentNim" value="250210500034" class="w-full p-2.5 rounded-xl border border-indigo-200 bg-white font-bold text-slate-900 outline-none text-xs focus:ring-2 focus:ring-indigo-300" required>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-slate-700 text-[11px] mb-1 font-bold">Program Studi & Angkatan *</label>
+                  <input type="text" id="formStudentProdi" value="S1 Teknik Komputer (Angkatan 2025)" class="w-full p-2.5 rounded-xl border border-indigo-200 bg-white text-slate-900 font-medium outline-none text-xs focus:ring-2 focus:ring-indigo-300" required>
+                </div>
+                <div>
+                  <label class="block text-slate-700 text-[11px] mb-1 font-bold">No. WhatsApp / HP Aktif (Notifikasi) *</label>
+                  <input type="tel" id="formStudentPhone" value="0852-9876-5432" class="w-full p-2.5 rounded-xl border border-indigo-200 bg-white font-bold text-slate-900 outline-none text-xs focus:ring-2 focus:ring-indigo-300" required>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-slate-700 text-[11px] mb-1 font-bold">Dosen Pengampu / Penanggung Jawab Praktikum *</label>
+                <input type="text" id="formStudentLecturer" value="Ayu Lestari, S.Pd., M.Pd." class="w-full p-2.5 rounded-xl border border-indigo-200 bg-white text-slate-900 font-medium outline-none text-xs focus:ring-2 focus:ring-indigo-300" required>
+              </div>
             </div>
+
+            <!-- SEKSI 2: DETAIL SARPRAS & KEPERLUAN -->
+            <div class="space-y-3 pt-1 border-t border-slate-200">
+              <div>
+                <label class="block text-slate-700 mb-1">Barang Terpilih:</label>
+                <input type="text" id="formItemName" value="Laptop ASUS Core i7" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-100 font-bold text-slate-700 outline-none" readonly>
+              </div>
 
             <!-- UNIFIED CHAIR RELOCATION FIELDS (MUNCUL OTOMATIS JIKA PINJAM MEBELAIR/BANGKU) -->
             <div id="unifiedChairFields" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-300 space-y-3">
@@ -561,6 +606,15 @@
 
           <!-- Summary Box -->
           <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs space-y-2 text-slate-700">
+            <!-- Data Diri Mahasiswa di Modal Review -->
+            <div class="p-2.5 rounded-xl bg-indigo-50/90 border border-indigo-200 text-xs space-y-1">
+              <span class="text-[10px] font-black text-indigo-950 uppercase block">Identitas Mahasiswa Pemohon:</span>
+              <div class="flex justify-between"><span class="text-slate-500">Nama & NIM:</span><span id="revStudentInfo" class="font-bold text-slate-900">Warnisyah Armin (250210500034)</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Prodi:</span><span id="revStudentProdi" class="font-bold text-slate-900">S1 Teknik Komputer</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">WhatsApp:</span><span id="revStudentPhone" class="font-bold text-slate-900">0852-9876-5432</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Dosen PJ:</span><span id="revStudentLecturer" class="font-bold text-slate-900">Ayu Lestari, S.Pd., M.Pd.</span></div>
+            </div>
+
             <div class="flex justify-between"><span class="text-slate-500">Barang:</span><span id="revItem" class="font-bold text-slate-900">Laptop ASUS Core i7</span></div>
             <div class="flex justify-between"><span class="text-slate-500">Jumlah:</span><span id="revQty" class="font-bold">1 Unit</span></div>
             <div class="flex justify-between"><span class="text-slate-500">Tanggal:</span><span id="revDate" class="font-bold">15/10/2026</span></div>
@@ -790,9 +844,9 @@
 
         <!-- Clearance Card Details -->
         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 max-w-md mx-auto text-xs text-left space-y-2 text-slate-700 font-semibold">
-          <div class="flex justify-between"><span class="text-slate-500">Nama Mahasiswa:</span><span class="text-slate-900">Warnisyah Armin</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">NIM:</span><span class="text-slate-900">250210500034</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Program Studi:</span><span class="text-slate-900">Teknik Komputer</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Nama Mahasiswa:</span><span id="clearanceStudentName" class="text-slate-900 font-bold">Warnisyah Armin</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">NIM:</span><span id="clearanceStudentNim" class="text-slate-900 font-bold">250210500034</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Program Studi:</span><span id="clearanceStudentProdi" class="text-slate-900 font-bold">S1 Teknik Komputer</span></div>
           <div class="flex justify-between"><span class="text-slate-500">Status 3 Ruangan:</span><span class="font-bold text-emerald-600">LUNAS & BERSIH (Bebas Tanggungan)</span></div>
           <div class="flex justify-between"><span class="text-slate-500">Tanggal Terbit:</span><span>13 Oktober 2026</span></div>
         </div>
@@ -963,15 +1017,16 @@
           </div>
 
           <!-- Permohonan Warnisyah Armin -->
+          <!-- Permohonan Mahasiswa -->
           <div class="p-5 rounded-2xl bg-slate-50 border-2 border-slate-300 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
+                <div id="adminBorrowerAvatar" class="w-10 h-10 rounded-xl bg-indigo-900 text-white flex items-center justify-center font-bold text-sm">
                   WA
                 </div>
                 <div>
-                  <h4 class="font-extrabold text-sm text-slate-900">Warnisyah Armin</h4>
-                  <p class="text-[11px] text-slate-500">NIM: 250210500034 • Teknik Komputer S1 (Kelompok 2 HCI)</p>
+                  <h4 id="adminBorrowerName" class="font-extrabold text-sm text-slate-900">Warnisyah Armin</h4>
+                  <p id="adminBorrowerSub" class="text-[11px] text-slate-500">NIM: 250210500034 • S1 Teknik Komputer (2025) • WA: 0852-9876-5432</p>
                 </div>
               </div>
               <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-200">
@@ -980,22 +1035,26 @@
             </div>
 
             <!-- Detail Peminjaman Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs bg-white p-4 rounded-xl border border-slate-200 font-semibold">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 text-xs bg-white p-4 rounded-xl border border-slate-200 font-semibold">
               <div>
                 <span class="text-slate-400 block text-[10px]">SARPRAS / BAHAN:</span>
-                <span class="text-slate-900 font-extrabold" id="adminReqItemName">Solder Station Digital 60W</span>
+                <span class="text-slate-900 font-extrabold" id="adminReqItemName">Laptop ASUS Core i7</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">DOSEN PJ:</span>
+                <span class="text-slate-900 font-bold" id="adminReqLecturer">Ayu Lestari, S.Pd., M.Pd.</span>
               </div>
               <div>
                 <span class="text-slate-400 block text-[10px]">LOKASI PENYIMPANAN:</span>
-                <span class="text-slate-900">Bengkel IT (Rak B-02)</span>
+                <span class="text-slate-900">Bengkel IT / Lab Komputer</span>
               </div>
               <div>
                 <span class="text-slate-400 block text-[10px]">JADWAL PENGGUNAAN:</span>
-                <span class="text-slate-900">13 Okt 2026 (08:00 - 16:00 WITA)</span>
+                <span class="text-slate-900" id="adminReqSchedule">15 Okt 2026 (08:00 - 10:30 WITA)</span>
               </div>
               <div>
                 <span class="text-slate-400 block text-[10px]">KEPERLUAN:</span>
-                <span class="text-slate-900">Praktikum Mandiri Mikroprosesor</span>
+                <span class="text-slate-900" id="adminReqPurpose">Praktikum Jarkom</span>
               </div>
             </div>
 
@@ -1606,6 +1665,20 @@
 
     function handleFormReview(e) {
       e.preventDefault();
+
+      // Data Diri Mahasiswa (Revisi Canva)
+      const sName = document.getElementById('formStudentName').value;
+      const sNim = document.getElementById('formStudentNim').value;
+      const sProdi = document.getElementById('formStudentProdi').value;
+      const sPhone = document.getElementById('formStudentPhone').value;
+      const sLecturer = document.getElementById('formStudentLecturer').value;
+
+      document.getElementById('revStudentInfo').innerText = `${sName} (${sNim})`;
+      document.getElementById('revStudentProdi').innerText = sProdi;
+      document.getElementById('revStudentPhone').innerText = sPhone;
+      document.getElementById('revStudentLecturer').innerText = sLecturer;
+
+      // Data Sarpras & Jadwal
       document.getElementById('revQty').innerText = document.getElementById('formQty').value;
       document.getElementById('revDate').innerText = document.getElementById('formDate').value;
       document.getElementById('revTime').innerText = document.getElementById('formTime').value;
@@ -1640,6 +1713,32 @@
       document.getElementById('adminPendingCountBadge').innerText = '1';
       document.getElementById('adminLiveStatusBadge').innerText = 'MENUNGGU PERSETUJUAN';
       document.getElementById('adminLiveStatusBadge').className = 'font-black px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300';
+
+      // Update Admin Approval Desk & Certificate with student data
+      const sName = document.getElementById('formStudentName').value;
+      const sNim = document.getElementById('formStudentNim').value;
+      const sProdi = document.getElementById('formStudentProdi').value;
+      const sPhone = document.getElementById('formStudentPhone').value;
+      const sLecturer = document.getElementById('formStudentLecturer').value;
+      const itemTitle = document.getElementById('formItemName').value;
+      const dateVal = document.getElementById('formDate').value;
+      const timeVal = document.getElementById('formTime').value;
+      const purposeVal = document.getElementById('formPurpose').value;
+
+      if (document.getElementById('adminBorrowerName')) document.getElementById('adminBorrowerName').innerText = sName;
+      if (document.getElementById('adminBorrowerSub')) document.getElementById('adminBorrowerSub').innerText = `NIM: ${sNim} • ${sProdi} • WA: ${sPhone}`;
+      if (document.getElementById('adminBorrowerAvatar')) {
+        document.getElementById('adminBorrowerAvatar').innerText = sName.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+      }
+      if (document.getElementById('adminReqLecturer')) document.getElementById('adminReqLecturer').innerText = sLecturer;
+      if (document.getElementById('adminReqItemName')) document.getElementById('adminReqItemName').innerText = itemTitle;
+      if (document.getElementById('adminReqSchedule')) document.getElementById('adminReqSchedule').innerText = `${dateVal} (${timeVal})`;
+      if (document.getElementById('adminReqPurpose')) document.getElementById('adminReqPurpose').innerText = purposeVal;
+
+      // Update Certificate in Phase 5
+      if (document.getElementById('clearanceStudentName')) document.getElementById('clearanceStudentName').innerText = sName;
+      if (document.getElementById('clearanceStudentNim')) document.getElementById('clearanceStudentNim').innerText = sNim;
+      if (document.getElementById('clearanceStudentProdi')) document.getElementById('clearanceStudentProdi').innerText = sProdi;
 
       // Update monitoring & return if chair
       const monRelocation = document.getElementById('monRelocationRow');
