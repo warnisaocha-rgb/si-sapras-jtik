@@ -16,9 +16,9 @@
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-slate-900 selection:text-white">
 
-  <!-- TOP HEADER & USER FLOW CONTROLLER -->
+  <!-- TOP HEADER & DUAL-ROLE CONTROLLER -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-3">
       
       <!-- Brand & Title -->
       <div class="flex items-center space-x-3">
@@ -28,14 +28,24 @@
         <div>
           <div class="flex items-center space-x-2">
             <h1 class="text-sm font-extrabold text-slate-900 tracking-tight">SI-SAPRAS JTIK FT UNM</h1>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">USER FLOW PROTOTYPE</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">DUAL-ROLE PROTOTYPE</span>
           </div>
           <p class="text-[10px] text-slate-500 font-medium">Sistem Peminjaman Sarana Prasarana • Kelompok 2 (HCI)</p>
         </div>
       </div>
 
-      <!-- Jump Step Buttons (5 User Flow Phases) -->
-      <div class="flex items-center space-x-1.5 overflow-x-auto text-[11px] font-bold py-1">
+      <!-- ROLE SELECTOR PILL (MAHASISWA VS ADMIN) -->
+      <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-300 shadow-inner">
+        <button onclick="switchRole('user')" id="roleBtnUser" class="px-3 py-1 rounded-lg text-xs font-black transition bg-slate-900 text-white shadow-sm flex items-center space-x-1.5">
+          <span>🎓 Mahasiswa (User)</span>
+        </button>
+        <button onclick="switchRole('admin')" id="roleBtnAdmin" class="px-3 py-1 rounded-lg text-xs font-black transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5">
+          <span>🛡️ Laboran / Admin</span>
+        </button>
+      </div>
+
+      <!-- Navigation for Mahasiswa (User Role: 5 Phases) -->
+      <div id="userPhaseNav" class="flex items-center space-x-1.5 overflow-x-auto text-[11px] font-bold py-1">
         <button onclick="goToPhase(1)" id="phaseBtn-1" class="phase-btn px-2.5 py-1 rounded-lg border transition step-active">
           1. Akses & Login
         </button>
@@ -43,13 +53,32 @@
           2. Dashboard
         </button>
         <button onclick="goToPhase(3)" id="phaseBtn-3" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
-          3. Proses Peminjaman
+          3. Proses Pinjam
         </button>
         <button onclick="goToPhase(4)" id="phaseBtn-4" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
-          4. Persetujuan & Monitoring
+          4. Monitoring
         </button>
         <button onclick="goToPhase(5)" id="phaseBtn-5" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
-          5. Pengembalian & Bebas
+          5. Pengembalian
+        </button>
+      </div>
+
+      <!-- Navigation for Admin / Laboran (Admin Role: 5 Desks) -->
+      <div id="adminTabNav" class="hidden items-center space-x-1.5 overflow-x-auto text-[11px] font-bold py-1">
+        <button onclick="goToAdminTab(1)" id="adminBtn-1" class="admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-slate-900 text-white">
+          A. Dashboard Admin
+        </button>
+        <button onclick="goToAdminTab(2)" id="adminBtn-2" class="admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-white text-slate-700 hover:bg-slate-50">
+          B. Persetujuan (Approval)
+        </button>
+        <button onclick="goToAdminTab(3)" id="adminBtn-3" class="admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-white text-slate-700 hover:bg-slate-50">
+          C. Inventaris & Rak
+        </button>
+        <button onclick="goToAdminTab(4)" id="adminBtn-4" class="admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-white text-slate-700 hover:bg-slate-50">
+          D. Validasi Kembali
+        </button>
+        <button onclick="goToAdminTab(5)" id="adminBtn-5" class="admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-white text-slate-700 hover:bg-slate-50">
+          E. Otorisasi Bebas
         </button>
       </div>
 
@@ -61,17 +90,20 @@
       </div>
     </div>
 
-    <!-- Active User Flow Phase Breadcrumb Banner -->
+    <!-- Active Mode & Step Breadcrumb Banner -->
     <div class="bg-slate-50 border-t border-slate-200 px-4 py-1.5 text-xs">
       <div class="max-w-7xl mx-auto flex items-center justify-between text-[11px]">
         <div class="flex items-center space-x-2">
-          <span class="font-bold text-slate-500">FASE AKTIF:</span>
+          <span class="font-bold text-slate-500">MODE AKTIF:</span>
+          <span id="roleBadge" class="font-extrabold text-blue-900 px-2 py-0.5 rounded bg-blue-100 border border-blue-200 shadow-sm">
+            🎓 Mahasiswa (User)
+          </span>
           <span id="phaseBadge" class="font-extrabold text-slate-900 px-2 py-0.5 rounded bg-white border border-slate-200 shadow-sm">
             1. Akses & Login
           </span>
-          <span id="phaseDesc" class="text-slate-500 hidden sm:inline">• Masuk menggunakan NIM/Username dan Password</span>
+          <span id="phaseDesc" class="text-slate-500 hidden sm:inline">• Masuk menggunakan NIM dan Password</span>
         </div>
-        <span class="font-mono text-slate-400 text-[10px]">Alur Sesuai Diagram Bab II</span>
+        <span class="font-mono text-slate-400 text-[10px]">SI-SAPRAS JTIK FT UNM</span>
       </div>
     </div>
   </header>
@@ -91,24 +123,34 @@
         <p class="text-xs text-slate-500 mt-1">Jurusan Teknik Informatika dan Komputer FT UNM</p>
       </div>
 
+      <!-- Role Login Selector Tab -->
+      <div class="flex items-center p-1 bg-slate-100 rounded-2xl mb-4 border border-slate-200">
+        <button type="button" onclick="setLoginRole('user')" id="loginTabUser" class="flex-1 py-1.5 rounded-xl text-xs font-black transition bg-white text-slate-900 shadow-sm border border-slate-300">
+          🎓 Mahasiswa (User)
+        </button>
+        <button type="button" onclick="setLoginRole('admin')" id="loginTabAdmin" class="flex-1 py-1.5 rounded-xl text-xs font-black transition text-slate-500 hover:text-slate-900">
+          🛡️ Laboran / Admin
+        </button>
+      </div>
+
       <!-- Flowchart Alert: Error Message (Decision: Data valid? -> TIDAK) -->
       <div id="loginErrorAlert" class="hidden mb-4 p-3 rounded-xl bg-rose-50 border-2 border-rose-500 text-rose-900 text-xs flex items-start space-x-2 animate-bounce">
         <span class="text-base">⚠️</span>
         <div>
-          <span class="font-bold block">Username atau Password salah!</span>
-          <span class="text-[11px] text-rose-700">Silakan masukkan NIM dan Password yang terdaftar pada sistem akademik.</span>
+          <span class="font-bold block" id="errorAlertTitle">Username atau Password salah!</span>
+          <span class="text-[11px] text-rose-700" id="errorAlertDesc">Silakan masukkan NIM dan Password yang terdaftar pada sistem akademik.</span>
         </div>
       </div>
 
       <!-- Login Form -->
       <form onsubmit="handleLogin(event)" class="space-y-4 text-xs font-semibold">
         <div>
-          <label class="block text-slate-700 mb-1">NIM / Username Mahasiswa</label>
+          <label class="block text-slate-700 mb-1" id="loginLabelId">NIM / Username Mahasiswa</label>
           <div class="relative">
             <input type="text" id="loginNIM" value="250210500034" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none text-slate-900" placeholder="Masukkan NIM Anda..." required>
-            <span class="absolute right-3 top-2.5 text-slate-400">👤</span>
+            <span class="absolute right-3 top-2.5 text-slate-400" id="loginIconId">👤</span>
           </div>
-          <span class="text-[10px] text-slate-400 font-normal">Contoh NIM: 250210500034</span>
+          <span class="text-[10px] text-slate-400 font-normal" id="loginHintId">Contoh NIM: 250210500034 (Teknik Komputer)</span>
         </div>
 
         <div>
@@ -119,20 +161,25 @@
           </div>
         </div>
 
-        <button type="submit" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow-md flex items-center justify-center space-x-2">
-          <span>Masuk ke Dashboard</span>
+        <button type="submit" id="loginSubmitBtn" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow-md flex items-center justify-center space-x-2">
+          <span>Masuk ke Dashboard Mahasiswa</span>
           <span>→</span>
         </button>
 
         <!-- Test Buttons to demonstrate Decision Branch -->
         <div class="pt-3 border-t border-slate-200">
           <span class="text-[10px] text-slate-500 font-bold block mb-1.5 text-center">UJI PERCABANGAN FLOWCHART:</span>
-          <div class="grid grid-cols-2 gap-2 text-[10px]">
+          <div class="grid grid-cols-2 gap-2 text-[10px]" id="userTestBtns">
             <button type="button" onclick="testInvalidLogin()" class="py-1.5 px-2 rounded-lg bg-rose-50 text-rose-800 border border-rose-300 font-bold hover:bg-rose-100">
               ❌ Tes Data Salah (Error)
             </button>
             <button type="button" onclick="testValidLogin()" class="py-1.5 px-2 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold hover:bg-emerald-100">
               ✅ Tes Data Valid (Masuk)
+            </button>
+          </div>
+          <div class="hidden gap-2 text-[10px]" id="adminTestBtns">
+            <button type="button" onclick="testValidAdminLogin()" class="w-full py-2 px-2 rounded-lg bg-blue-50 text-blue-900 border border-blue-300 font-black hover:bg-blue-100 flex items-center justify-center space-x-1">
+              <span>🛡️ Masuk Langsung Sebagai Laboran (Valid)</span>
             </button>
           </div>
         </div>
@@ -552,7 +599,7 @@
           <!-- Alasan Penolakan -->
           <div class="bg-white p-4 rounded-xl border border-rose-200 text-xs space-y-1">
             <span class="font-bold text-slate-900 block">Alasan Penolakan dari Admin:</span>
-            <p class="text-slate-600 italic">"Alat sedang dialokasikan untuk kegiatan praktikum resmi semester 3 di Lab Komputer 1 pada jam yang sama. Silakan ajukan jadwal lain."</p>
+            <p class="text-slate-600 italic" id="rejectReasonText">"Alat sedang dialokasikan untuk kegiatan praktikum resmi semester 3 di Lab Komputer 1 pada jam yang sama. Silakan ajukan jadwal lain."</p>
           </div>
 
           <div class="pt-2 flex justify-end">
@@ -686,6 +733,446 @@
 
     </section>
 
+    <!-- ============================================================== -->
+    <!-- PORTAL ADMIN / LABORAN SARPRAS JTIK -->
+    <!-- ============================================================== -->
+    <section id="adminContainer" class="hidden w-full max-w-5xl space-y-6">
+
+      <!-- Admin Profile Banner -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center space-x-4">
+          <div class="w-14 h-14 rounded-2xl bg-blue-900 text-white flex items-center justify-center text-2xl shadow-md border-2 border-slate-900">
+            🛡️
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-blue-100 text-blue-900 border border-blue-200">PORTAL PENGELOLA & LABORAN</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200">ONLINE</span>
+            </div>
+            <h2 class="text-lg font-black text-slate-900 mt-1">Ahmad Munawir, S.T., M.T. (Kepala Lab / PIC W1)</h2>
+            <p class="text-xs text-slate-500">NIP: 19850412 201404 1 001 • Penanggung Jawab Bengkel IT & Lab Komputer</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button onclick="switchRole('user')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-300 transition flex items-center space-x-1.5">
+            <span>⇄ Beralih ke Portal Mahasiswa</span>
+          </button>
+          <button onclick="goToPhase(1); switchRole('user');" class="px-3 py-1.5 rounded-xl border border-rose-300 bg-rose-50 hover:bg-rose-100 text-xs font-bold text-rose-700 transition">
+            Keluar (Logout)
+          </button>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 1: DASHBOARD RINGKASAN -->
+      <div id="adminTab1" class="admin-tab-content space-y-6">
+        <!-- 4 Metric Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl shrink-0">
+              📦
+            </div>
+            <div>
+              <span class="text-xs text-slate-500 font-bold block">Total Inventaris</span>
+              <span class="text-2xl font-black text-slate-900">245</span>
+              <span class="text-[10px] text-slate-400 block">3 Titik Lokasi JTIK</span>
+            </div>
+          </div>
+
+          <div onclick="goToAdminTab(2)" class="p-5 rounded-2xl bg-amber-50 border-2 border-amber-400 shadow-sm flex items-center space-x-4 cursor-pointer hover:bg-amber-100 transition">
+            <div class="w-12 h-12 rounded-xl bg-amber-200 text-amber-900 flex items-center justify-center text-xl shrink-0 animate-pulse">
+              ⏳
+            </div>
+            <div>
+              <span class="text-xs text-amber-800 font-bold block">Menunggu Persetujuan</span>
+              <span class="text-2xl font-black text-amber-950" id="adminPendingCountBadge">1</span>
+              <span class="text-[10px] text-amber-700 font-bold block">Klik untuk Review →</span>
+            </div>
+          </div>
+
+          <div onclick="goToAdminTab(4)" class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center space-x-4 cursor-pointer hover:bg-slate-50 transition">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl shrink-0">
+              🔄
+            </div>
+            <div>
+              <span class="text-xs text-slate-500 font-bold block">Pengembalian Hari Ini</span>
+              <span class="text-2xl font-black text-slate-900">2</span>
+              <span class="text-[10px] text-emerald-700 font-bold block">Bengkel IT (Cek Fisik)</span>
+            </div>
+          </div>
+
+          <div onclick="goToAdminTab(5)" class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center space-x-4 cursor-pointer hover:bg-slate-50 transition">
+            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl shrink-0">
+              📜
+            </div>
+            <div>
+              <span class="text-xs text-slate-500 font-bold block">Bebas Sarpras Terbit</span>
+              <span class="text-2xl font-black text-slate-900">18</span>
+              <span class="text-[10px] text-slate-400 block">Surat Digital Sah</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Critical Stock Alert & Action shortcuts -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-5 rounded-2xl bg-rose-50 border-2 border-rose-300 space-y-3">
+            <div class="flex items-center space-x-2 text-rose-900 font-black text-xs">
+              <span>⚠️</span>
+              <span>ALERT STOK BAHAN HABIS PAKAI</span>
+            </div>
+            <p class="text-xs text-rose-800 leading-relaxed font-medium">
+              <strong>Timah Solder 0.8mm (Bengkel IT - Rak C-01)</strong> tersisa <strong>3 rol</strong>. Segera lakukan pengadaan bahan habis pakai untuk menunjang praktikum.
+            </p>
+            <button onclick="goToAdminTab(3)" class="px-3 py-1.5 rounded-lg bg-rose-700 text-white font-bold text-xs hover:bg-rose-800 transition">
+              Kelola Stok Inventaris →
+            </button>
+          </div>
+
+          <div class="md:col-span-2 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+            <h3 class="text-xs font-black text-slate-900 uppercase tracking-wider">
+              ✦ DISPOSISI CEPAT PENGELOLA LABORATORIUM
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <button onclick="goToAdminTab(2)" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-left transition flex items-center justify-between">
+                <div>
+                  <span class="font-extrabold text-slate-900 block">1. Meja Persetujuan Pinjaman</span>
+                  <span class="text-[11px] text-slate-500">Setujui/Tolak permohonan sarpras</span>
+                </div>
+                <span class="text-slate-400 font-bold">→</span>
+              </button>
+              <button onclick="goToAdminTab(3)" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-left transition flex items-center justify-between">
+                <div>
+                  <span class="font-extrabold text-slate-900 block">2. Denah Rak & Stok Alat</span>
+                  <span class="text-[11px] text-slate-500">Bengkel IT, Lab Komp, Ruang Admin</span>
+                </div>
+                <span class="text-slate-400 font-bold">→</span>
+              </button>
+              <button onclick="goToAdminTab(4)" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-left transition flex items-center justify-between">
+                <div>
+                  <span class="font-extrabold text-slate-900 block">3. Validasi Pengembalian Fisik</span>
+                  <span class="text-[11px] text-slate-500">Cek laporan, bukti foto & kendala</span>
+                </div>
+                <span class="text-slate-400 font-bold">→</span>
+              </button>
+              <button onclick="goToAdminTab(5)" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-left transition flex items-center justify-between">
+                <div>
+                  <span class="font-extrabold text-slate-900 block">4. Otorisasi Surat Bebas</span>
+                  <span class="text-[11px] text-slate-500">Bubuhkan stempel QR digital resmi</span>
+                </div>
+                <span class="text-slate-400 font-bold">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 2: MEJA PERSETUJUAN (APPROVAL DESK) -->
+      <div id="adminTab2" class="admin-tab-content hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+            <div>
+              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+                FASE 4 SINKRONISASI
+              </span>
+              <h3 class="text-base font-black text-slate-900 mt-1">Meja Persetujuan Peminjaman Sarpras (Approval Desk)</h3>
+              <p class="text-xs text-slate-500">Keputusan Admin di sini secara real-time mengubah status notifikasi pada portal Mahasiswa.</p>
+            </div>
+            <div class="flex items-center space-x-2 text-xs">
+              <span class="text-slate-500 font-medium">Status Permohonan Saat Ini:</span>
+              <span id="adminLiveStatusBadge" class="font-black px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300">
+                MENUNGGU PERSETUJUAN
+              </span>
+            </div>
+          </div>
+
+          <!-- Permohonan Warnisyah Armin -->
+          <div class="p-5 rounded-2xl bg-slate-50 border-2 border-slate-300 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
+                  WA
+                </div>
+                <div>
+                  <h4 class="font-extrabold text-sm text-slate-900">Warnisyah Armin</h4>
+                  <p class="text-[11px] text-slate-500">NIM: 250210500034 • Teknik Komputer S1 (Kelompok 2 HCI)</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-200">
+                ID Pengajuan: REQ-2026-1013-001
+              </span>
+            </div>
+
+            <!-- Detail Peminjaman Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs bg-white p-4 rounded-xl border border-slate-200 font-semibold">
+              <div>
+                <span class="text-slate-400 block text-[10px]">SARPRAS / BAHAN:</span>
+                <span class="text-slate-900 font-extrabold" id="adminReqItemName">Solder Station Digital 60W</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">LOKASI PENYIMPANAN:</span>
+                <span class="text-slate-900">Bengkel IT (Rak B-02)</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">JADWAL PENGGUNAAN:</span>
+                <span class="text-slate-900">13 Okt 2026 (08:00 - 16:00 WITA)</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">KEPERLUAN:</span>
+                <span class="text-slate-900">Praktikum Mandiri Mikroprosesor</span>
+              </div>
+            </div>
+
+            <!-- Admin Decision Action Buttons -->
+            <div class="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200">
+              <span class="text-xs text-slate-500 font-medium">Tindakan Pengelola / Laboran:</span>
+              <div class="flex items-center space-x-2">
+                <button onclick="adminRejectPrompt()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs transition shadow-sm flex items-center space-x-1.5">
+                  <span>❌ Tolak Permohonan</span>
+                </button>
+                <button onclick="adminApproveLoan()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs transition shadow-sm flex items-center space-x-1.5">
+                  <span>✅ Setujui Permohonan</span>
+                </button>
+                <button onclick="switchRole('user'); goToPhase(4);" class="px-3 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs transition">
+                  Lihat Tampilan Mahasiswa →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Permohonan Perpanjangan Section -->
+          <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div>
+              <span class="font-extrabold text-amber-950 block">Permohonan Perpanjangan Waktu:</span>
+              <span class="text-amber-800 text-[11px]" id="adminExtDesc">Mahasiswa belum mengajukan perpanjangan waktu.</span>
+            </div>
+            <button onclick="adminGrantExtension()" id="btnAdminGrantExt" class="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition">
+              Setujui Tambahan Durasi (+2 Hari)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 3: MANAJEMEN INVENTARIS & DENAH RAK -->
+      <div id="adminTab3" class="admin-tab-content hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+            <div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-900">INVENTARIS & DENAH RAK</span>
+              <h3 class="text-base font-black text-slate-900 mt-1">Pemetaan Sarana, Bahan, & Mebelair di 3 Ruangan</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs text-slate-500 font-medium">Filter Ruang:</span>
+              <select class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-800 outline-none">
+                <option>Semua Lokasi (Bengkel IT, Lab Komp, Admin)</option>
+                <option>🏢 Bengkel IT JTIK (85 Item)</option>
+                <option>💻 Lab Komputer 1 (120 Item)</option>
+                <option>📂 Ruang Admin JTIK (40 Item)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Inventory Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-400 text-[10px] uppercase font-bold">
+                  <th class="py-2 px-3">Nama Sarana / Bahan</th>
+                  <th class="py-2 px-3">Kategori</th>
+                  <th class="py-2 px-3">Lokasi Fisik (Rak/Lemari)</th>
+                  <th class="py-2 px-3">Stok Tersedia</th>
+                  <th class="py-2 px-3">Kondisi Alat</th>
+                  <th class="py-2 px-3 text-right">Aksi Laboran</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-semibold text-slate-700">
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 px-3 font-extrabold text-slate-900">Solder Station Digital 60W</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-100 text-blue-900">Sarana Praktikum</span></td>
+                  <td class="py-3 px-3">Bengkel IT (Rak B-02)</td>
+                  <td class="py-3 px-3 font-mono font-bold">8 Unit</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-900 font-bold">Baik (Normal)</span></td>
+                  <td class="py-3 px-3 text-right"><button onclick="alert('Form kalibrasi & kondisi alat dibuka!')" class="px-2.5 py-1 rounded-lg border border-slate-300 hover:bg-slate-100 text-[11px]">Ubah Status</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 px-3 font-extrabold text-slate-900">Osiloskop Digital Dual Channel</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-100 text-blue-900">Sarana Praktikum</span></td>
+                  <td class="py-3 px-3">Bengkel IT (Rak A-01)</td>
+                  <td class="py-3 px-3 font-mono font-bold">4 Unit</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-900 font-bold">Baik (Normal)</span></td>
+                  <td class="py-3 px-3 text-right"><button onclick="alert('Form kalibrasi & kondisi alat dibuka!')" class="px-2.5 py-1 rounded-lg border border-slate-300 hover:bg-slate-100 text-[11px]">Ubah Status</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50 bg-rose-50/50">
+                  <td class="py-3 px-3 font-extrabold text-slate-900">Timah Solder 0.8mm (Alat/Bahan)</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-900">Bahan Habis Pakai</span></td>
+                  <td class="py-3 px-3">Bengkel IT (Rak C-01)</td>
+                  <td class="py-3 px-3 font-mono font-bold text-rose-600">3 Rol (Kritis)</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-rose-100 text-rose-900 font-bold">Perlu Re-stock</span></td>
+                  <td class="py-3 px-3 text-right"><button onclick="alert('Stok timah solder ditambah +10 rol!')" class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-[11px] font-bold">+ Tambah Stok</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 px-3 font-extrabold text-slate-900">Bangku Kuliah Mahasiswa</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-100 text-purple-900">Mebelair Ruang</span></td>
+                  <td class="py-3 px-3">Ruang Kelas & Bengkel IT</td>
+                  <td class="py-3 px-3 font-mono font-bold">45 Unit</td>
+                  <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-900 font-bold">Baik (Normal)</span></td>
+                  <td class="py-3 px-3 text-right"><button onclick="alert('Data mebelair diperbarui!')" class="px-2.5 py-1 rounded-lg border border-slate-300 hover:bg-slate-100 text-[11px]">Ubah Status</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 4: VALIDASI PENGEMBALIAN & KENDALA -->
+      <div id="adminTab4" class="admin-tab-content hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-200 pb-3">
+            <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300">
+              FASE 5 SINKRONISASI
+            </span>
+            <h3 class="text-base font-black text-slate-900 mt-1">Meja Validasi Pengembalian Fisik & Bukti Laporan</h3>
+            <p class="text-xs text-slate-500">Pemeriksaan fisik sarpras di Bengkel IT dan verifikasi file laporan/foto yang diunggah mahasiswa.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 text-xs font-semibold">
+            <div class="flex flex-wrap items-center justify-between">
+              <div>
+                <span class="text-slate-400 text-[10px] block">MAHASISWA YANG MENGEMBALIKAN:</span>
+                <span class="text-slate-900 font-extrabold text-sm">Warnisyah Armin (250210500034)</span>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                Lokasi: Bengkel IT JTIK FT UNM
+              </span>
+            </div>
+
+            <!-- Bukti Dokumen & Foto -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-white p-4 rounded-xl border border-slate-200">
+              <div class="space-y-1.5">
+                <span class="text-slate-500 text-[10px] uppercase font-bold block">1. Laporan Penggunaan Terunggah:</span>
+                <div class="flex items-center space-x-2 text-indigo-700 bg-indigo-50 p-2.5 rounded-lg border border-indigo-200">
+                  <span>📄</span>
+                  <span class="truncate">Laporan_Praktikum_Solder_Warnisyah.pdf</span>
+                  <button onclick="alert('Pratinjau dokumen laporan mahasiswa!')" class="ml-auto text-[10px] font-bold underline">Buka</button>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <span class="text-slate-500 text-[10px] uppercase font-bold block">2. Foto Bukti Dokumentasi Pemakaian:</span>
+                <div class="flex items-center space-x-2 text-teal-700 bg-teal-50 p-2.5 rounded-lg border border-teal-200">
+                  <span>📷</span>
+                  <span class="truncate">Dokumentasi_Alat_BengkelIT.jpg</span>
+                  <button onclick="alert('Foto kondisi alat menyala dan meja bersih!')" class="ml-auto text-[10px] font-bold underline">Lihat Foto</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Checklist Fisik Laboran -->
+            <div class="space-y-2 bg-slate-100 p-3 rounded-xl border border-slate-300">
+              <span class="text-[10px] font-bold text-slate-600 uppercase block">Checklist Verifikasi Fisik oleh Laboran (W1):</span>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-800">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-slate-900">
+                <span>Alat lengkap (Unit utama, mata solder, sponge, dudukan, kabel listrik)</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-800">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-slate-900">
+                <span>Fungsi normal tanpa konsleting saat diuji menyala</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-800">
+                <input type="checkbox" id="adminCheckIssue" onchange="toggleAdminIssue()" class="w-4 h-4 rounded text-rose-600">
+                <span class="text-rose-700 font-bold">Terdapat kendala atau kerusakan yang membutuhkan ganti rugi/servis</span>
+              </label>
+            </div>
+
+            <div id="adminIssueNoteBox" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-xs">
+              <label class="font-bold block mb-1">Catatan Berita Acara Kerusakan oleh Laboran:</label>
+              <textarea class="w-full p-2 rounded-lg border border-rose-300 text-xs text-slate-900" rows="2" placeholder="Tuliskan komponen yang rusak atau klausul tindak lanjut..."></textarea>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+              <button onclick="adminValidateReturnSuccess()" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs transition shadow flex items-center space-x-2">
+                <span>✓ Validasi Pengembalian Fisik Diterima & Bersih</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 5: OTORISASI BEBAS SARPRAS -->
+      <div id="adminTab5" class="admin-tab-content hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="border-b border-slate-200 pb-3">
+            <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 border border-purple-300">
+              OTORITAS PENGESAHAN
+            </span>
+            <h3 class="text-base font-black text-slate-900 mt-1">Otorisasi & Penerbitan Surat Bebas Sarpras Digital</h3>
+            <p class="text-xs text-slate-500">Pemberian tanda tangan digital dan stempel QR Code resmi untuk bukti bebas pinjaman sarpras.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 max-w-xl mx-auto space-y-4 text-xs">
+            <div class="flex items-center space-x-3 border-b border-slate-200 pb-3">
+              <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center text-2xl font-black">
+                📜
+              </div>
+              <div>
+                <h4 class="font-black text-sm text-slate-900">Validasi Tanggungan Mahasiswa</h4>
+                <p class="text-slate-500 text-[11px]">Pengecekan riwayat 3 Ruang: Bengkel IT, Lab Komputer, & Admin</p>
+              </div>
+            </div>
+
+            <div class="space-y-2 font-semibold text-slate-700">
+              <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-200">
+                <span>Mahasiswa:</span>
+                <span class="text-slate-900 font-bold">Warnisyah Armin (250210500034)</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-200">
+                <span>Pinjaman Belum Kembali:</span>
+                <span class="text-emerald-700 font-bold">0 Unit (Nol / Tuntas)</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-white border border-slate-200">
+                <span>Tunggakan Denda / Kerusakan:</span>
+                <span class="text-emerald-700 font-bold">Rp 0 (Bersih)</span>
+              </div>
+              <div class="flex justify-between p-2 rounded-lg bg-emerald-50 border border-emerald-300">
+                <span class="text-emerald-950 font-bold">Kelayakan Surat Bebas:</span>
+                <span class="text-emerald-900 font-black">MEMENUHI SYARAT (DISPOSISI HIJAU)</span>
+              </div>
+            </div>
+
+            <div class="pt-3">
+              <button onclick="adminAuthorizeClearanceCertificate()" class="w-full py-3 rounded-xl bg-purple-900 hover:bg-purple-800 text-white font-extrabold text-xs transition shadow-lg flex items-center justify-center space-x-2">
+                <span>🖋️ Bubuhkan TTD Digital & Terbitkan Surat Bebas Resmi</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ADMIN REJECTION MODAL -->
+    <div id="adminRejectModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-2xl max-w-md w-full p-6 space-y-4">
+        <div class="flex items-center space-x-2 text-rose-600">
+          <span class="text-xl">⚠️</span>
+          <h3 class="text-base font-black text-slate-900">Alasan Penolakan Permohonan Sarpras</h3>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Tuliskan alasan penolakan secara jelas. Pesan ini akan langsung tampil dalam <strong>Notifikasi Merah</strong> di portal mahasiswa (Fase 4).
+        </p>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Alasan Penolakan:</label>
+          <textarea id="adminRejectReasonInput" class="w-full p-3 rounded-xl border border-slate-300 focus:border-slate-900 outline-none text-xs text-slate-900" rows="3">Alat sedang dipersiapkan untuk jadwal Ujian Praktikum Jaringan Komputer TK-01.</textarea>
+        </div>
+        <div class="flex items-center justify-end space-x-2 pt-2">
+          <button onclick="closeAdminRejectModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100">
+            Batal
+          </button>
+          <button onclick="confirmAdminRejection()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs shadow-sm">
+            Kirim Penolakan ke Mahasiswa
+          </button>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- MAPPING MODAL (FOR PHASE 2 MENU B) -->
@@ -730,23 +1217,133 @@
 
   <!-- SCRIPT LOGIC MAPPING USER FLOW -->
   <script>
+    // GLOBAL STATE MANAGEMENT
+    let currentRole = 'user'; // 'user' or 'admin'
+    let loginRole = 'user';   // for Fase 1 login form
+    let currentAdminTab = 1;  // 1 to 5
+    let currentPhase = 1;     // 1 to 5
+    let loanApprovalState = 'pending'; // 'pending', 'approved', 'rejected'
+    let loanRejectReason = 'Alat sedang dialokasikan untuk kegiatan praktikum resmi semester 3 di Lab Komputer 1 pada jam yang sama.';
+
     const phaseNames = {
       1: { badge: "1. Akses & Login", desc: "Masuk menggunakan NIM/Username dan Password (dengan validasi error)" },
-      2: { badge: "2. Dashboard", desc: "4 Menu Utama: Pinjam, Pemetaan 3 Ruang, Riwayat, & Bebas Sarpras" },
+      2: { badge: "2. Dashboard Mahasiswa", desc: "4 Menu Utama: Pinjam, Pemetaan 3 Ruang, Riwayat, & Bebas Sarpras" },
       3: { badge: "3. Proses Peminjaman", desc: "Pilih Sarpras/Bahan -> Detail -> Formulir -> Konfirmasi Cek Kembali" },
       4: { badge: "4. Persetujuan & Monitoring", desc: "Status Disetujui/Ditolak dengan Alasan + Opsi Perpanjangan" },
       5: { badge: "5. Pengembalian & Konfirmasi", desc: "Unggah Laporan Bukti Pemakaian -> Verifikasi Pengelola -> Surat Bebas Digital" }
     };
 
+    const adminTabNames = {
+      1: { badge: "A. Beranda Admin", desc: "Ringkasan Metrik Sarpras, Permohonan Menunggu, & Alert Bahan Kritis" },
+      2: { badge: "B. Meja Persetujuan (Approval Desk)", desc: "Keputusan Setujui/Tolak Peminjaman (Sinkron ke Fase 4 Mahasiswa)" },
+      3: { badge: "C. Inventaris & Denah Rak", desc: "Pemetaan Sarana, Bahan Habis Pakai, & Mebelair di Bengkel IT, Lab Komp, Admin" },
+      4: { badge: "D. Validasi Pengembalian Fisik", desc: "Inspeksi Fisik Bengkel IT, Laporan PDF, Foto Bukti, & Form Kendala" },
+      5: { badge: "E. Otorisasi Bebas Sarpras", desc: "Pemeriksaan Tanggungan & Penerbitan Surat Bebas Resmi ber-QR Code" }
+    };
+
+    // ROLE SWITCHER
+    function switchRole(role) {
+      currentRole = role;
+      const userBtn = document.getElementById('roleBtnUser');
+      const adminBtn = document.getElementById('roleBtnAdmin');
+      const userNav = document.getElementById('userPhaseNav');
+      const adminNav = document.getElementById('adminTabNav');
+      const roleBadge = document.getElementById('roleBadge');
+      const adminContainer = document.getElementById('adminContainer');
+
+      if (role === 'user') {
+        // Active role styling
+        userBtn.className = 'px-3 py-1 rounded-lg text-xs font-black transition bg-slate-900 text-white shadow-sm flex items-center space-x-1.5';
+        adminBtn.className = 'px-3 py-1 rounded-lg text-xs font-black transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5';
+        
+        userNav.classList.remove('hidden');
+        userNav.classList.add('flex');
+        adminNav.classList.remove('flex');
+        adminNav.classList.add('hidden');
+
+        roleBadge.className = 'font-extrabold text-blue-900 px-2 py-0.5 rounded bg-blue-100 border border-blue-200 shadow-sm';
+        roleBadge.innerText = '🎓 Mahasiswa (User)';
+
+        adminContainer.classList.add('hidden');
+        goToPhase(currentPhase);
+      } else {
+        // Admin active styling
+        userBtn.className = 'px-3 py-1 rounded-lg text-xs font-black transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5';
+        adminBtn.className = 'px-3 py-1 rounded-lg text-xs font-black transition bg-blue-900 text-white shadow-sm flex items-center space-x-1.5';
+
+        userNav.classList.remove('flex');
+        userNav.classList.add('hidden');
+        adminNav.classList.remove('hidden');
+        adminNav.classList.add('flex');
+
+        roleBadge.className = 'font-extrabold text-indigo-900 px-2 py-0.5 rounded bg-indigo-100 border border-indigo-200 shadow-sm';
+        roleBadge.innerText = '🛡️ Laboran / Admin';
+
+        // Hide user phases, show admin
+        document.querySelectorAll('.phase-container').forEach(el => el.classList.add('hidden'));
+        adminContainer.classList.remove('hidden');
+        goToAdminTab(currentAdminTab);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // FASE 1: SET LOGIN ROLE TABS
+    function setLoginRole(role) {
+      loginRole = role;
+      const tabUser = document.getElementById('loginTabUser');
+      const tabAdmin = document.getElementById('loginTabAdmin');
+      const labelId = document.getElementById('loginLabelId');
+      const inputId = document.getElementById('loginNIM');
+      const hintId = document.getElementById('loginHintId');
+      const iconId = document.getElementById('loginIconId');
+      const submitBtn = document.getElementById('loginSubmitBtn');
+      const userTestBtns = document.getElementById('userTestBtns');
+      const adminTestBtns = document.getElementById('adminTestBtns');
+
+      document.getElementById('loginErrorAlert').classList.add('hidden');
+
+      if (role === 'user') {
+        tabUser.className = 'flex-1 py-1.5 rounded-xl text-xs font-black transition bg-white text-slate-900 shadow-sm border border-slate-300';
+        tabAdmin.className = 'flex-1 py-1.5 rounded-xl text-xs font-black transition text-slate-500 hover:text-slate-900';
+        labelId.innerText = 'NIM / Username Mahasiswa';
+        inputId.value = '250210500034';
+        inputId.placeholder = 'Masukkan NIM Anda...';
+        hintId.innerText = 'Contoh NIM: 250210500034 (Warnisyah Armin / Kelompok 2 HCI)';
+        iconId.innerText = '👤';
+        submitBtn.innerHTML = '<span>Masuk ke Dashboard Mahasiswa</span><span>→</span>';
+        userTestBtns.classList.remove('hidden');
+        userTestBtns.classList.add('grid');
+        adminTestBtns.classList.add('hidden');
+      } else {
+        tabUser.className = 'flex-1 py-1.5 rounded-xl text-xs font-black transition text-slate-500 hover:text-slate-900';
+        tabAdmin.className = 'flex-1 py-1.5 rounded-xl text-xs font-black transition bg-blue-900 text-white shadow-sm border border-blue-950';
+        labelId.innerText = 'NIP / Akun Laboran Sarpras';
+        inputId.value = '198504122014041001';
+        inputId.placeholder = 'Masukkan NIP Pengelola Lab...';
+        hintId.innerText = 'Contoh NIP: 19850412 201404 1 001 (Kepala Lab / PIC Bengkel IT)';
+        iconId.innerText = '🛡️';
+        submitBtn.innerHTML = '<span>Masuk ke Portal Laboran / Admin</span><span>→</span>';
+        userTestBtns.classList.add('hidden');
+        userTestBtns.classList.remove('grid');
+        adminTestBtns.classList.remove('hidden');
+        adminTestBtns.classList.add('grid');
+      }
+    }
+
+    // PHASE NAVIGATOR (USER)
     function goToPhase(num) {
+      currentPhase = num;
+      if (currentRole !== 'user') {
+        switchRole('user');
+        return;
+      }
+
       document.querySelectorAll('.phase-container').forEach(el => el.classList.add('hidden'));
       document.getElementById('phase' + num).classList.remove('hidden');
 
-      // Update Phase Badge & Breadcrumb
       document.getElementById('phaseBadge').innerText = phaseNames[num].badge;
       document.getElementById('phaseDesc').innerText = "• " + phaseNames[num].desc;
 
-      // Update Header Buttons
       document.querySelectorAll('.phase-btn').forEach((btn, idx) => {
         if (idx + 1 === num) {
           btn.className = 'phase-btn px-2.5 py-1 rounded-lg border transition step-active';
@@ -757,35 +1354,87 @@
         }
       });
 
-      // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // FASE 1 LOGIN LOGIC
+    // ADMIN TAB NAVIGATOR
+    function goToAdminTab(tabNum) {
+      currentAdminTab = tabNum;
+      if (currentRole !== 'admin') {
+        switchRole('admin');
+        return;
+      }
+
+      document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('adminTab' + tabNum).classList.remove('hidden');
+
+      document.getElementById('phaseBadge').innerText = adminTabNames[tabNum].badge;
+      document.getElementById('phaseDesc').innerText = "• " + adminTabNames[tabNum].desc;
+
+      document.querySelectorAll('.admin-nav-btn').forEach((btn, idx) => {
+        if (idx + 1 === tabNum) {
+          btn.className = 'admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-slate-900 text-white';
+        } else {
+          btn.className = 'admin-nav-btn px-2.5 py-1 rounded-lg border transition bg-white text-slate-700 hover:bg-slate-50';
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // LOGIN LOGIC
     function handleLogin(e) {
       e.preventDefault();
-      const nim = document.getElementById('loginNIM').value.trim();
-      const pass = document.getElementById('loginPass').value.trim();
+      const idVal = document.getElementById('loginNIM').value.trim();
+      const passVal = document.getElementById('loginPass').value.trim();
 
-      if (nim === "250210500034" && pass === "password123") {
-        document.getElementById('loginErrorAlert').classList.add('hidden');
-        goToPhase(2);
+      if (loginRole === 'user') {
+        if (idVal === "250210500034" && passVal === "password123") {
+          document.getElementById('loginErrorAlert').classList.add('hidden');
+          switchRole('user');
+          goToPhase(2);
+        } else {
+          document.getElementById('errorAlertTitle').innerText = "NIM atau Password salah!";
+          document.getElementById('errorAlertDesc').innerText = "Silakan masukkan NIM mahasiswa dan password yang terdaftar.";
+          document.getElementById('loginErrorAlert').classList.remove('hidden');
+        }
       } else {
-        document.getElementById('loginErrorAlert').classList.remove('hidden');
+        if (idVal === "198504122014041001" && (passVal === "adminlab123" || passVal === "password123")) {
+          document.getElementById('loginErrorAlert').classList.add('hidden');
+          switchRole('admin');
+          goToAdminTab(1);
+        } else {
+          document.getElementById('errorAlertTitle').innerText = "NIP atau Sandi Laboran salah!";
+          document.getElementById('errorAlertDesc').innerText = "Pastikan NIP pengelola laboratorium dan kata sandi otorisasi benar.";
+          document.getElementById('loginErrorAlert').classList.remove('hidden');
+        }
       }
     }
 
     function testInvalidLogin() {
       document.getElementById('loginNIM').value = "250210599999";
       document.getElementById('loginPass').value = "wrongpass";
+      document.getElementById('errorAlertTitle').innerText = "NIM atau Password salah!";
+      document.getElementById('errorAlertDesc').innerText = "Silakan masukkan NIM dan Password yang terdaftar pada sistem akademik.";
       document.getElementById('loginErrorAlert').classList.remove('hidden');
     }
 
     function testValidLogin() {
+      setLoginRole('user');
       document.getElementById('loginNIM').value = "250210500034";
       document.getElementById('loginPass').value = "password123";
       document.getElementById('loginErrorAlert').classList.add('hidden');
+      switchRole('user');
       goToPhase(2);
+    }
+
+    function testValidAdminLogin() {
+      setLoginRole('admin');
+      document.getElementById('loginNIM').value = "198504122014041001";
+      document.getElementById('loginPass').value = "adminlab123";
+      document.getElementById('loginErrorAlert').classList.add('hidden');
+      switchRole('admin');
+      goToAdminTab(1);
     }
 
     // FASE 2 MODAL
@@ -809,6 +1458,7 @@
 
       document.getElementById('formItemName').value = title;
       document.getElementById('revItem').innerText = title;
+      document.getElementById('adminReqItemName').innerText = title;
     }
 
     function backToCatalog() {
@@ -847,21 +1497,30 @@
 
     function submitApplicationSuccess() {
       document.getElementById('p3ModalReview').classList.add('hidden');
+      loanApprovalState = 'pending';
+      document.getElementById('adminPendingCountBadge').innerText = '1';
+      document.getElementById('adminLiveStatusBadge').innerText = 'MENUNGGU PERSETUJUAN';
+      document.getElementById('adminLiveStatusBadge').className = 'font-black px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300';
       goToPhase(4);
     }
 
     // FASE 4 APPROVAL TOGGLE & EXTEND
     function setApprovalState(state) {
+      loanApprovalState = state;
       if (state === 'approved') {
         document.getElementById('approvedBox').classList.remove('hidden');
         document.getElementById('rejectedBox').classList.add('hidden');
         document.getElementById('btnApproveState').className = 'px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold text-xs shadow-sm';
         document.getElementById('btnRejectState').className = 'px-3 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs';
+        document.getElementById('adminLiveStatusBadge').innerText = 'DISETUJUI (HIJAU)';
+        document.getElementById('adminLiveStatusBadge').className = 'font-black px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300';
       } else {
         document.getElementById('approvedBox').classList.add('hidden');
         document.getElementById('rejectedBox').classList.remove('hidden');
         document.getElementById('btnApproveState').className = 'px-3 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs';
         document.getElementById('btnRejectState').className = 'px-3 py-1 rounded-lg bg-rose-600 text-white font-bold text-xs shadow-sm';
+        document.getElementById('adminLiveStatusBadge').innerText = 'DITOLAK (MERAH)';
+        document.getElementById('adminLiveStatusBadge').className = 'font-black px-2.5 py-1 rounded-lg bg-rose-100 text-rose-900 border border-rose-300';
       }
     }
 
@@ -873,7 +1532,8 @@
     }
     function submitExtension() {
       closeExtendModal();
-      alert('Permohonan perpanjangan waktu berhasil dikirim ke pengelola lab!');
+      document.getElementById('adminExtDesc').innerText = 'Mahasiswa Warnisyah Armin mengajukan perpanjangan +2 hari (Praktikum Mikroprosesor).';
+      alert('Permohonan perpanjangan waktu berhasil dikirim ke Meja Persetujuan Pengelola Lab!');
     }
 
     // FASE 5 RETURN & CLEARANCE
@@ -889,6 +1549,60 @@
     function completeReturnAndShowClearance() {
       document.getElementById('clearanceCertBox').classList.remove('hidden');
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // ==============================================================
+    // ADMIN FUNCTIONS (REAL-TIME SINKRONISASI)
+    // ==============================================================
+    function adminApproveLoan() {
+      setApprovalState('approved');
+      alert('✅ PERMOHONAN DISETUJUI OLEH LABORAN!\n\nStatus berhasil diubah menjadi Disetujui. QR Code Pengambilan diterbitkan dan notifikasi hijau aktif di portal mahasiswa.');
+    }
+
+    function adminRejectPrompt() {
+      document.getElementById('adminRejectModal').classList.remove('hidden');
+    }
+
+    function closeAdminRejectModal() {
+      document.getElementById('adminRejectModal').classList.add('hidden');
+    }
+
+    function confirmAdminRejection() {
+      const reason = document.getElementById('adminRejectReasonInput').value.trim();
+      if (reason) {
+        loanRejectReason = reason;
+        document.getElementById('rejectReasonText').innerText = `"${loanRejectReason}"`;
+      }
+      setApprovalState('rejected');
+      closeAdminRejectModal();
+      alert('❌ PERMOHONAN DITOLAK OLEH LABORAN!\n\nAlasan penolakan telah diteruskan ke portal mahasiswa dan tampil dalam notifikasi merah.');
+    }
+
+    function adminGrantExtension() {
+      document.getElementById('adminExtDesc').innerText = 'Disetujui: Tambahan waktu 2 hari telah diberikan ke mahasiswa.';
+      alert('⏱️ PERPANJANGAN DISETUJUI!\n\nTambahan waktu 2 hari disetujui. Batas pengembalian diperpanjang.');
+    }
+
+    function toggleAdminIssue() {
+      const isChecked = document.getElementById('adminCheckIssue').checked;
+      if (isChecked) {
+        document.getElementById('adminIssueNoteBox').classList.remove('hidden');
+      } else {
+        document.getElementById('adminIssueNoteBox').classList.add('hidden');
+      }
+    }
+
+    function adminValidateReturnSuccess() {
+      document.getElementById('clearanceCertBox').classList.remove('hidden');
+      alert('✓ VALIDASI PENGEMBALIAN SELESAI!\n\nPemeriksaan fisik sarpras di Bengkel IT telah diverifikasi tuntas & bebas tanggungan.');
+    }
+
+    function adminAuthorizeClearanceCertificate() {
+      document.getElementById('clearanceCertBox').classList.remove('hidden');
+      alert('📜 SURAT BEBAS SARPRAS RESMI DIOTORISASI!\n\nTanda tangan digital & stempel QR Code pengesahan telah dibubuhkan. Mahasiswa kini dapat mengunduh bukti bebas pinjaman.');
+      switchRole('user');
+      goToPhase(5);
+      completeReturnAndShowClearance();
     }
 
     // Init phase 1
