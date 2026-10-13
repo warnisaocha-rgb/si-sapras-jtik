@@ -707,13 +707,33 @@
                 </div>
               </div>
 
+              <!-- Upload Foto Bukti Pengembalian -->
+              <div class="p-2 rounded-lg border-2 border-dashed border-slate-300 bg-white space-y-1">
+                <span class="font-bold text-slate-800 text-[10px] block">📷 Foto Bukti Serah Terima Lab *</span>
+                <div class="p-1.5 rounded border border-slate-200 bg-slate-50 flex items-center justify-between text-[10px]">
+                  <span class="font-semibold text-slate-800 truncate">bukti_laptop_lab1.jpg (1.4MB)</span>
+                  <span class="text-emerald-700 font-bold">✓ Terunggah</span>
+                </div>
+              </div>
+
+              <div class="p-2 rounded-lg border border-slate-200 bg-slate-50 text-[10px] space-y-1">
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Teknisi Penerima:</span>
+                  <span class="font-bold text-slate-900">Ahmad Dahlan, S.T.</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">No. BAST Kembali:</span>
+                  <span class="font-bold font-mono text-slate-900">BAST-20261016-042</span>
+                </div>
+              </div>
+
               <div class="flex items-start space-x-1.5 pt-0.5 text-[10px] text-slate-600">
                 <input type="checkbox" checked class="mt-0.5 rounded border-slate-300">
                 <span>Saya menyerahkan fisik barang ke teknisi laboratorium.</span>
               </div>
 
-              <button onclick="alert('Pengembalian Laptop ASUS berhasil diverifikasi!'); showScreen(7);" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow">
-                Selesaikan Pengembalian Laptop →
+              <button onclick="alert('Bukti pengembalian Laptop terverifikasi!\nNo. BAST: BAST-20261016-042\nPenerima: Ahmad Dahlan, S.T.'); showScreen(7);" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow">
+                Kirim Bukti &amp; Selesaikan Pengembalian →
               </button>
             </div>
 
@@ -745,13 +765,33 @@
                 </div>
               </div>
 
+              <!-- Upload Foto Bukti Restorasi Kelas -->
+              <div class="p-2 rounded-lg border-2 border-dashed border-slate-300 bg-white space-y-1">
+                <span class="font-bold text-slate-800 text-[10px] block">📷 Foto Bukti Restorasi Ruang TK-02 *</span>
+                <div class="p-1.5 rounded border border-slate-200 bg-slate-50 flex items-center justify-between text-[10px]">
+                  <span class="font-semibold text-slate-800 truncate">restorasi_TK02.jpg (2.1MB)</span>
+                  <span class="text-emerald-700 font-bold">✓ Terunggah</span>
+                </div>
+              </div>
+
+              <div class="p-2 rounded-lg border border-slate-200 bg-slate-50 text-[10px] space-y-1">
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Verifikator Sarpras:</span>
+                  <span class="font-bold text-slate-900">Baharuddin, S.Pd.</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">No. BAST Restorasi:</span>
+                  <span class="font-bold font-mono text-slate-900">BAST-20261015-019</span>
+                </div>
+              </div>
+
               <div class="flex items-start space-x-1.5 pt-0.5 text-[10px] text-slate-600">
                 <input type="checkbox" checked class="mt-0.5 rounded border-slate-300">
                 <span>Saya menjamin seluruh fasilitas telah disusun rapi di ruang asal.</span>
               </div>
 
-              <button onclick="alert('Restorasi Meja &amp; Bangku ke Ruang TK-02 berhasil diverifikasi!'); showScreen(7);" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow">
-                Konfirmasi Restorasi Selesai →
+              <button onclick="alert('Bukti restorasi mebelair terverifikasi!\nNo. BAST: BAST-20261015-019\nVerifikator: Baharuddin, S.Pd.'); showScreen(7);" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow">
+                Kirim Bukti &amp; Konfirmasi Restorasi →
               </button>
             </div>
           </div>
@@ -770,9 +810,24 @@
             </div>
 
             <h2 class="text-base font-extrabold text-slate-900 mb-1">Bebas Peminjaman Sarpras</h2>
-            <p class="text-xs text-slate-500 max-w-xs leading-relaxed mb-6">
-              Anda tidak memiliki tanggungan peminjaman barang di Bengkel IT, Lab Komputer, maupun Ruang Admin JTIK FT UNM.
+            <p class="text-xs text-slate-500 max-w-xs leading-relaxed mb-4">
+              Seluruh barang telah dikembalikan lengkap beserta bukti serah terima terverifikasi di Bengkel IT, Lab Komputer, dan Ruang Admin.
             </p>
+
+            <!-- Mini Box BAST Terverifikasi Mobile -->
+            <div class="w-full max-w-xs p-2.5 rounded-xl border border-slate-300 bg-white text-left space-y-1 mb-4 text-[10px]">
+              <span class="font-extrabold text-[9px] text-slate-800 uppercase tracking-wider block border-b border-slate-200 pb-1">
+                📋 Bukti Pengembalian Terverifikasi:
+              </span>
+              <div class="flex justify-between text-slate-600">
+                <span>Laptop ASUS (BAST-042)</span>
+                <span class="text-emerald-700 font-bold">✓ Foto &amp; Unit Diterima</span>
+              </div>
+              <div class="flex justify-between text-slate-600">
+                <span>Meja &amp; Bangku (BAST-019)</span>
+                <span class="text-emerald-700 font-bold">✓ Restorasi TK-02 Sah</span>
+              </div>
+            </div>
 
             <div class="w-full space-y-2 max-w-xs">
               <button onclick="alert('Bukti Bebas Sarpras JTIK (PDF) berhasil diunduh!')" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 shadow">
