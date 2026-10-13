@@ -269,68 +269,6 @@
                 </button>
               </div>
             </div>
-
-            <!-- MODUL KHUSUS: PEMINJAMAN & RELOKASI MEJA DAN BANGKU KELAS -->
-            <div class="p-5 rounded-2xl border-2 border-slate-900 bg-slate-50 space-y-4">
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center space-x-3">
-                  <div class="w-11 h-11 rounded-xl bg-slate-900 text-white flex items-center justify-center text-2xl font-bold shadow-sm">
-                    🪑
-                  </div>
-                  <div>
-                    <div class="flex items-center space-x-2">
-                      <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-slate-900 text-white tracking-wider">FITUR KHUSUS MEBELAIR</span>
-                      <span class="text-[9px] font-bold px-2 py-0.5 rounded border border-slate-400 bg-white text-slate-700">PELACAKAN ANTAR-KELAS</span>
-                    </div>
-                    <h3 class="text-sm font-extrabold text-slate-900 mt-0.5">Peminjaman &amp; Relokasi Meja dan Bangku Kuliah Antar-Kelas</h3>
-                  </div>
-                </div>
-                <button onclick="goToDesktopScreen(4, 'bangku')" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition flex items-center space-x-1.5 shadow">
-                  <span>🪑 Pinjam Meja &amp; Bangku Sekarang</span>
-                  <span>→</span>
-                </button>
-              </div>
-
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Meminjam meja atau bangku dari ruang kelas lain? Sistem melacak <strong>ruang asal pengambilan</strong>, memverifikasi <strong>kuota aman kelas agar perkuliahan reguler tidak terganggu kekurangan meja dan kursi belajar</strong>, dan mencatat <strong>ruang tujuan pemindahan</strong>.
-              </p>
-
-              <!-- Mini Grid Status Kuota Meja & Bangku Per Ruang -->
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-                <div class="p-3 rounded-xl border border-slate-300 bg-white text-xs">
-                  <div class="flex justify-between items-center mb-1">
-                    <span class="font-bold text-slate-800">Ruang Teori TK-01</span>
-                    <span class="px-1.5 py-0.5 rounded bg-slate-200 text-slate-800 font-bold text-[10px]">Normal</span>
-                  </div>
-                  <div class="text-[11px] text-slate-600 space-y-0.5">
-                    <div>Total: <strong>35 Bangku, 18 Meja</strong></div>
-                    <div class="text-slate-900 font-bold">Boleh dipinjam: <span class="underline">Maks 5 Bangku, 3 Meja</span></div>
-                  </div>
-                </div>
-
-                <div class="p-3 rounded-xl border-2 border-slate-900 bg-white text-xs shadow-sm">
-                  <div class="flex justify-between items-center mb-1">
-                    <span class="font-bold text-slate-900">Ruang Teori TK-02</span>
-                    <span class="px-1.5 py-0.5 rounded bg-slate-900 text-white font-bold text-[10px]">Surplus Kuota</span>
-                  </div>
-                  <div class="text-[11px] text-slate-600 space-y-0.5">
-                    <div>Total: <strong>42 Bangku, 22 Meja</strong></div>
-                    <div class="text-slate-900 font-bold">Boleh dipinjam: <span class="underline">Maks 12 Bangku, 7 Meja</span></div>
-                  </div>
-                </div>
-
-                <div class="p-3 rounded-xl border border-slate-300 bg-white text-xs">
-                  <div class="flex justify-between items-center mb-1">
-                    <span class="font-bold text-slate-800">Ruang Teori TK-03</span>
-                    <span class="px-1.5 py-0.5 rounded border border-slate-400 bg-slate-100 text-slate-600 font-bold text-[10px]">Defisit Fasilitas</span>
-                  </div>
-                  <div class="text-[11px] text-slate-600 space-y-0.5">
-                    <div>Total: <strong>26 Bangku, 12 Meja</strong> (Kurang)</div>
-                    <div class="text-slate-500 font-medium">Terkunci: Ruang Tujuan Relokasi</div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         `
       },
