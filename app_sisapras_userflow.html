@@ -44,7 +44,7 @@
         </button>
       </div>
 
-      <!-- Navigation for Mahasiswa (User Role: 5 Phases) -->
+      <!-- Navigation for Mahasiswa (User Role: 5 Phases + Fitur Khusus Bangku) -->
       <div id="userPhaseNav" class="flex items-center space-x-1.5 overflow-x-auto text-[11px] font-bold py-1">
         <button onclick="goToPhase(1)" id="phaseBtn-1" class="phase-btn px-2.5 py-1 rounded-lg border transition step-active">
           1. Akses & Login
@@ -60,6 +60,9 @@
         </button>
         <button onclick="goToPhase(5)" id="phaseBtn-5" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
           5. Pengembalian
+        </button>
+        <button onclick="openBangkuFeature()" id="phaseBtn-bangku" class="px-2.5 py-1 rounded-lg border transition bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300 font-extrabold flex items-center space-x-1 shadow-sm shrink-0">
+          <span>🪑 Pinjam Bangku</span>
         </button>
       </div>
 
@@ -283,6 +286,30 @@
           </div>
 
         </div>
+      </div>
+
+      <!-- FITUR KHUSUS: PEMINJAMAN & RELOKASI BANGKU KELAS -->
+      <div class="p-6 rounded-3xl bg-gradient-to-r from-amber-50 via-orange-50 to-amber-100 border-2 border-amber-400 shadow-md flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-start space-x-4 max-w-xl">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-3xl shadow-md border-2 border-slate-900 shrink-0">
+            🪑
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 uppercase border border-amber-400">FITUR KHUSUS MEBELAIR</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300">PELACAKAN ANTAR-RUANG</span>
+            </div>
+            <h3 class="text-base font-black text-slate-900 mt-1">Peminjaman & Relokasi Bangku Kuliah</h3>
+            <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+              Meminjam bangku dari ruang kelas lain? Sistem ini secara khusus melacak <strong>ruang asal pengambilan</strong>, memverifikasi <strong>kuota aman kelas agar perkuliahan tidak terganggu</strong>, dan mencatat <strong>ruang tujuan pemindahan</strong>.
+            </p>
+          </div>
+        </div>
+
+        <button onclick="openBangkuFeature()" class="px-5 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow-lg flex items-center space-x-2">
+          <span>Buka Form Pinjam Bangku</span>
+          <span>→</span>
+        </button>
       </div>
 
       <!-- Quick Room Distribution Stats -->
@@ -727,6 +754,271 @@
           </button>
           <button onclick="goToPhase(1)" class="px-6 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs transition">
             Keluar dari Sistem (Selesai)
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- FITUR KHUSUS: PEMINJAMAN & RELOKASI BANGKU KELAS (MEBELAIR) -->
+    <!-- ============================================================== -->
+    <section id="bangkuSection" class="hidden w-full max-w-5xl space-y-6">
+      
+      <!-- Feature Top Header -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center space-x-4">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-3xl shadow-md border-2 border-slate-900">
+            🪑
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+                FITUR KHUSUS MEBELAIR
+              </span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300">
+                PELACAKAN RUANG ASAL & TUJUAN
+              </span>
+            </div>
+            <h2 class="text-lg font-black text-slate-900 mt-1">Peminjaman & Relokasi Bangku Kuliah</h2>
+            <p class="text-xs text-slate-500">Mencatat dengan tepat dari mana bangku diambil, batas aman kelas, dan ke mana bangku dipindahkan.</p>
+          </div>
+        </div>
+
+        <button onclick="closeBangkuFeature()" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-slate-100 text-xs font-bold text-slate-700 transition">
+          ← Kembali ke Dashboard
+        </button>
+      </div>
+
+      <!-- Real-Time Room Capacity & Chair Availability Cards -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center space-x-1.5">
+            <span>📍</span>
+            <span>STATUS KETERSEDIAAN BANGKU PER RUANG KELAS (SAAT INI)</span>
+          </h3>
+          <span class="text-[11px] text-slate-500 font-medium">Batas aman perkuliahan: minimal 30 bangku per ruang</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <!-- Room 1: TK-01 -->
+          <div id="cardRoom-TK01" class="p-4 rounded-2xl bg-white border-2 border-slate-200 transition hover:border-slate-400 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-extrabold text-slate-900">Ruang Teori TK-01</span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-100 text-emerald-900">🟢 Normal</span>
+            </div>
+            <div class="flex items-baseline space-x-2">
+              <span class="text-2xl font-black text-slate-900" id="stockRoom-TK01">35</span>
+              <span class="text-[11px] text-slate-500">Bangku Total</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 text-[11px] space-y-1">
+              <div class="flex justify-between text-slate-500"><span>Batas Aman Kelas:</span><span class="font-bold text-slate-700">30 Unit</span></div>
+              <div class="flex justify-between text-emerald-700 font-extrabold"><span>Boleh Diambil:</span><span>5 Unit</span></div>
+            </div>
+          </div>
+
+          <!-- Room 2: TK-02 (Surplus) -->
+          <div id="cardRoom-TK02" class="p-4 rounded-2xl bg-amber-50/60 border-2 border-amber-400 transition space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-extrabold text-amber-950">Ruang Teori TK-02</span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-100 text-emerald-900">🟢 Surplus</span>
+            </div>
+            <div class="flex items-baseline space-x-2">
+              <span class="text-2xl font-black text-amber-950" id="stockRoom-TK02">42</span>
+              <span class="text-[11px] text-amber-800">Bangku Total</span>
+            </div>
+            <div class="pt-2 border-t border-amber-200 text-[11px] space-y-1">
+              <div class="flex justify-between text-amber-900"><span>Batas Aman Kelas:</span><span class="font-bold text-amber-950">30 Unit</span></div>
+              <div class="flex justify-between text-emerald-800 font-extrabold"><span>Boleh Diambil:</span><span>12 Unit (Rekomendasi)</span></div>
+            </div>
+          </div>
+
+          <!-- Room 3: TK-03 (Defisit / Terkunci) -->
+          <div id="cardRoom-TK03" class="p-4 rounded-2xl bg-rose-50 border-2 border-rose-300 transition space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-extrabold text-rose-950">Ruang Teori TK-03</span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-rose-200 text-rose-900">🔴 Defisit</span>
+            </div>
+            <div class="flex items-baseline space-x-2">
+              <span class="text-2xl font-black text-rose-950" id="stockRoom-TK03">26</span>
+              <span class="text-[11px] text-rose-700">Bangku Total</span>
+            </div>
+            <div class="pt-2 border-t border-rose-200 text-[11px] space-y-1">
+              <div class="flex justify-between text-rose-800"><span>Batas Aman Kelas:</span><span class="font-bold text-rose-950">30 Unit</span></div>
+              <div class="flex justify-between text-rose-700 font-black"><span>Boleh Diambil:</span><span>0 Unit (Dilarang)</span></div>
+            </div>
+          </div>
+
+          <!-- Room 4: Bengkel IT & Lab -->
+          <div id="cardRoom-Bengkel" class="p-4 rounded-2xl bg-white border-2 border-slate-200 transition hover:border-slate-400 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-extrabold text-slate-900">Bengkel IT & Lab</span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-900">🟡 Terbatas</span>
+            </div>
+            <div class="flex items-baseline space-x-2">
+              <span class="text-2xl font-black text-slate-900" id="stockRoom-Bengkel">25</span>
+              <span class="text-[11px] text-slate-500">Kursi Kerja</span>
+            </div>
+            <div class="pt-2 border-t border-slate-100 text-[11px] space-y-1">
+              <div class="flex justify-between text-slate-500"><span>Batas Aman Lab:</span><span class="font-bold text-slate-700">15 Unit</span></div>
+              <div class="flex justify-between text-amber-800 font-extrabold"><span>Boleh Diambil:</span><span>10 Unit</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulir Peminjaman & Relokasi Bangku -->
+      <div class="bg-white p-6 rounded-3xl border-2 border-slate-900 shadow-xl space-y-5">
+        <div class="border-b border-slate-200 pb-3">
+          <h3 class="text-base font-black text-slate-900">Formulir Relokasi & Peminjaman Bangku Antar-Ruang</h3>
+          <p class="text-xs text-slate-500">Isi data ruang asal dan tujuan pemindahan secara akurat agar terdata pada sistem inventaris.</p>
+        </div>
+
+        <form onsubmit="handleBangkuLoanSubmit(event)" class="space-y-4 text-xs font-semibold">
+          
+          <!-- STEP 1: RUANG ASAL (DIAMBIL DARI MANA?) -->
+          <div class="p-4 rounded-2xl bg-amber-50 border border-amber-300 space-y-3">
+            <div class="flex items-center space-x-2 text-amber-950 font-black">
+              <span class="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs">1</span>
+              <span>DIAMBIL DARI MANA? (RUANG ASAL BANGKU)</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-800 mb-1">Pilih Ruang Kelas Asal *</label>
+                <select id="selectRuangAsal" onchange="handleSourceRoomChange()" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-bold text-slate-900 outline-none">
+                  <option value="TK-02" selected>Ruang Teori TK-02 (Tersedia diambil: 12 Bangku - Surplus)</option>
+                  <option value="TK-01">Ruang Teori TK-01 (Tersedia diambil: 5 Bangku - Normal)</option>
+                  <option value="Bengkel">Bengkel IT & Lab (Tersedia diambil: 10 Kursi Kerja)</option>
+                  <option value="TK-03" disabled>Ruang Teori TK-03 (Terkunci: Kekurangan Bangku)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-slate-800 mb-1">Jenis Bangku yang Diambil *</label>
+                <select id="selectJenisBangku" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-bold text-slate-900 outline-none">
+                  <option value="Kursi Kuliah Lipat Chitose (Meja Tulis)">Kursi Kuliah Lipat Chitose (Meja Tulis)</option>
+                  <option value="Kursi Kuliah Kayu">Kursi Kuliah Kayu Bertingkat</option>
+                  <option value="Kursi Plastik Serbaguna">Kursi Plastik Serbaguna</option>
+                  <option value="Kursi Putar Komputer">Kursi Putar Komputer Lab</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- DYNAMIC INFO ALERT TENTANG RUANG ASAL -->
+            <div id="sourceRoomInfoBox" class="p-3 rounded-xl bg-white border border-amber-400 text-[11px] text-amber-950 flex items-start space-x-2">
+              <span class="text-base">📍</span>
+              <div>
+                <span class="font-extrabold block text-slate-900" id="infoAsalTitle">INFO RUANG ASAL: Ruang Teori TK-02 (Lantai 2 Gedung JTIK)</span>
+                <span class="text-slate-600 block mt-0.5" id="infoAsalDesc">
+                  Saat ini terdapat <strong>42 unit bangku</strong>. Kuota cadangan aman perkuliahan adalah 30 unit, sehingga Anda dapat meminjam maksimal <strong>12 unit bangku</strong> dari ruangan ini.
+                </span>
+                <span class="text-amber-800 font-bold block mt-1">⚠️ Catatan: Seluruh bangku yang diambil dari Ruang TK-02 wajib dikembalikan dan disusun rapi ke ruangan ini setelah selesai.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: RUANG TUJUAN (DIPINDAHKAN KE MANA?) -->
+          <div class="p-4 rounded-2xl bg-sky-50 border border-sky-300 space-y-3">
+            <div class="flex items-center space-x-2 text-sky-950 font-black">
+              <span class="w-6 h-6 rounded-lg bg-sky-600 text-white flex items-center justify-center text-xs">2</span>
+              <span>DIPINDAHKAN KE MANA? (RUANG TUJUAN PENGGUNAAN)</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-800 mb-1">Pilih Ruang / Lokasi Tujuan *</label>
+                <select id="selectRuangTujuan" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-bold text-slate-900 outline-none">
+                  <option value="Ruang Teori TK-03">Ruang Teori TK-03 (Tambahan Mahasiswa Kelas)</option>
+                  <option value="Aula FT UNM">Aula Fakultas Teknik UNM (Seminar / Kuliah Umum)</option>
+                  <option value="Gazebo / Pelataran JTIK">Gazebo / Pelataran JTIK (Rapat Organisasi HIMATIK)</option>
+                  <option value="Ruang Sidang Skripsi">Ruang Sidang Skripsi (Tambahan Kursi Penguji/Audiens)</option>
+                  <option value="Lab Komputer 1">Lab Komputer 1 (Ujian Praktikum Tambahan)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-slate-800 mb-1">Jumlah Bangku yang Dipinjam *</label>
+                <div class="flex items-center space-x-2">
+                  <input type="number" id="inputBangkuQty" min="1" max="12" value="5" onchange="validateChairQty()" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-mono font-bold text-slate-900 outline-none">
+                  <span class="text-slate-500 font-bold shrink-0">Unit</span>
+                </div>
+                <span class="text-[10px] text-slate-400 font-normal" id="qtyLimitHint">Maksimal aman: 12 unit dari Ruang TK-02</span>
+              </div>
+            </div>
+
+            <div id="chairQtyErrorAlert" class="hidden p-2 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-[11px] font-bold">
+              ⚠️ Peringatan: Jumlah yang Anda masukkan melebihi kuota aman ruang asal! Perkuliahan reguler di kelas tersebut dapat kekurangan bangku.
+            </div>
+          </div>
+
+          <!-- STEP 3: WAKTU & PENANGGUNG JAWAB -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-slate-700 mb-1">Tanggal Relokasi *</label>
+              <input type="date" id="inputBangkuDate" value="2026-10-14" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-medium outline-none" required>
+            </div>
+            <div>
+              <label class="block text-slate-700 mb-1">Jam Pemindahan *</label>
+              <input type="text" id="inputBangkuTimeStart" value="09:00 WITA" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-medium outline-none" required>
+            </div>
+            <div>
+              <label class="block text-slate-700 mb-1">Estimasi Jam Kembali ke Ruang Asal *</label>
+              <input type="text" id="inputBangkuTimeEnd" value="15:00 WITA (Hari yang sama)" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-medium outline-none" required>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-slate-700 mb-1">Keperluan Pemindahan Bangku *</label>
+            <textarea id="inputBangkuPurpose" rows="2" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-normal outline-none text-slate-900" required>Penambahan bangku kuliah untuk kegiatan Kuliah Tamu Arsitektur Komputer di Ruang Teori TK-03.</textarea>
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <span class="text-[11px] text-slate-500">Penanggung Jawab: <strong>Warnisyah Armin (250210500034)</strong></span>
+            <button type="submit" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow-lg flex items-center space-x-2">
+              <span>Ajukan Izin Relokasi Bangku Antar-Ruang</span>
+              <span>→</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Digital Relocation Ticket Result (Preview Setelah Pengajuan) -->
+      <div id="bangkuTicketBox" class="hidden bg-white p-6 rounded-3xl border-2 border-emerald-500 shadow-xl space-y-4 animate-fade-in">
+        <div class="flex items-center space-x-3 text-emerald-700 border-b border-slate-200 pb-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl font-black">
+            ✓
+          </div>
+          <div>
+            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-900">TIKET RELOKASI AKTIF</span>
+            <h4 class="text-base font-black text-slate-900">Izin Pemindahan Bangku Disetujui Sistem</h4>
+            <p class="text-xs text-slate-500">ID Relokasi: <span class="font-mono font-bold text-slate-800">#REL-20261014-008</span></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs font-semibold">
+          <div>
+            <span class="text-slate-400 block text-[10px]">DIAMBIL DARI (ASAL):</span>
+            <span class="text-amber-900 font-extrabold text-sm" id="ticketAsal">Ruang Teori TK-02</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">DIPINDAHKAN KE (TUJUAN):</span>
+            <span class="text-sky-900 font-extrabold text-sm" id="ticketTujuan">Ruang Teori TK-03</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">JUMLAH & JENIS:</span>
+            <span class="text-slate-900 font-extrabold" id="ticketQty">5 Unit Kursi Chitose</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">BATAS PENGEMBALIAN:</span>
+            <span class="text-slate-900 font-extrabold" id="ticketDeadline">Hari ini, 15:00 WITA</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-xs text-emerald-900 flex items-center justify-between">
+          <span>📍 Status: Bangku tercatat dipindahkan. Harap segera dikembalikan ke <strong>Ruang Asal</strong> setelah selesai.</span>
+          <button onclick="restoreChairsSuccess()" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-sm">
+            Konfirmasi Bangku Sudah Dikembalikan ke Ruang Asal ✓
           </button>
         </div>
       </div>
@@ -1603,6 +1895,124 @@
       switchRole('user');
       goToPhase(5);
       completeReturnAndShowClearance();
+    }
+
+    // ==============================================================
+    // FITUR KHUSUS: PEMINJAMAN & RELOKASI BANGKU (MEBELAIR)
+    // ==============================================================
+    function openBangkuFeature() {
+      document.querySelectorAll('.phase-container').forEach(el => el.classList.add('hidden'));
+      const adminContainer = document.getElementById('adminContainer');
+      if (adminContainer) adminContainer.classList.add('hidden');
+
+      document.getElementById('bangkuSection').classList.remove('hidden');
+
+      document.getElementById('phaseBadge').innerText = "🪑 Fitur Khusus Mebelair";
+      document.getElementById('phaseDesc').innerText = "• Peminjaman & Relokasi Bangku Antar-Ruang (Asal ➔ Tujuan)";
+
+      document.querySelectorAll('.phase-btn').forEach(btn => btn.className = 'phase-btn px-2.5 py-1 rounded-lg border transition step-inactive');
+      const bangkuBtn = document.getElementById('phaseBtn-bangku');
+      if (bangkuBtn) {
+        bangkuBtn.className = 'px-2.5 py-1 rounded-lg border transition bg-amber-600 text-white border-amber-700 font-extrabold flex items-center space-x-1 shadow-sm shrink-0';
+      }
+
+      handleSourceRoomChange();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeBangkuFeature() {
+      document.getElementById('bangkuSection').classList.add('hidden');
+      const bangkuBtn = document.getElementById('phaseBtn-bangku');
+      if (bangkuBtn) {
+        bangkuBtn.className = 'px-2.5 py-1 rounded-lg border transition bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300 font-extrabold flex items-center space-x-1 shadow-sm shrink-0';
+      }
+      goToPhase(2);
+    }
+
+    function handleSourceRoomChange() {
+      const room = document.getElementById('selectRuangAsal').value;
+      const title = document.getElementById('infoAsalTitle');
+      const desc = document.getElementById('infoAsalDesc');
+      const qtyInput = document.getElementById('inputBangkuQty');
+      const hint = document.getElementById('qtyLimitHint');
+
+      // Reset card highlights
+      ['TK01', 'TK02', 'TK03', 'Bengkel'].forEach(id => {
+        const el = document.getElementById('cardRoom-' + id);
+        if (el) el.classList.remove('ring-4', 'ring-amber-400');
+      });
+
+      if (room === 'TK-02') {
+        title.innerText = 'INFO RUANG ASAL: Ruang Teori TK-02 (Lantai 2 Gedung JTIK)';
+        desc.innerHTML = 'Saat ini terdapat <strong>42 unit bangku</strong>. Kuota cadangan aman perkuliahan adalah 30 unit, sehingga Anda dapat meminjam maksimal <strong>12 unit bangku</strong> dari ruangan ini.';
+        qtyInput.max = 12;
+        qtyInput.value = 5;
+        hint.innerText = 'Maksimal aman: 12 unit dari Ruang TK-02';
+        document.getElementById('cardRoom-TK02').classList.add('ring-4', 'ring-amber-400');
+      } else if (room === 'TK-01') {
+        title.innerText = 'INFO RUANG ASAL: Ruang Teori TK-01 (Lantai 2 Gedung JTIK)';
+        desc.innerHTML = 'Saat ini terdapat <strong>35 unit bangku</strong>. Kuota cadangan aman perkuliahan adalah 30 unit, sehingga Anda dapat meminjam maksimal <strong>5 unit bangku</strong> dari ruangan ini.';
+        qtyInput.max = 5;
+        qtyInput.value = 3;
+        hint.innerText = 'Maksimal aman: 5 unit dari Ruang TK-01';
+        document.getElementById('cardRoom-TK01').classList.add('ring-4', 'ring-amber-400');
+      } else if (room === 'Bengkel') {
+        title.innerText = 'INFO RUANG ASAL: Bengkel IT & Laboratorium Komputer JTIK';
+        desc.innerHTML = 'Saat ini terdapat <strong>25 unit kursi kerja</strong>. Kuota cadangan aman praktikum adalah 15 unit, sehingga Anda dapat meminjam maksimal <strong>10 unit kursi</strong> dari ruangan ini.';
+        qtyInput.max = 10;
+        qtyInput.value = 4;
+        hint.innerText = 'Maksimal aman: 10 unit dari Bengkel IT';
+        document.getElementById('cardRoom-Bengkel').classList.add('ring-4', 'ring-amber-400');
+      }
+      validateChairQty();
+    }
+
+    function validateChairQty() {
+      const input = document.getElementById('inputBangkuQty');
+      const val = parseInt(input.value) || 0;
+      const max = parseInt(input.max) || 12;
+      const alertBox = document.getElementById('chairQtyErrorAlert');
+
+      if (val > max) {
+        alertBox.classList.remove('hidden');
+        input.classList.add('border-rose-500', 'bg-rose-50');
+      } else {
+        alertBox.classList.add('hidden');
+        input.classList.remove('border-rose-500', 'bg-rose-50');
+      }
+    }
+
+    function handleBangkuLoanSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('inputBangkuQty');
+      const val = parseInt(input.value) || 0;
+      const max = parseInt(input.max) || 12;
+
+      if (val > max) {
+        alert('⚠️ Peringatan: Jumlah bangku melebihi kuota aman ruang asal! Harap kurangi jumlah bangku agar kelas asal tidak kekurangan.');
+        return;
+      }
+
+      const asal = document.getElementById('selectRuangAsal').selectedOptions[0].text;
+      const tujuan = document.getElementById('selectRuangTujuan').value;
+      const jenis = document.getElementById('selectJenisBangku').value;
+      const deadline = document.getElementById('inputBangkuTimeEnd').value;
+
+      document.getElementById('ticketAsal').innerText = asal.split('(')[0].trim();
+      document.getElementById('ticketTujuan').innerText = tujuan;
+      document.getElementById('ticketQty').innerText = val + ' Unit (' + jenis + ')';
+      document.getElementById('ticketDeadline').innerText = deadline;
+
+      document.getElementById('bangkuTicketBox').classList.remove('hidden');
+      alert('✅ PERMOHONAN RELOKASI BANGKU BERHASIL DIAJUKAN!\n\nSistem mencatat ' + val + ' bangku diambil dari ' + asal.split('(')[0].trim() + ' dan dipindahkan ke ' + tujuan + '.\n\nHarap simpan tiket ini dan kembalikan bangku tepat waktu ke ruang asal.');
+
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function restoreChairsSuccess() {
+      alert('✓ VERIFIKASI PENGEMBALIAN BANGKU SELESAI!\n\nBangku telah berhasil diverifikasi kembali ke posisi semula di Ruangan Asal. Terima kasih telah menjaga keteraturan sarana perkuliahan di JTIK FT UNM.');
+      document.getElementById('bangkuTicketBox').classList.add('hidden');
+      closeBangkuFeature();
     }
 
     // Init phase 1
