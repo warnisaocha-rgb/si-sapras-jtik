@@ -131,7 +131,7 @@
                 <button onclick="goToDesktopScreen(4, 'bangku')" id="dSide-bangku" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-200 transition text-left font-bold">
                   <div class="flex items-center space-x-2.5">
                     <span>🪑</span>
-                    <span>Pinjam Bangku</span>
+                    <span>Pinjam Meja &amp; Bangku</span>
                   </div>
                   <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-900 text-white font-black">FITUR</span>
                 </button>
@@ -162,9 +162,9 @@
             
             <!-- Main Content Top Header -->
             <div class="border-b border-slate-200 px-6 py-3 flex items-center justify-between bg-white">
-              <div class="w-72 p-2 rounded-lg border border-slate-300 bg-slate-50 text-xs text-slate-400 flex items-center space-x-2">
-                <span>🔍</span>
-                <span>Cari barang, alat, atau lokasi...</span>
+              <div class="flex items-center space-x-2 text-xs font-semibold text-slate-600">
+                <span>🏛️</span>
+                <span>Sistem Sarana &amp; Prasarana JTIK FT UNM</span>
               </div>
               <div class="flex items-center space-x-2 text-xs font-semibold text-slate-700">
                 <span>Nama User</span>
@@ -259,7 +259,7 @@
                 </button>
                 <button onclick="goToDesktopScreen(4, 'bangku')" class="p-4 rounded-xl border-2 border-slate-900 hover:border-slate-700 bg-slate-50 text-center flex flex-col items-center group transition shadow-sm">
                   <span class="text-2xl mb-2">🪑</span>
-                  <span class="text-xs font-black text-slate-900">Pinjam Bangku</span>
+                  <span class="text-xs font-black text-slate-900">Pinjam Meja &amp; Bangku</span>
                   <span class="text-[10px] text-slate-600 font-semibold mt-0.5">Relokasi Antar-Kelas</span>
                 </button>
                 <button onclick="goToDesktopScreen(5)" class="p-4 rounded-xl border border-slate-200 hover:border-slate-400 bg-white text-center flex flex-col items-center group transition">
@@ -270,7 +270,7 @@
               </div>
             </div>
 
-            <!-- MODUL KHUSUS: PEMINJAMAN & RELOKASI BANGKU KELAS -->
+            <!-- MODUL KHUSUS: PEMINJAMAN & RELOKASI MEJA DAN BANGKU KELAS -->
             <div class="p-5 rounded-2xl border-2 border-slate-900 bg-slate-50 space-y-4">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center space-x-3">
@@ -282,20 +282,20 @@
                       <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-slate-900 text-white tracking-wider">FITUR KHUSUS MEBELAIR</span>
                       <span class="text-[9px] font-bold px-2 py-0.5 rounded border border-slate-400 bg-white text-slate-700">PELACAKAN ANTAR-KELAS</span>
                     </div>
-                    <h3 class="text-sm font-extrabold text-slate-900 mt-0.5">Peminjaman & Relokasi Bangku Kuliah Antar-Kelas</h3>
+                    <h3 class="text-sm font-extrabold text-slate-900 mt-0.5">Peminjaman &amp; Relokasi Meja dan Bangku Kuliah Antar-Kelas</h3>
                   </div>
                 </div>
                 <button onclick="goToDesktopScreen(4, 'bangku')" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition flex items-center space-x-1.5 shadow">
-                  <span>🪑 Pinjam Bangku Sekarang</span>
+                  <span>🪑 Pinjam Meja &amp; Bangku Sekarang</span>
                   <span>→</span>
                 </button>
               </div>
 
               <p class="text-xs text-slate-600 leading-relaxed">
-                Meminjam bangku dari ruang kelas lain? Sistem melacak <strong>ruang asal pengambilan</strong>, memverifikasi <strong>kuota aman kelas agar perkuliahan reguler tidak terganggu kekurangan kursi</strong>, dan mencatat <strong>ruang tujuan pemindahan</strong>.
+                Meminjam meja atau bangku dari ruang kelas lain? Sistem melacak <strong>ruang asal pengambilan</strong>, memverifikasi <strong>kuota aman kelas agar perkuliahan reguler tidak terganggu kekurangan meja dan kursi belajar</strong>, dan mencatat <strong>ruang tujuan pemindahan</strong>.
               </p>
 
-              <!-- Mini Grid Status Kuota Bangku Per Ruang -->
+              <!-- Mini Grid Status Kuota Meja & Bangku Per Ruang -->
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
                 <div class="p-3 rounded-xl border border-slate-300 bg-white text-xs">
                   <div class="flex justify-between items-center mb-1">
@@ -303,8 +303,8 @@
                     <span class="px-1.5 py-0.5 rounded bg-slate-200 text-slate-800 font-bold text-[10px]">Normal</span>
                   </div>
                   <div class="text-[11px] text-slate-600 space-y-0.5">
-                    <div>Total: <strong>35 Unit</strong> (Batas aman: 30)</div>
-                    <div class="text-slate-900 font-bold">Boleh dipinjam: <span class="underline">Maks 5 unit</span></div>
+                    <div>Total: <strong>35 Bangku, 18 Meja</strong></div>
+                    <div class="text-slate-900 font-bold">Boleh dipinjam: <span class="underline">Maks 5 Bangku, 3 Meja</span></div>
                   </div>
                 </div>
 
@@ -314,18 +314,18 @@
                     <span class="px-1.5 py-0.5 rounded bg-slate-900 text-white font-bold text-[10px]">Surplus Kuota</span>
                   </div>
                   <div class="text-[11px] text-slate-600 space-y-0.5">
-                    <div>Total: <strong>42 Unit</strong> (Batas aman: 30)</div>
-                    <div class="text-slate-900 font-bold">Boleh dipinjam: <span class="underline">Maks 12 unit</span></div>
+                    <div>Total: <strong>42 Bangku, 22 Meja</strong></div>
+                    <div class="text-slate-900 font-bold">Boleh dipinjam: <span class="underline">Maks 12 Bangku, 7 Meja</span></div>
                   </div>
                 </div>
 
                 <div class="p-3 rounded-xl border border-slate-300 bg-white text-xs">
                   <div class="flex justify-between items-center mb-1">
                     <span class="font-bold text-slate-800">Ruang Teori TK-03</span>
-                    <span class="px-1.5 py-0.5 rounded border border-slate-400 bg-slate-100 text-slate-600 font-bold text-[10px]">Defisit (-4)</span>
+                    <span class="px-1.5 py-0.5 rounded border border-slate-400 bg-slate-100 text-slate-600 font-bold text-[10px]">Defisit Fasilitas</span>
                   </div>
                   <div class="text-[11px] text-slate-600 space-y-0.5">
-                    <div>Total: <strong>26 Unit</strong> (Kebutuhan: 30)</div>
+                    <div>Total: <strong>26 Bangku, 12 Meja</strong> (Kurang)</div>
                     <div class="text-slate-500 font-medium">Terkunci: Ruang Tujuan Relokasi</div>
                   </div>
                 </div>
@@ -392,8 +392,8 @@
                   </tr>
                   <tr class="hover:bg-slate-50">
                     <td class="p-3 font-semibold">3</td>
-                    <td class="p-3 font-bold text-slate-900">Kursi Kuliah Teori</td>
-                    <td class="p-3">50</td>
+                    <td class="p-3 font-bold text-slate-900">Meja &amp; Kursi Kuliah Teori</td>
+                    <td class="p-3">50 Set</td>
                     <td class="p-3">Baik</td>
                     <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-bold">Tersedia</span></td>
                     <td class="p-3">Ruang Kelas 02</td>
@@ -432,7 +432,7 @@
               <button onclick="goToDesktopScreen(2)" class="text-xs text-slate-600 font-bold hover:underline">← Kembali ke Inventaris</button>
               <div class="flex items-center space-x-1.5 text-[11px] font-bold">
                 <button id="btnDetailAlat" onclick="switchDesktopDetail('alat')" class="px-3 py-1 rounded-lg bg-slate-900 text-white transition">Laptop Asus</button>
-                <button id="btnDetailBangku" onclick="switchDesktopDetail('bangku')" class="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300 transition">🪑 Kursi Kuliah Teori</button>
+                <button id="btnDetailBangku" onclick="switchDesktopDetail('bangku')" class="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300 transition">🪑 Meja &amp; Bangku Kuliah</button>
               </div>
             </div>
             <h2 class="text-base font-extrabold text-slate-900">Detail Barang</h2>
@@ -480,19 +480,19 @@
               </div>
             </div>
 
-            <!-- VIEW BANGKU (KURSI KULIAH TEORI) -->
+            <!-- VIEW MEJA & BANGKU (KURSI & MEJA KULIAH TEORI) -->
             <div id="viewDetailBangku" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden">
               <!-- Left: Image Placeholder -->
               <div class="h-64 rounded-2xl image-placeholder flex flex-col items-center justify-center text-slate-500 text-xs">
-                <span class="text-4xl mb-1">🪑</span>
-                <span class="font-bold">[ Foto Kursi Kuliah Lipat Chitose ]</span>
-                <span class="text-[10px] text-slate-400 mt-1">Mebelair Perkuliahan Teori</span>
+                <span class="text-4xl mb-1">🪑 🪵</span>
+                <span class="font-bold">[ Foto Meja &amp; Kursi Kuliah Chitose ]</span>
+                <span class="text-[10px] text-slate-400 mt-1">Mebelair Ruang Perkuliahan Teori</span>
               </div>
 
               <!-- Right: Specifications -->
               <div class="space-y-3 text-xs">
                 <div>
-                  <h3 class="text-lg font-black text-slate-900">Kursi Kuliah Teori (Mebelair)</h3>
+                  <h3 class="text-lg font-black text-slate-900">Meja &amp; Kursi Kuliah Teori (Mebelair)</h3>
                   <div class="flex items-center space-x-1.5 mt-0.5">
                     <span class="px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-bold">Tersedia</span>
                     <span class="px-2 py-0.5 rounded border border-slate-300 bg-slate-100 text-slate-700 text-[10px] font-bold">Relokasi Antar-Kelas</span>
@@ -501,20 +501,20 @@
 
                 <div class="space-y-1.5 border-t border-b border-slate-200 py-3 text-slate-700">
                   <div class="flex justify-between"><span class="text-slate-500">Kategori:</span><span class="font-bold">Mebelair Ruang Perkuliahan</span></div>
-                  <div class="flex justify-between"><span class="text-slate-500">Total di Ruang TK-02:</span><span class="font-bold">42 Unit</span></div>
-                  <div class="flex justify-between"><span class="text-slate-500">Batas Aman Kuliah:</span><span class="font-bold">30 Unit</span></div>
-                  <div class="flex justify-between"><span class="text-slate-500">Kuota Boleh Dipinjam:</span><span class="font-bold text-slate-900 underline">Maksimal 12 Unit</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Total di Ruang TK-02:</span><span class="font-bold">42 Bangku &amp; 22 Meja</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Batas Aman Kuliah:</span><span class="font-bold">30 Bangku &amp; 15 Meja</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Kuota Boleh Dipinjam:</span><span class="font-bold text-slate-900 underline">Maks 12 Bangku &amp; 7 Meja</span></div>
                   <div class="flex justify-between"><span class="text-slate-500">Lokasi Standar:</span><span class="font-bold">Ruang Teori TK-02 (Lantai 2)</span></div>
                 </div>
 
                 <p class="text-slate-600 text-[11px] leading-relaxed">
-                  <strong>Deskripsi:</strong> Kursi kuliah lipat berbahan rangka besi dan dudukan busa dilengkapi meja kayu lipat untuk kegiatan belajar mengajar mahasiswa JTIK FT UNM.
+                  <strong>Deskripsi:</strong> Kursi kuliah lipat Chitose dan meja belajar teori untuk kegiatan proses belajar mengajar mahasiswa JTIK FT UNM. Sistem melacak mutasi antar-ruang agar kelas asal tidak kekurangan fasilitas belajar.
                 </p>
 
                 <!-- Denah Lokasi Kelas -->
                 <div class="p-3 rounded-xl border-2 border-slate-900 bg-slate-50">
                   <div class="flex justify-between items-center mb-1.5">
-                    <span class="font-bold text-slate-800 text-[11px]">📍 Denah Ruang Asal & Rute Relokasi:</span>
+                    <span class="font-bold text-slate-800 text-[11px]">📍 Denah Ruang Asal &amp; Rute Relokasi:</span>
                     <span class="text-[10px] text-slate-600 font-bold">Lantai 2 JTIK</span>
                   </div>
                   <div class="h-20 rounded-lg image-placeholder flex flex-col items-center justify-center text-[10px] text-slate-500 font-semibold">
@@ -524,7 +524,7 @@
                 </div>
 
                 <button onclick="goToDesktopScreen(4, 'bangku')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center justify-center space-x-2">
-                  <span>🪑 Ajukan Relokasi Bangku Ini</span>
+                  <span>🪑 Ajukan Relokasi Meja &amp; Bangku Ini</span>
                   <span>→</span>
                 </button>
               </div>
@@ -548,7 +548,7 @@
                 </button>
                 <button id="btnTabBangku" onclick="switchDesktopFormTab('bangku')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 transition flex items-center space-x-1.5">
                   <span>🪑</span>
-                  <span>Pinjam Bangku (Mebelair)</span>
+                  <span>Pinjam Meja &amp; Bangku (Mebelair)</span>
                 </button>
               </div>
             </div>
@@ -652,12 +652,12 @@
               </div>
             </div>
 
-            <!-- PANEL 2: FORMULIR BANGKU KULIAH / MEBELAIR -->
+            <!-- PANEL 2: FORMULIR MEJA & BANGKU KULIAH / MEBELAIR -->
             <div id="panelFormBangku" class="space-y-4 hidden">
               <div class="flex items-center justify-between">
                 <div>
-                  <h2 class="text-base font-extrabold text-slate-900">Formulir Peminjaman & Relokasi Bangku Kuliah</h2>
-                  <p class="text-xs text-slate-500">Mencatat ruang asal, verifikasi kuota aman kelas, dan tujuan pemindahan.</p>
+                  <h2 class="text-base font-extrabold text-slate-900">Formulir Peminjaman &amp; Relokasi Meja dan Bangku Kuliah</h2>
+                  <p class="text-xs text-slate-500">Mencatat ruang asal, verifikasi kuota aman kelas, dan tujuan pemindahan fasilitas belajar.</p>
                 </div>
                 <span class="text-[10px] font-black px-2.5 py-1 rounded bg-slate-900 text-white uppercase tracking-wider">FITUR MEBELAIR</span>
               </div>
@@ -666,20 +666,20 @@
                 <!-- Left Preview Mebelair -->
                 <div class="p-4 rounded-xl border border-slate-300 bg-slate-50 space-y-3">
                   <div class="h-32 rounded-lg image-placeholder flex flex-col items-center justify-center text-slate-500 text-xs">
-                    <span class="text-3xl mb-1">🪑</span>
-                    <span class="font-bold">[ Foto Kursi Kuliah Lipat ]</span>
+                    <span class="text-3xl mb-1">🪑 🪵</span>
+                    <span class="font-bold">[ Foto Meja &amp; Kursi Kuliah ]</span>
                   </div>
                   <div>
                     <div class="flex items-center space-x-1.5 mb-1">
                       <span class="px-2 py-0.5 rounded bg-slate-900 text-white font-bold text-[10px]">Mebelair Kelas</span>
-                      <span class="px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700 font-bold text-[10px]">Chitose</span>
+                      <span class="px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700 font-bold text-[10px]">Chitose &amp; Meja Kayu</span>
                     </div>
-                    <h4 class="font-bold text-sm text-slate-900">Kursi Kuliah Teori Mahasiswa</h4>
-                    <p class="text-xs text-slate-600 mt-1">Bangku kuliah lipat dilengkapi meja tulis untuk kegiatan perkuliahan teori di lingkungan JTIK FT UNM.</p>
+                    <h4 class="font-bold text-sm text-slate-900">Meja &amp; Kursi Kuliah Teori</h4>
+                    <p class="text-xs text-slate-600 mt-1">Fasilitas meja belajar dan bangku kuliah untuk kegiatan perkuliahan teori di lingkungan JTIK FT UNM.</p>
                     <div class="mt-3 pt-2 border-t border-slate-200 space-y-1 text-[11px] text-slate-600">
-                      <div>• Kondisi: <strong>Baik & Kokoh</strong></div>
+                      <div>• Kondisi: <strong>Baik &amp; Kokoh</strong></div>
                       <div>• Standar Ruang: <strong>Ruang Teori TK-02</strong></div>
-                      <div>• Kuota Tersedia: <strong>42 Unit</strong></div>
+                      <div>• Kuota Tersedia: <strong>42 Bangku &amp; 22 Meja</strong></div>
                     </div>
                   </div>
                 </div>
@@ -728,30 +728,41 @@
                     </div>
                   </div>
 
-                  <!-- Informasi Asal & Tujuan Bangku -->
+                  <!-- Pilihan Item Mebelair Yang Dipinjam -->
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-1">Item Mebelair Yang Dipinjam *</label>
+                    <select class="w-full p-2 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
+                      <option selected>1 Set Lengkap (Meja Kuliah &amp; Kursi Lipat)</option>
+                      <option>Kursi Kuliah Lipat Chitose Saja (Bangku)</option>
+                      <option>Meja Kuliah / Meja Belajar Mahasiswa Saja</option>
+                      <option>Meja Dosen &amp; Kursi Praktikum</option>
+                    </select>
+                  </div>
+
+                  <!-- Informasi Asal & Tujuan Meja & Bangku -->
                   <div class="p-3 rounded-lg border-2 border-slate-800 bg-white space-y-3">
                     <div class="flex items-center justify-between pb-1 border-b border-slate-200">
-                      <span class="font-extrabold text-[11px] text-slate-900 uppercase tracking-wide">📍 Pelacakan Asal & Tujuan Relokasi Bangku</span>
-                      <span class="text-[10px] text-slate-600 font-semibold">Mencegah Kelas Asal Kurang Kursi</span>
+                      <span class="font-extrabold text-[11px] text-slate-900 uppercase tracking-wide">📍 Pelacakan Asal &amp; Tujuan Relokasi Meja &amp; Bangku</span>
+                      <span class="text-[10px] text-slate-600 font-semibold">Mencegah Kelas Asal Kurang Fasilitas</span>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label class="font-bold text-slate-700 block mb-1">1. Ruang Asal Pengambilan (Dari Mana?) *</label>
                         <select id="desktopFormRuangAsal" onchange="updateDesktopRoomQuota()" class="w-full p-2 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
-                          <option value="tk02" selected>Ruang Teori TK-02 (42 Unit • Aman: 12)</option>
-                          <option value="tk01">Ruang Teori TK-01 (35 Unit • Aman: 5)</option>
-                          <option value="bengkel">Bengkel IT (25 Kursi • Aman: 10)</option>
+                          <option value="tk02" selected>Ruang Teori TK-02 (42 Bangku, 22 Meja • Aman: 12 B, 7 M)</option>
+                          <option value="tk01">Ruang Teori TK-01 (35 Bangku, 18 Meja • Aman: 5 B, 3 M)</option>
+                          <option value="bengkel">Bengkel IT (25 Kursi, 10 Meja • Aman: 10 K, 4 M)</option>
                         </select>
                       </div>
 
                       <div>
                         <label class="font-bold text-slate-700 block mb-1">2. Ruang Tujuan Pemindahan (Ke Mana?) *</label>
                         <select class="w-full p-2 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
-                          <option value="tk03" selected>Ruang Teori TK-03 (Kelas Kurang Kursi)</option>
+                          <option value="tk03" selected>Ruang Teori TK-03 (Kelas Kurang Meja &amp; Kursi)</option>
                           <option value="aula">Aula FT UNM (Seminar / Kuliah Tamu)</option>
                           <option value="gazebo">Gazebo JTIK (Rapat Organisasi)</option>
-                          <option value="sidang">Ruang Sidang Skripsi (Tambahan Audiens)</option>
+                          <option value="sidang">Ruang Sidang Skripsi (Tambahan Audiens &amp; Penguji)</option>
                         </select>
                       </div>
                     </div>
@@ -760,19 +771,19 @@
                     <div id="desktopQuotaNotice" class="p-3 rounded-lg border border-slate-300 bg-slate-50 space-y-1 text-[11px]">
                       <span class="font-bold text-slate-900 block" id="desktopQuotaTitle">📍 Ruang Asal: Ruang Teori TK-02 (Lantai 2 Gedung JTIK)</span>
                       <span class="text-slate-600 block" id="desktopQuotaDesc">
-                        Total saat ini <strong>42 unit bangku</strong>. Batas aman perkuliahan adalah 30 unit, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>12 unit bangku</strong> agar perkuliahan kelas reguler tidak terganggu kekurangan tempat duduk.
+                        Total saat ini <strong>42 unit bangku &amp; 22 unit meja</strong>. Batas aman perkuliahan adalah 30 bangku dan 15 meja, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>12 unit bangku dan 7 unit meja</strong> agar perkuliahan kelas reguler tidak kekurangan fasilitas belajar.
                       </span>
                       <span class="text-slate-800 font-bold block pt-1 border-t border-slate-200">
-                        ⚠️ Seluruh bangku wajib dikembalikan dan disusun rapi ke Ruang TK-02 setelah kegiatan selesai.
+                        ⚠️ Seluruh meja dan bangku wajib dikembalikan dan disusun rapi ke Ruang TK-02 setelah kegiatan selesai.
                       </span>
                     </div>
                   </div>
 
+                  <!-- Jumlah Meja & Bangku -->
                   <div class="grid grid-cols-2 gap-3">
                     <div>
                       <label class="font-bold text-slate-700 block mb-1">Jumlah Bangku Dipinjam *</label>
                       <select class="w-full p-2 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
-                        <option>1 Unit</option>
                         <option>2 Unit</option>
                         <option>5 Unit</option>
                         <option selected>10 Unit</option>
@@ -781,30 +792,40 @@
                     </div>
 
                     <div>
-                      <label class="font-bold text-slate-700 block mb-1">Tanggal & Waktu Penggunaan *</label>
-                      <div class="p-2 rounded-lg border border-slate-300 bg-white text-slate-700 font-semibold flex justify-between items-center text-xs">
-                        <span>15/10/2026 (08:00 - 15:30)</span>
-                        <span>📅</span>
-                      </div>
+                      <label class="font-bold text-slate-700 block mb-1">Jumlah Meja Dipinjam *</label>
+                      <select class="w-full p-2 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
+                        <option>1 Unit</option>
+                        <option>2 Unit</option>
+                        <option selected>5 Unit</option>
+                        <option>7 Unit (Batas Maksimal Aman)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-1">Tanggal &amp; Waktu Penggunaan *</label>
+                    <div class="p-2 rounded-lg border border-slate-300 bg-white text-slate-700 font-semibold flex justify-between items-center text-xs">
+                      <span>15/10/2026 (08:00 - 15:30 WITA)</span>
+                      <span>📅</span>
                     </div>
                   </div>
 
                   <div>
                     <label class="font-bold text-slate-700 block mb-1">Keperluan Penggunaan *</label>
                     <div class="p-2 rounded-lg border border-slate-300 bg-white text-slate-700 text-xs">
-                      Tambahan kursi perkuliahan Teori Arsitektur Komputer di Ruang TK-03 karena lonjakan peserta.
+                      Tambahan meja dan bangku perkuliahan Teori Arsitektur Komputer di Ruang TK-03 karena lonjakan peserta kuliah.
                     </div>
                   </div>
 
                   <!-- Checklist Komitmen -->
                   <div class="p-2.5 rounded-lg border border-slate-300 bg-slate-50 flex items-start space-x-2 text-[11px] text-slate-700">
                     <input type="checkbox" checked class="mt-0.5 rounded border-slate-400">
-                    <span>Saya bertanggung jawab penuh atas keutuhan bangku dan berkomitmen mengembalikannya tepat waktu serta disusun rapi ke ruang asal.</span>
+                    <span>Saya bertanggung jawab penuh atas keutuhan meja dan bangku serta berkomitmen mengembalikannya tepat waktu dan disusun rapi ke ruang asal.</span>
                   </div>
 
                   <div class="flex justify-end space-x-2 pt-2">
                     <button onclick="goToDesktopScreen(1)" class="px-5 py-2 rounded-lg border border-slate-300 text-slate-700 font-bold hover:bg-slate-50">Batal</button>
-                    <button onclick="goToDesktopScreen(5)" class="px-5 py-2 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800">Ajukan Relokasi Bangku</button>
+                    <button onclick="goToDesktopScreen(5)" class="px-5 py-2 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800">Ajukan Relokasi Meja &amp; Bangku</button>
                   </div>
                 </div>
               </div>
@@ -871,20 +892,20 @@
                     <td class="p-3">15/10/2026</td>
                     <td class="p-3">
                       <div class="font-bold text-slate-900 flex items-center space-x-1.5">
-                        <span>🪑</span>
-                        <span>Kursi Kelas Teori (Mebelair)</span>
+                        <span>🪑 🪵</span>
+                        <span>Meja &amp; Bangku Teori (Mebelair)</span>
                       </div>
                       <div class="text-[10px] text-slate-500 mt-0.5 flex items-center space-x-1">
                         <span class="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-bold">Relokasi:</span>
                         <span>Ruang TK-02 ➔ Ruang TK-03</span>
                       </div>
                     </td>
-                    <td class="p-3 font-bold">10 Unit</td>
+                    <td class="p-3 font-bold">10 Bangku, 5 Meja</td>
                     <td class="p-3">
                       <span class="px-2 py-0.5 rounded bg-slate-900 text-white font-bold">Disetujui</span>
                       <span class="block text-[9px] text-emerald-700 font-bold mt-0.5">Siap Dipindahkan</span>
                     </td>
-                    <td class="p-3 text-center"><button onclick="alert('Tiket Relokasi Bangku #REL-20261014-008\nAsal: Ruang TK-02 (Lantai 2)\nTujuan: Ruang TK-03 (Lantai 2)\nJumlah: 10 Unit Kursi Lipat\nStatus: Disetujui\nCatatan: Seluruh bangku wajib dikembalikan & disusun rapi ke Ruang TK-02.')" class="px-3 py-1 rounded border border-slate-300 font-bold hover:bg-slate-100">Tiket</button></td>
+                    <td class="p-3 text-center"><button onclick="alert('Tiket Relokasi Meja &amp; Bangku #REL-20261014-008\nAsal: Ruang TK-02 (Lantai 2)\nTujuan: Ruang TK-03 (Lantai 2)\nJumlah: 10 Unit Bangku &amp; 5 Unit Meja\nStatus: Disetujui\nCatatan: Seluruh meja dan bangku wajib dikembalikan &amp; disusun rapi ke Ruang TK-02.')" class="px-3 py-1 rounded border border-slate-300 font-bold hover:bg-slate-100">Tiket</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -947,19 +968,19 @@
                 </div>
               </div>
 
-              <!-- Item Pengembalian Bangku -->
+              <!-- Item Pengembalian Meja & Bangku -->
               <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-lg border-2 border-slate-800 bg-slate-50">
                 <div>
                   <div class="flex items-center space-x-1.5">
-                    <span class="font-bold text-slate-900">🪑 Kursi Kuliah Teori (10 Unit)</span>
+                    <span class="font-bold text-slate-900">🪑 🪵 Meja &amp; Bangku Kuliah Teori (10 Bangku, 5 Meja)</span>
                     <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-900 text-white font-bold">Relokasi Mebelair</span>
                   </div>
                   <span class="text-[10px] text-slate-600 block mt-0.5">Rute: Ruang Teori TK-02 ➔ Ruang Teori TK-03 • Dipinjam: 15/10/2026</span>
-                  <span class="text-[10px] text-slate-700 font-semibold block mt-0.5">☑️ Telah dikembalikan lengkap dan disusun rapi ke Ruang Teori TK-02</span>
+                  <span class="text-[10px] text-slate-700 font-semibold block mt-0.5">☑️ Telah dikembalikan lengkap (10 bangku &amp; 5 meja) dan disusun rapi ke Ruang Teori TK-02</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <div class="p-2 rounded border border-slate-300 bg-white text-[11px]">Kondisi: Lengkap 10 Unit ▼</div>
-                  <button onclick="alert('Pengembalian & restorasi 10 bangku ke Ruang TK-02 berhasil diverifikasi!'); goToDesktopScreen(7);" class="px-4 py-2 rounded bg-slate-900 text-white font-bold">Konfirmasi Restorasi</button>
+                  <div class="p-2 rounded border border-slate-300 bg-white text-[11px]">Kondisi: Lengkap (10 B, 5 M) ▼</div>
+                  <button onclick="alert('Pengembalian &amp; restorasi 10 bangku dan 5 meja ke Ruang TK-02 berhasil diverifikasi!'); goToDesktopScreen(7);" class="px-4 py-2 rounded bg-slate-900 text-white font-bold">Konfirmasi Restorasi</button>
                 </div>
               </div>
             </div>
@@ -1120,13 +1141,13 @@
       const val = select.value;
       if (val === 'tk02') {
         title.innerText = '📍 Ruang Asal: Ruang Teori TK-02 (Lantai 2 Gedung JTIK)';
-        desc.innerHTML = 'Total saat ini <strong>42 unit bangku</strong>. Batas aman perkuliahan adalah 30 unit, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>12 unit bangku</strong> agar perkuliahan kelas reguler tidak terganggu kekurangan tempat duduk.';
+        desc.innerHTML = 'Total saat ini <strong>42 unit bangku &amp; 22 unit meja</strong>. Batas aman perkuliahan adalah 30 bangku dan 15 meja, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>12 unit bangku dan 7 unit meja</strong> agar perkuliahan kelas reguler tidak kekurangan fasilitas belajar.';
       } else if (val === 'tk01') {
         title.innerText = '📍 Ruang Asal: Ruang Teori TK-01 (Lantai 2 Gedung JTIK)';
-        desc.innerHTML = 'Total saat ini <strong>35 unit bangku</strong>. Batas aman perkuliahan adalah 30 unit, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>5 unit bangku</strong> agar perkuliahan kelas reguler tidak terganggu kekurangan tempat duduk.';
+        desc.innerHTML = 'Total saat ini <strong>35 unit bangku &amp; 18 unit meja</strong>. Batas aman perkuliahan adalah 30 bangku dan 15 meja, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>5 unit bangku dan 3 unit meja</strong> agar perkuliahan kelas reguler tidak kekurangan fasilitas belajar.';
       } else {
         title.innerText = '📍 Ruang Asal: Bengkel IT JTIK (Lantai 1 Gedung JTIK)';
-        desc.innerHTML = 'Total saat ini <strong>25 unit kursi</strong>. Batas cadangan bengkel adalah 15 unit, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>10 unit kursi</strong>.';
+        desc.innerHTML = 'Total saat ini <strong>25 unit kursi &amp; 10 unit meja</strong>. Batas cadangan bengkel adalah 15 kursi dan 6 meja, sehingga kuota aman yang dapat dipinjam adalah maksimal <strong>10 unit kursi dan 4 unit meja</strong>.';
       }
     }
 
