@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SI-SAPRAS JTIK — Sistem Informasi Sarana Prasarana (Sesuai User Flow)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .step-active { background-color: #0F172A; color: #FFFFFF; border-color: #0F172A; }
+    .step-completed { background-color: #E2E8F0; color: #0F172A; border-color: #94A3B8; }
+    .step-inactive { background-color: #F8FAFC; color: #94A3B8; border-color: #E2E8F0; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-slate-900 selection:text-white">
+
+  <!-- TOP HEADER & USER FLOW CONTROLLER -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-black text-sm shadow">
+          SI
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-sm font-extrabold text-slate-900 tracking-tight">SI-SAPRAS JTIK FT UNM</h1>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">USER FLOW PROTOTYPE</span>
+          </div>
+          <p class="text-[10px] text-slate-500 font-medium">Sistem Peminjaman Sarana Prasarana • Kelompok 2 (HCI)</p>
+        </div>
+      </div>
+
+      <!-- Jump Step Buttons (5 User Flow Phases) -->
+      <div class="flex items-center space-x-1.5 overflow-x-auto text-[11px] font-bold py-1">
+        <button onclick="goToPhase(1)" id="phaseBtn-1" class="phase-btn px-2.5 py-1 rounded-lg border transition step-active">
+          1. Akses & Login
+        </button>
+        <button onclick="goToPhase(2)" id="phaseBtn-2" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
+          2. Dashboard
+        </button>
+        <button onclick="goToPhase(3)" id="phaseBtn-3" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
+          3. Proses Peminjaman
+        </button>
+        <button onclick="goToPhase(4)" id="phaseBtn-4" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
+          4. Persetujuan & Monitoring
+        </button>
+        <button onclick="goToPhase(5)" id="phaseBtn-5" class="phase-btn px-2.5 py-1 rounded-lg border transition step-inactive">
+          5. Pengembalian & Bebas
+        </button>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="flex items-center space-x-2">
+        <a href="index.html" class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 transition">
+          ← Presentasi Deck
+        </a>
+      </div>
+    </div>
+
+    <!-- Active User Flow Phase Breadcrumb Banner -->
+    <div class="bg-slate-50 border-t border-slate-200 px-4 py-1.5 text-xs">
+      <div class="max-w-7xl mx-auto flex items-center justify-between text-[11px]">
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-slate-500">FASE AKTIF:</span>
+          <span id="phaseBadge" class="font-extrabold text-slate-900 px-2 py-0.5 rounded bg-white border border-slate-200 shadow-sm">
+            1. Akses & Login
+          </span>
+          <span id="phaseDesc" class="text-slate-500 hidden sm:inline">• Masuk menggunakan NIM/Username dan Password</span>
+        </div>
+        <span class="font-mono text-slate-400 text-[10px]">Alur Sesuai Diagram Bab II</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex justify-center items-start">
+
+    <!-- ============================================================== -->
+    <!-- FASE 1: AKSES & LOGIN -->
+    <!-- ============================================================== -->
+    <section id="phase1" class="phase-container w-full max-w-md bg-white rounded-3xl border-2 border-slate-900 shadow-2xl p-6 sm:p-8 my-auto">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl mx-auto mb-3 shadow-lg">
+          SI
+        </div>
+        <h2 class="text-xl font-black text-slate-900 tracking-tight">SI-SAPRAS JTIK</h2>
+        <p class="text-xs text-slate-500 mt-1">Jurusan Teknik Informatika dan Komputer FT UNM</p>
+      </div>
+
+      <!-- Flowchart Alert: Error Message (Decision: Data valid? -> TIDAK) -->
+      <div id="loginErrorAlert" class="hidden mb-4 p-3 rounded-xl bg-rose-50 border-2 border-rose-500 text-rose-900 text-xs flex items-start space-x-2 animate-bounce">
+        <span class="text-base">⚠️</span>
+        <div>
+          <span class="font-bold block">Username atau Password salah!</span>
+          <span class="text-[11px] text-rose-700">Silakan masukkan NIM dan Password yang terdaftar pada sistem akademik.</span>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form onsubmit="handleLogin(event)" class="space-y-4 text-xs font-semibold">
+        <div>
+          <label class="block text-slate-700 mb-1">NIM / Username Mahasiswa</label>
+          <div class="relative">
+            <input type="text" id="loginNIM" value="250210500034" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none text-slate-900" placeholder="Masukkan NIM Anda..." required>
+            <span class="absolute right-3 top-2.5 text-slate-400">👤</span>
+          </div>
+          <span class="text-[10px] text-slate-400 font-normal">Contoh NIM: 250210500034</span>
+        </div>
+
+        <div>
+          <label class="block text-slate-700 mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="loginPass" value="password123" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none text-slate-900" placeholder="Masukkan password..." required>
+            <span class="absolute right-3 top-2.5 text-slate-400">🔒</span>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow-md flex items-center justify-center space-x-2">
+          <span>Masuk ke Dashboard</span>
+          <span>→</span>
+        </button>
+
+        <!-- Test Buttons to demonstrate Decision Branch -->
+        <div class="pt-3 border-t border-slate-200">
+          <span class="text-[10px] text-slate-500 font-bold block mb-1.5 text-center">UJI PERCABANGAN FLOWCHART:</span>
+          <div class="grid grid-cols-2 gap-2 text-[10px]">
+            <button type="button" onclick="testInvalidLogin()" class="py-1.5 px-2 rounded-lg bg-rose-50 text-rose-800 border border-rose-300 font-bold hover:bg-rose-100">
+              ❌ Tes Data Salah (Error)
+            </button>
+            <button type="button" onclick="testValidLogin()" class="py-1.5 px-2 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold hover:bg-emerald-100">
+              ✅ Tes Data Valid (Masuk)
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- FASE 2: DASHBOARD -->
+    <!-- ============================================================== -->
+    <section id="phase2" class="phase-container hidden w-full max-w-5xl space-y-6">
+      
+      <!-- User Info Card -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center space-x-4">
+          <div class="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-300 flex items-center justify-center text-2xl shadow-inner">
+            👨‍🎓
+          </div>
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200">MAHASISWA AKTIF</span>
+            <h2 class="text-lg font-black text-slate-900 mt-1">Warnisyah Armin (Kelompok 2 HCI)</h2>
+            <p class="text-xs text-slate-500">NIM: 250210500034 • Teknik Komputer JTIK FT UNM</p>
+          </div>
+        </div>
+
+        <div class="flex space-x-2">
+          <button onclick="goToPhase(1)" class="px-3 py-1.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-xs font-bold text-slate-700">
+            Keluar (Logout)
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Menu Utama Sesuai User Flow -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-black text-slate-800 uppercase tracking-wider">
+            ✦ 4 MENU UTAMA (SESUAI FLOWCHART 2. DASHBOARD)
+          </h3>
+          <span class="text-xs text-slate-500">Pilih salah satu menu untuk melanjutkan alur</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Menu 1: Peminjaman Sarpras -->
+          <div onclick="goToPhase(3)" class="p-5 rounded-2xl bg-white border-2 border-slate-900 hover:border-slate-700 cursor-pointer shadow transition hover:-translate-y-1 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl mb-3 border border-orange-200">
+                📝
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900 mb-1">Peminjaman Sarpras</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Ajukan peminjaman alat praktikum laboratorium atau sarana perkuliahan.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-orange-600">
+              <span>Buka Formulir</span>
+              <span>→</span>
+            </div>
+          </div>
+
+          <!-- Menu 2: Pemetaan Alat & Bahan -->
+          <div onclick="openMappingModal()" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 cursor-pointer shadow-sm transition hover:-translate-y-1 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-xl mb-3 border border-sky-200">
+                📍
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900 mb-1">Pemetaan Alat & Bahan</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Cek ketersediaan dan titik lokasi rak di Bengkel IT, Lab Komputer, & Admin.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-600">
+              <span>Cek Ketersediaan</span>
+              <span>→</span>
+            </div>
+          </div>
+
+          <!-- Menu 3: Riwayat Penggunaan -->
+          <div onclick="goToPhase(4)" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 cursor-pointer shadow-sm transition hover:-translate-y-1 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl mb-3 border border-emerald-200">
+                ⏱️
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900 mb-1">Riwayat Penggunaan</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Monitoring status persetujuan, jadwal kembali, dan perpanjangan waktu.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
+              <span>Lihat Status</span>
+              <span>→</span>
+            </div>
+          </div>
+
+          <!-- Menu 4: Cetak Bebas Peminjaman -->
+          <div onclick="goToPhase(5)" class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-400 cursor-pointer shadow-sm transition hover:-translate-y-1 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl mb-3 border border-purple-200">
+                🎓
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900 mb-1">Cetak Bebas Pinjam</h4>
+              <p class="text-xs text-slate-500 leading-relaxed">Penerbitan surat keterangan bebas tanggungan sarana prasarana digital.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-purple-600">
+              <span>Cetak Bukti</span>
+              <span>→</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Room Distribution Stats -->
+      <div class="p-4 rounded-2xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-3 text-xs">
+        <span class="font-bold flex items-center space-x-2">
+          <span>🏢</span>
+          <span>Sebaran Sarpras JTIK FT UNM:</span>
+        </span>
+        <div class="flex space-x-2 font-mono text-[11px]">
+          <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700">Bengkel IT: 85 Alat</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700">Lab Komputer: 120 Alat</span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700">Ruang Admin: 40 Alat</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- FASE 3: PROSES PEMINJAMAN -->
+    <!-- ============================================================== -->
+    <section id="phase3" class="phase-container hidden w-full max-w-5xl space-y-6">
+      
+      <!-- Sub-Step 1: Pilih Sarana / Prasarana -->
+      <div id="p3Step1" class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-100 text-orange-900">LANGKAH 1 DARI 3</span>
+            <h3 class="text-lg font-black text-slate-900 mt-1">Pilih Sarana / Prasarana (atau Bahan)</h3>
+          </div>
+          <button onclick="goToPhase(2)" class="text-xs text-slate-500 font-bold hover:underline">← Kembali ke Dashboard</button>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="p-3 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-wrap gap-2 items-center text-xs">
+          <input type="text" placeholder="Cari nama alat, laptop, proyektor, kabel..." class="flex-1 min-w-[200px] p-2 rounded-xl border border-slate-300 outline-none">
+          <select class="p-2 rounded-xl border border-slate-300 bg-white font-medium text-slate-700">
+            <option>Semua Kategori (Sarana & Bahan)</option>
+            <option>Sarana Praktikum</option>
+            <option>Bahan Habis Pakai</option>
+            <option>Mebelair (Bangku Kelas)</option>
+          </select>
+          <select class="p-2 rounded-xl border border-slate-300 bg-white font-medium text-slate-700">
+            <option>Semua Lokasi Ruangan</option>
+            <option>Bengkel IT JTIK</option>
+            <option>Lab Komputer 1 (R. 101)</option>
+            <option>Ruang Administrasi JTIK</option>
+          </select>
+        </div>
+
+        <!-- Catalog Items Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Item 1: Laptop -->
+          <div class="p-4 rounded-2xl bg-white border-2 border-slate-900 shadow flex flex-col justify-between">
+            <div>
+              <div class="h-28 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-3xl mb-3">
+                💻
+              </div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-300">Tersedia: 10 Unit</span>
+                <span class="text-[10px] text-slate-500 font-semibold">Sarana Praktikum</span>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900">Laptop ASUS Core i7</h4>
+              <p class="text-[11px] text-slate-500 mt-1">📍 Lab Komputer 1 (Ruang 101 - Rak B-02)</p>
+            </div>
+            <button onclick="selectItem('Laptop ASUS Core i7', '10 Unit', 'Lab Komputer 1', 'Sarana Praktikum', 'Laptop siap pakai untuk praktikum pemrograman.')" class="mt-4 w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition">
+              Lihat Detail & Pinjam →
+            </button>
+          </div>
+
+          <!-- Item 2: Proyektor -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="h-28 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-3xl mb-3">
+                📽️
+              </div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-300">Tersedia: 5 Unit</span>
+                <span class="text-[10px] text-slate-500 font-semibold">Sarana Presentasi</span>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900">Proyektor Epson EB-X</h4>
+              <p class="text-[11px] text-slate-500 mt-1">📍 Bengkel IT JTIK FT UNM</p>
+            </div>
+            <button onclick="selectItem('Proyektor Epson EB-X', '5 Unit', 'Bengkel IT', 'Sarana Presentasi', 'Proyektor HDMI untuk presentasi kelas teori.')" class="mt-4 w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition">
+              Lihat Detail & Pinjam →
+            </button>
+          </div>
+
+          <!-- Item 3: Bangku Kelas Teori -->
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="h-28 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-3xl mb-3">
+                🪑
+              </div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-300">Tersedia: 40 Unit</span>
+                <span class="text-[10px] text-slate-500 font-semibold">Mebelair Kelas</span>
+              </div>
+              <h4 class="font-extrabold text-sm text-slate-900">Kursi Kuliah Teori</h4>
+              <p class="text-[11px] text-slate-500 mt-1">📍 Ruang Teori 02 (Mutasi Kelas)</p>
+            </div>
+            <button onclick="selectItem('Kursi Kuliah Teori', '40 Unit', 'Ruang Teori 02', 'Mebelair Kelas', 'Bangku kuliah lipat untuk kebutuhan ruang kelas teori.')" class="mt-4 w-full py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition">
+              Lihat Detail & Pinjam →
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Sub-Step 2: Detail Alat & Bahan (Termasuk Ketersediaan) -->
+      <div id="p3Step2" class="hidden space-y-4">
+        <button onclick="backToCatalog()" class="text-xs text-slate-500 font-bold hover:underline">← Kembali ke Pilihan Alat</button>
+
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="h-64 rounded-2xl bg-slate-100 border border-slate-300 flex flex-col items-center justify-center text-5xl">
+            <span id="detailIcon">💻</span>
+            <span class="text-xs text-slate-400 font-bold mt-2">DOKUMENTASI ALAT</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <span id="detailCategory" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Sarana Praktikum</span>
+              <h3 id="detailTitle" class="text-xl font-black text-slate-900 mt-1">Laptop ASUS Core i7</h3>
+              <p id="detailDesc" class="text-slate-500 mt-1">Laptop praktikum pemrograman.</p>
+            </div>
+
+            <div class="space-y-1.5 border-t border-b border-slate-100 py-3 text-slate-700">
+              <div class="flex justify-between"><span class="text-slate-500">Stok Ketersediaan:</span><span id="detailStock" class="font-bold text-slate-900">10 Unit</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Kondisi Alat:</span><span class="font-bold text-emerald-600">Baik & Normal</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Titik Penyimpanan:</span><span id="detailLocation" class="font-bold text-slate-900">Lab Komputer 1</span></div>
+            </div>
+
+            <!-- Mini Denah Rak -->
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-800 block text-[11px] mb-1">📍 Denah Penyimpanan Rak Fisik:</span>
+              <div class="h-16 rounded-lg bg-slate-200 border border-slate-300 flex items-center justify-center font-mono text-[10px] text-slate-600">
+                [ Denah Rak B-02 • Meja Teknisi Bengkel IT / Lab ]
+              </div>
+            </div>
+
+            <button onclick="goToForm()" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow">
+              Isi Formulir Peminjaman Sekarang →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-Step 3: Isi Formulir Peminjaman -->
+      <div id="p3Step3" class="hidden space-y-4">
+        <button onclick="backToDetail()" class="text-xs text-slate-500 font-bold hover:underline">← Kembali ke Detail</button>
+
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm max-w-2xl mx-auto space-y-4 text-xs font-semibold">
+          <div class="border-b border-slate-200 pb-3">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-100 text-orange-900">LANGKAH 3: FORMULIR</span>
+            <h3 class="text-base font-black text-slate-900 mt-1">Isi Formulir Peminjaman</h3>
+            <p class="text-slate-500 font-normal mt-0.5">Lengkapi tanggal, waktu, keperluan, dan jumlah unit.</p>
+          </div>
+
+          <form onsubmit="handleFormReview(event)" class="space-y-3">
+            <div>
+              <label class="block text-slate-700 mb-1">Barang Terpilih:</label>
+              <input type="text" id="formItemName" value="Laptop ASUS Core i7" class="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-100 font-bold text-slate-700 outline-none" readonly>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-700 mb-1">Jumlah Unit *</label>
+                <select id="formQty" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white outline-none">
+                  <option value="1 Unit">1 Unit</option>
+                  <option value="2 Unit">2 Unit</option>
+                  <option value="3 Unit">3 Unit</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-slate-700 mb-1">Tanggal Pinjam *</label>
+                <input type="date" id="formDate" value="2026-10-15" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white outline-none" required>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-700 mb-1">Waktu / Jam Penggunaan *</label>
+                <input type="text" id="formTime" value="08:00 - 10:30 WITA" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white outline-none" required>
+              </div>
+              <div>
+                <label class="block text-slate-700 mb-1">Lokasi Ruang Pakai *</label>
+                <input type="text" id="formRoom" value="Lab Komputer 1 / Ruang Teori" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white outline-none" required>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-slate-700 mb-1">Keperluan Peminjaman *</label>
+              <textarea id="formPurpose" rows="2" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white outline-none font-normal" required>Praktikum Mata Kuliah Jaringan Komputer Lanjut.</textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow">
+              Konfirmasi Data Peminjaman (Cek Kembali) →
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Sub-Step 4: Modal Konfirmasi Data (Cek Kembali) -->
+      <div id="p3ModalReview" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-2xl max-w-md w-full p-6 space-y-4">
+          <div class="text-center">
+            <span class="text-2xl">📋</span>
+            <h3 class="text-base font-black text-slate-900 mt-1">Konfirmasi Data Peminjaman</h3>
+            <p class="text-xs text-slate-500">Mohon periksa kembali kelengkapan data permohonan Anda sebelum dikirim ke pengelola.</p>
+          </div>
+
+          <!-- Summary Box -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs space-y-2 text-slate-700">
+            <div class="flex justify-between"><span class="text-slate-500">Barang:</span><span id="revItem" class="font-bold text-slate-900">Laptop ASUS Core i7</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Jumlah:</span><span id="revQty" class="font-bold">1 Unit</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Tanggal:</span><span id="revDate" class="font-bold">15/10/2026</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Waktu:</span><span id="revTime" class="font-bold">08:00 - 10:30 WITA</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Keperluan:</span><span id="revPurpose" class="font-bold text-right max-w-[200px]">Praktikum Jarkom</span></div>
+          </div>
+
+          <!-- Alert simulasi jika data tidak lengkap -->
+          <div id="revErrorAlert" class="hidden p-2.5 rounded-xl bg-rose-50 border border-rose-400 text-rose-900 text-[11px] font-bold">
+            ⚠️ Data tidak lengkap/tidak sesuai! Silakan perbaiki data terlebih dahulu.
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-2 pt-2">
+            <button onclick="submitApplicationSuccess()" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow">
+              Kirim Permohonan Peminjaman →
+            </button>
+            <div class="grid grid-cols-2 gap-2 text-[10px]">
+              <button onclick="closeReviewModal()" class="py-2 rounded-lg border border-slate-300 text-slate-700 font-bold hover:bg-slate-50">
+                ← Perbaiki Data
+              </button>
+              <button onclick="testReviewError()" class="py-2 rounded-lg bg-rose-100 text-rose-800 font-bold hover:bg-rose-200">
+                Uji Cabang Tidak Lengkap
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- FASE 4: PERSETUJUAN & MONITORING -->
+    <!-- ============================================================== -->
+    <section id="phase4" class="phase-container hidden w-full max-w-4xl space-y-6">
+      
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-900">FASE 4: STATUS MONITORING</span>
+            <h3 class="text-lg font-black text-slate-900 mt-1">Status Peminjaman & Notifikasi Persetujuan</h3>
+          </div>
+          <button onclick="goToPhase(2)" class="text-xs text-slate-500 font-bold hover:underline">← Dashboard</button>
+        </div>
+
+        <!-- Simulator Switcher: Disetujui? YA atau TIDAK -->
+        <div class="p-3 rounded-2xl bg-slate-100 border border-slate-300 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <span class="font-bold text-slate-700">⚡ Simulasi Status Keputusan Admin:</span>
+          <div class="flex space-x-2">
+            <button onclick="setApprovalState('approved')" id="btnApproveState" class="px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold text-xs shadow-sm">
+              🟢 Disetujui (Ya)
+            </button>
+            <button onclick="setApprovalState('rejected')" id="btnRejectState" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs">
+              🔴 Ditolak (Tidak)
+            </button>
+          </div>
+        </div>
+
+        <!-- STATE 1: DISETUJUI (HIJAU) -->
+        <div id="approvedBox" class="p-6 rounded-2xl bg-emerald-50 border-2 border-emerald-500 space-y-4">
+          <div class="flex items-start space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl shrink-0">
+              ✓
+            </div>
+            <div>
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-emerald-200 text-emerald-950 uppercase">Notifikasi Persetujuan</span>
+              <h4 class="text-base font-black text-emerald-950 mt-1">Permohonan Anda Telah Disetujui!</h4>
+              <p class="text-xs text-emerald-800 mt-0.5">Nomor Izin: <strong>#TRX-202610-092</strong> • Disetujui oleh Kepala Lab (W1)</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-emerald-200 text-xs space-y-1.5 text-slate-700">
+            <div class="flex justify-between"><span class="text-slate-500">Barang:</span><span class="font-bold text-slate-900">Laptop ASUS Core i7 (1 Unit)</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Waktu Pengambilan:</span><span class="font-bold text-slate-900">15 Okt 2026, Pukul 07:45 WITA</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Lokasi Serah Terima:</span><span class="font-bold text-slate-900">Meja Teknisi Bengkel IT JTIK FT UNM</span></div>
+          </div>
+
+          <!-- Percabangan: Perlu perpanjangan? -->
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-emerald-200">
+            <button onclick="openExtendModal()" class="px-4 py-2 rounded-xl bg-white border border-emerald-400 hover:bg-emerald-100 text-emerald-900 font-bold text-xs transition">
+              ⏱️ Ajukan Perpanjangan Waktu (Jika Perlu)
+            </button>
+            <button onclick="goToPhase(5)" class="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow">
+              Lanjut ke Pengembalian Alat →
+            </button>
+          </div>
+        </div>
+
+        <!-- STATE 2: DITOLAK (MERAH) -->
+        <div id="rejectedBox" class="hidden p-6 rounded-2xl bg-rose-50 border-2 border-rose-500 space-y-4">
+          <div class="flex items-start space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-xl shrink-0">
+              ✕
+            </div>
+            <div>
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-rose-200 text-rose-950 uppercase">Notifikasi Penolakan</span>
+              <h4 class="text-base font-black text-rose-950 mt-1">Permohonan Tidak Disetujui</h4>
+              <p class="text-xs text-rose-800 mt-0.5">Pengajuan peminjaman barang tidak dapat diproses oleh pengelola.</p>
+            </div>
+          </div>
+
+          <!-- Alasan Penolakan -->
+          <div class="bg-white p-4 rounded-xl border border-rose-200 text-xs space-y-1">
+            <span class="font-bold text-slate-900 block">Alasan Penolakan dari Admin:</span>
+            <p class="text-slate-600 italic">"Alat sedang dialokasikan untuk kegiatan praktikum resmi semester 3 di Lab Komputer 1 pada jam yang sama. Silakan ajukan jadwal lain."</p>
+          </div>
+
+          <div class="pt-2 flex justify-end">
+            <button onclick="goToPhase(3)" class="px-5 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs">
+              Pilih Alat / Jadwal Lain →
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Perpanjangan Waktu -->
+      <div id="extendModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-2xl max-w-sm w-full p-6 space-y-4">
+          <h3 class="text-base font-black text-slate-900">Ajukan Perpanjangan Peminjaman</h3>
+          <p class="text-xs text-slate-500">Perpanjangan waktu hanya dapat disetujui apabila alat tidak memiliki reservasi antrean dari mahasiswa lain.</p>
+          
+          <div class="space-y-2 text-xs">
+            <label class="font-bold text-slate-700 block">Tambah Durasi Waktu:</label>
+            <select class="w-full p-2.5 rounded-xl border border-slate-300 bg-white">
+              <option>1 Jam Tambahan (hingga 11:30 WITA)</option>
+              <option>2 Jam Tambahan (hingga 12:30 WITA)</option>
+              <option>1 Hari (Hingga Esok Pukul 10:00 WITA)</option>
+            </select>
+            <label class="font-bold text-slate-700 block pt-1">Alasan Perpanjangan:</label>
+            <textarea rows="2" class="w-full p-2 rounded-xl border border-slate-300" placeholder="Praktikum belum selesai..."></textarea>
+          </div>
+
+          <div class="flex space-x-2 pt-2">
+            <button onclick="closeExtendModal()" class="flex-1 py-2 rounded-xl border border-slate-300 text-xs font-bold">Batal</button>
+            <button onclick="submitExtension()" class="flex-1 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">Kirim Permohonan</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- FASE 5: PENGEMBALIAN & KONFIRMASI -->
+    <!-- ============================================================== -->
+    <section id="phase5" class="phase-container hidden w-full max-w-4xl space-y-6">
+      
+      <!-- Halaman Pengembalian -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-900">FASE 5: PENGEMBALIAN & BEBAS SARPRAS</span>
+            <h3 class="text-lg font-black text-slate-900 mt-1">Pengembalian Alat & Verifikasi Pengelola</h3>
+          </div>
+          <button onclick="goToPhase(4)" class="text-xs text-slate-500 font-bold hover:underline">← Status Monitoring</button>
+        </div>
+
+        <!-- Step 1: Datang ke Lab -->
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center space-x-3 text-xs">
+          <span class="text-2xl">🏢</span>
+          <div>
+            <span class="font-bold text-slate-900 block">1. Lokasi Pengembalian Fisik</span>
+            <span class="text-slate-500">Silakan serahkan barang secara langsung ke teknisi di <strong>Bengkel IT / Lab Komputer 1 JTIK FT UNM</strong>.</span>
+          </div>
+        </div>
+
+        <!-- Step 2: Unggah Laporan & Bukti Pemakaian -->
+        <div class="space-y-2 text-xs">
+          <span class="font-bold text-slate-900 block">2. Unggah Laporan Pemakaian Alat & Bukti Foto Penggunaan</span>
+          <div class="p-6 rounded-2xl border-2 border-dashed border-slate-300 hover:border-slate-500 bg-slate-50 text-center cursor-pointer transition">
+            <span class="text-3xl block mb-2">📁</span>
+            <span class="font-bold text-slate-800 block">Tarik & Lepas File di Sini, atau <span class="text-blue-600 underline">Pilih File</span></span>
+            <span class="text-[10px] text-slate-400 mt-1 block">Format: PDF, JPG, PNG (Maks 10 MB)</span>
+            <div class="mt-2 inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-bold">
+              ✓ File Terlampir: Laporan_Praktikum_Kelompok2.pdf (1.2 MB)
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Verifikasi Pengelola & Decision: Ada Kendala? -->
+        <div class="p-4 rounded-2xl bg-white border border-slate-300 space-y-3 text-xs">
+          <span class="font-bold text-slate-900 block">3. Verifikasi Kondisi oleh Pengelola & Lapor Kendala</span>
+          
+          <label class="flex items-center space-x-2 text-slate-700 cursor-pointer">
+            <input type="checkbox" id="checkIssue" onchange="toggleIssueForm()" class="rounded border-slate-300">
+            <span class="font-bold text-rose-600">Ada kendala / kerusakan / kehilangan saat pemakaian?</span>
+          </label>
+
+          <!-- Form Kendala (Muncul jika ada kendala) -->
+          <div id="issueForm" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-300 space-y-2">
+            <span class="font-bold text-rose-900 text-[11px] block">Deskripsi Kendala yang Dihadapi:</span>
+            <textarea rows="2" class="w-full p-2 rounded-lg border border-rose-300 bg-white text-xs outline-none" placeholder="Tuliskan kendala teknis (misal: kabel HDMI agak kendor, proyektor panas, dll)..."></textarea>
+            <span class="text-[10px] text-rose-700">Laporan kendala akan diteruskan langsung ke log perbaikan teknisi laboratorium.</span>
+          </div>
+        </div>
+
+        <button onclick="completeReturnAndShowClearance()" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition shadow flex items-center justify-center space-x-2">
+          <span>Verifikasi Pengembalian Selesai & Terbitkan Bebas Sarpras</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      <!-- Step 4: Sertifikat Bebas Peminjaman Digital -->
+      <div id="clearanceCertBox" class="hidden bg-white p-8 rounded-3xl border-2 border-slate-900 shadow-2xl text-center space-y-5 animate-fade-in">
+        <div class="w-20 h-20 rounded-full border-2 border-slate-900 bg-emerald-100 text-emerald-900 flex items-center justify-center text-4xl mx-auto shadow-md">
+          ✓
+        </div>
+
+        <div>
+          <span class="text-[10px] font-mono font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-300 uppercase">SURAT BEBAS SARPRAS RESMI DIGITAL</span>
+          <h3 class="text-xl font-black text-slate-900 mt-2">SURAT KETERANGAN BEBAS PINJAMAN SARPRAS</h3>
+          <p class="text-xs text-slate-600 max-w-md mx-auto mt-1 leading-relaxed">
+            Diterbitkan oleh Jurusan Teknik Informatika dan Komputer (JTIK) Fakultas Teknik Universitas Negeri Makassar.
+          </p>
+        </div>
+
+        <!-- Clearance Card Details -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 max-w-md mx-auto text-xs text-left space-y-2 text-slate-700 font-semibold">
+          <div class="flex justify-between"><span class="text-slate-500">Nama Mahasiswa:</span><span class="text-slate-900">Warnisyah Armin</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">NIM:</span><span class="text-slate-900">250210500034</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Program Studi:</span><span class="text-slate-900">Teknik Komputer</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Status 3 Ruangan:</span><span class="font-bold text-emerald-600">LUNAS & BERSIH (Bebas Tanggungan)</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Tanggal Terbit:</span><span>13 Oktober 2026</span></div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <button onclick="alert('File Surat_Bebas_Sarpras_JTIK.pdf berhasil diunduh!')" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow flex items-center space-x-2">
+            <span>📥 Cetak Bebas Peminjaman Alat Digital (PDF)</span>
+          </button>
+          <button onclick="goToPhase(1)" class="px-6 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs transition">
+            Keluar dari Sistem (Selesai)
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MAPPING MODAL (FOR PHASE 2 MENU B) -->
+  <div id="mappingModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-2xl max-w-2xl w-full p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+        <div>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-900">PEMETAAN ALAT & BAHAN</span>
+          <h3 class="text-base font-black text-slate-900 mt-1">Peta Sebaran Sarpras di 3 Titik JTIK</h3>
+        </div>
+        <button onclick="closeMappingModal()" class="text-slate-400 hover:text-slate-900 text-lg font-bold">✕</button>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 text-xs">
+        <div class="p-3 rounded-xl bg-indigo-50 border border-indigo-200 space-y-1">
+          <span class="font-bold text-indigo-950 block">🏢 Bengkel IT JTIK</span>
+          <span class="text-[11px] text-slate-600 block">• 85 Unit Inventaris</span>
+          <span class="text-[11px] text-slate-600 block">• Toolkit & Hardware</span>
+          <span class="text-[10px] text-indigo-700 font-semibold block mt-1">PIC: Kepala Lab (W1)</span>
+        </div>
+        <div class="p-3 rounded-xl bg-teal-50 border border-teal-200 space-y-1">
+          <span class="font-bold text-teal-950 block">💻 Lab Komputer 1</span>
+          <span class="text-[11px] text-slate-600 block">• 120 Unit Komputer/Laptop</span>
+          <span class="text-[11px] text-slate-600 block">• Perangkat Jaringan</span>
+          <span class="text-[10px] text-teal-700 font-semibold block mt-1">PIC: Teknisi Lab</span>
+        </div>
+        <div class="p-3 rounded-xl bg-purple-50 border border-purple-200 space-y-1">
+          <span class="font-bold text-purple-950 block">📂 Ruang Admin JTIK</span>
+          <span class="text-[11px] text-slate-600 block">• 40 Unit Media & Berkas</span>
+          <span class="text-[11px] text-slate-600 block">• Kamera & Proyektor</span>
+          <span class="text-[10px] text-purple-700 font-semibold block mt-1">PIC: Staf Admin</span>
+        </div>
+      </div>
+
+      <div class="pt-2 text-right">
+        <button onclick="closeMappingModal(); goToPhase(3);" class="px-5 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs">
+          Lanjut ke Pilihan Barang →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC MAPPING USER FLOW -->
+  <script>
+    const phaseNames = {
+      1: { badge: "1. Akses & Login", desc: "Masuk menggunakan NIM/Username dan Password (dengan validasi error)" },
+      2: { badge: "2. Dashboard", desc: "4 Menu Utama: Pinjam, Pemetaan 3 Ruang, Riwayat, & Bebas Sarpras" },
+      3: { badge: "3. Proses Peminjaman", desc: "Pilih Sarpras/Bahan -> Detail -> Formulir -> Konfirmasi Cek Kembali" },
+      4: { badge: "4. Persetujuan & Monitoring", desc: "Status Disetujui/Ditolak dengan Alasan + Opsi Perpanjangan" },
+      5: { badge: "5. Pengembalian & Konfirmasi", desc: "Unggah Laporan Bukti Pemakaian -> Verifikasi Pengelola -> Surat Bebas Digital" }
+    };
+
+    function goToPhase(num) {
+      document.querySelectorAll('.phase-container').forEach(el => el.classList.add('hidden'));
+      document.getElementById('phase' + num).classList.remove('hidden');
+
+      // Update Phase Badge & Breadcrumb
+      document.getElementById('phaseBadge').innerText = phaseNames[num].badge;
+      document.getElementById('phaseDesc').innerText = "• " + phaseNames[num].desc;
+
+      // Update Header Buttons
+      document.querySelectorAll('.phase-btn').forEach((btn, idx) => {
+        if (idx + 1 === num) {
+          btn.className = 'phase-btn px-2.5 py-1 rounded-lg border transition step-active';
+        } else if (idx + 1 < num) {
+          btn.className = 'phase-btn px-2.5 py-1 rounded-lg border transition step-completed';
+        } else {
+          btn.className = 'phase-btn px-2.5 py-1 rounded-lg border transition step-inactive';
+        }
+      });
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // FASE 1 LOGIN LOGIC
+    function handleLogin(e) {
+      e.preventDefault();
+      const nim = document.getElementById('loginNIM').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+
+      if (nim === "250210500034" && pass === "password123") {
+        document.getElementById('loginErrorAlert').classList.add('hidden');
+        goToPhase(2);
+      } else {
+        document.getElementById('loginErrorAlert').classList.remove('hidden');
+      }
+    }
+
+    function testInvalidLogin() {
+      document.getElementById('loginNIM').value = "250210599999";
+      document.getElementById('loginPass').value = "wrongpass";
+      document.getElementById('loginErrorAlert').classList.remove('hidden');
+    }
+
+    function testValidLogin() {
+      document.getElementById('loginNIM').value = "250210500034";
+      document.getElementById('loginPass').value = "password123";
+      document.getElementById('loginErrorAlert').classList.add('hidden');
+      goToPhase(2);
+    }
+
+    // FASE 2 MODAL
+    function openMappingModal() {
+      document.getElementById('mappingModal').classList.remove('hidden');
+    }
+    function closeMappingModal() {
+      document.getElementById('mappingModal').classList.add('hidden');
+    }
+
+    // FASE 3 SELECTION & STEPS
+    function selectItem(title, stock, location, category, desc) {
+      document.getElementById('p3Step1').classList.add('hidden');
+      document.getElementById('p3Step2').classList.remove('hidden');
+
+      document.getElementById('detailTitle').innerText = title;
+      document.getElementById('detailStock').innerText = stock;
+      document.getElementById('detailLocation').innerText = location;
+      document.getElementById('detailCategory').innerText = category;
+      document.getElementById('detailDesc').innerText = desc;
+
+      document.getElementById('formItemName').value = title;
+      document.getElementById('revItem').innerText = title;
+    }
+
+    function backToCatalog() {
+      document.getElementById('p3Step2').classList.add('hidden');
+      document.getElementById('p3Step1').classList.remove('hidden');
+    }
+
+    function goToForm() {
+      document.getElementById('p3Step2').classList.add('hidden');
+      document.getElementById('p3Step3').classList.remove('hidden');
+    }
+
+    function backToDetail() {
+      document.getElementById('p3Step3').classList.add('hidden');
+      document.getElementById('p3Step2').classList.remove('hidden');
+    }
+
+    function handleFormReview(e) {
+      e.preventDefault();
+      document.getElementById('revQty').innerText = document.getElementById('formQty').value;
+      document.getElementById('revDate').innerText = document.getElementById('formDate').value;
+      document.getElementById('revTime').innerText = document.getElementById('formTime').value;
+      document.getElementById('revPurpose').innerText = document.getElementById('formPurpose').value;
+
+      document.getElementById('revErrorAlert').classList.add('hidden');
+      document.getElementById('p3ModalReview').classList.remove('hidden');
+    }
+
+    function closeReviewModal() {
+      document.getElementById('p3ModalReview').classList.add('hidden');
+    }
+
+    function testReviewError() {
+      document.getElementById('revErrorAlert').classList.remove('hidden');
+    }
+
+    function submitApplicationSuccess() {
+      document.getElementById('p3ModalReview').classList.add('hidden');
+      goToPhase(4);
+    }
+
+    // FASE 4 APPROVAL TOGGLE & EXTEND
+    function setApprovalState(state) {
+      if (state === 'approved') {
+        document.getElementById('approvedBox').classList.remove('hidden');
+        document.getElementById('rejectedBox').classList.add('hidden');
+        document.getElementById('btnApproveState').className = 'px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold text-xs shadow-sm';
+        document.getElementById('btnRejectState').className = 'px-3 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs';
+      } else {
+        document.getElementById('approvedBox').classList.add('hidden');
+        document.getElementById('rejectedBox').classList.remove('hidden');
+        document.getElementById('btnApproveState').className = 'px-3 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 font-bold text-xs';
+        document.getElementById('btnRejectState').className = 'px-3 py-1 rounded-lg bg-rose-600 text-white font-bold text-xs shadow-sm';
+      }
+    }
+
+    function openExtendModal() {
+      document.getElementById('extendModal').classList.remove('hidden');
+    }
+    function closeExtendModal() {
+      document.getElementById('extendModal').classList.add('hidden');
+    }
+    function submitExtension() {
+      closeExtendModal();
+      alert('Permohonan perpanjangan waktu berhasil dikirim ke pengelola lab!');
+    }
+
+    // FASE 5 RETURN & CLEARANCE
+    function toggleIssueForm() {
+      const isChecked = document.getElementById('checkIssue').checked;
+      if (isChecked) {
+        document.getElementById('issueForm').classList.remove('hidden');
+      } else {
+        document.getElementById('issueForm').classList.add('hidden');
+      }
+    }
+
+    function completeReturnAndShowClearance() {
+      document.getElementById('clearanceCertBox').classList.remove('hidden');
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // Init phase 1
+    goToPhase(1);
+  </script>
+</body>
+</html>
