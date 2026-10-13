@@ -5,155 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Low-Fidelity Mobile Wireframe — SI-SAPRAS JTIK FT UNM</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    body { font-family: 'Inter', sans-serif; }
     .mono { font-family: 'JetBrains Mono', monospace; }
     .phone-mockup {
-      width: 360px;
-      height: 740px;
-      border: 12px solid #0F172A;
-      border-radius: 40px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      width: 340px;
+      height: 680px;
+      border: 8px solid #1E293B;
+      border-radius: 32px;
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.4);
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased">
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
 
-  <!-- Header Top Bar -->
-  <header class="border-b border-slate-800 bg-slate-900 sticky top-0 z-50 px-4 py-3">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center space-x-3">
-        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700">[LO-FI BLUEPRINT]</span>
-        <div>
-          <h1 class="font-bold text-sm sm:text-base text-white tracking-tight">SI-SAPRAS JTIK — Mobile Wireframe</h1>
-          <p class="text-[11px] text-slate-400">Pertemuan 9: Wireframe Low-Fidelity Mobile Berbasis Kotak, Garis &amp; Teks Placeholder</p>
-        </div>
+  <!-- TOP BAR CONTROL -->
+  <header class="border-b-2 border-slate-700 bg-slate-950 px-4 py-3 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white text-slate-900 uppercase">Lo-Fi Mobile</span>
+        <h1 class="font-bold text-sm sm:text-base text-white tracking-tight mt-0.5">SI-SAPRAS JTIK — Mobile Wireframe</h1>
       </div>
 
-      <!-- Mode Selector -->
-      <div class="flex items-center space-x-2">
-        <button id="btnDeviceMode" onclick="setMode('device')" class="px-3 py-1.5 rounded text-xs font-mono font-bold bg-white text-slate-950 border border-white transition">
-          [MODE: Simulasi HP]
+      <!-- Navigation & Mode -->
+      <div class="flex items-center space-x-2 text-xs font-mono">
+        <button id="btnDeviceMode" onclick="setMode('device')" class="px-3 py-1.5 rounded font-bold bg-white text-slate-950 border border-white">
+          Simulasi HP
         </button>
-        <button id="btnGridMode" onclick="setMode('grid')" class="px-3 py-1.5 rounded text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
-          [MODE: Board 7 Layar]
+        <button id="btnGridMode" onclick="setMode('grid')" class="px-3 py-1.5 rounded font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700">
+          Board 7 Layar
         </button>
-        <a href="lofi_desktop_wireframe.html" class="px-3 py-1.5 rounded text-xs font-mono font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
-          [Versi Desktop PC →]
-        </a>
-        <a href="index.html" class="px-3 py-1.5 rounded text-xs font-mono font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
-          [← Presentasi]
+        <a href="lofi_desktop_wireframe.html" class="px-3 py-1.5 rounded font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700">
+          Versi Desktop PC →
         </a>
       </div>
     </div>
   </header>
 
-  <!-- ACADEMIC DEFINITION BANNER -->
-  <div class="bg-slate-900/90 border-b border-slate-800 px-4 py-2.5">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-2 text-xs">
-      <div class="flex items-center space-x-2 shrink-0">
-        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-600 text-[10px] font-mono font-bold text-slate-200 uppercase">PRINSIP LO-FI</span>
-        <span class="font-bold text-slate-200">Definisi Low-Fidelity Wireframe:</span>
-      </div>
-      <p class="text-slate-400 text-[11px] font-mono leading-relaxed">
-        &ldquo;Low‑fidelity wireframes are simple, rough sketches—usually made with boxes, lines, and placeholder text—that map out a product’s layout, structure, and user flow before any visual design is added. They help teams validate ideas quickly, reduce redesign costs, and focus on UX logic rather than aesthetics.&rdquo;
-      </p>
-    </div>
-  </div>
-
-  <!-- Screen Navigation Pills (Device Mode Only) -->
+  <!-- PILLS NAVIGASI -->
   <div id="screenNavPills" class="bg-slate-900 border-b border-slate-800 py-2 px-4 overflow-x-auto no-scrollbar">
-    <div class="max-w-7xl mx-auto flex space-x-2 text-xs font-mono">
-      <button onclick="showScreen(1)" class="nav-pill px-3 py-1.5 rounded font-bold transition bg-white text-slate-950 border border-white" data-screen="1">[1. Dashboard]</button>
-      <button onclick="showScreen(2)" class="nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700" data-screen="2">[2. Cari Barang]</button>
-      <button onclick="showScreen(3)" class="nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700" data-screen="3">[3. Detail &amp; Peta]</button>
-      <button onclick="showScreen(4)" class="nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700" data-screen="4">[4. Form Pinjam]</button>
-      <button onclick="showScreen(5)" class="nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700" data-screen="5">[5. Status Pinjam]</button>
-      <button onclick="showScreen(6)" class="nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700" data-screen="6">[6. Lapor &amp; Kembali]</button>
-      <button onclick="showScreen(7)" class="nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700" data-screen="7">[7. Bebas Sarpras]</button>
+    <div class="max-w-6xl mx-auto flex space-x-2 text-xs font-mono">
+      <button onclick="showScreen(1)" class="nav-pill px-3 py-1 rounded font-bold bg-white text-slate-950" data-screen="1">1. Dashboard</button>
+      <button onclick="showScreen(2)" class="nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white" data-screen="2">2. Inventaris</button>
+      <button onclick="showScreen(3)" class="nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white" data-screen="3">3. Detail &amp; Peta</button>
+      <button onclick="showScreen(4)" class="nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white" data-screen="4">4. Form Pinjam</button>
+      <button onclick="showScreen(5)" class="nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white" data-screen="5">5. Status</button>
+      <button onclick="showScreen(6)" class="nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white" data-screen="6">6. Pengembalian</button>
+      <button onclick="showScreen(7)" class="nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white" data-screen="7">7. Bebas Sarpras</button>
     </div>
   </div>
 
-  <!-- Main Content Area -->
-  <main class="flex-1 flex justify-center items-center p-4 sm:p-8">
+  <!-- MAIN AREA -->
+  <main class="flex-1 flex justify-center items-center p-4 sm:p-6">
 
-    <!-- MODE 1: SINGLE DEVICE SIMULATOR -->
-    <div id="deviceView" class="flex flex-col lg:flex-row items-center gap-8 max-w-5xl">
-      <!-- Phone Frame (Low-Fi Schematic) -->
+    <!-- MODE 1: DEVICE VIEW -->
+    <div id="deviceView" class="flex flex-col md:flex-row items-center gap-6 max-w-4xl">
+      <!-- Phone Frame -->
       <div class="phone-mockup bg-white text-slate-900 flex flex-col relative overflow-hidden">
         
         <!-- Status Bar -->
-        <div class="px-6 pt-3 pb-1 flex justify-between items-center text-[10px] font-mono font-bold text-slate-800 shrink-0 border-b border-slate-200">
+        <div class="px-5 pt-2 pb-1 border-b border-slate-300 flex justify-between items-center text-[10px] font-mono font-bold text-slate-700 shrink-0">
           <span>09:41</span>
-          <div class="px-2 py-0.5 rounded bg-slate-200 text-slate-700 text-[9px] font-mono">[KAMERA]</div>
-          <span>[5G • 100%]</span>
+          <span class="px-2 py-0.2 bg-slate-200 border border-slate-400 rounded">[SI-SAPRAS]</span>
+          <span>100%</span>
         </div>
 
-        <!-- Phone Content (Scrollable Container) -->
-        <div id="phoneInner" class="flex-1 overflow-y-auto no-scrollbar flex flex-col justify-between">
-          <!-- Dynamic Content rendered by JS -->
+        <!-- Phone Inner Body -->
+        <div id="phoneInner" class="flex-1 overflow-y-auto no-scrollbar p-3 space-y-3 font-mono text-xs">
+          <!-- Rendered via JS -->
         </div>
 
-        <!-- Bottom Navigation Bar (Boxes & Lines) -->
-        <div class="border-t border-slate-300 bg-white px-2 py-2 flex justify-around items-center shrink-0 text-[10px] font-mono font-bold text-slate-600">
-          <button onclick="showScreen(1)" class="flex flex-col items-center nav-icon-1 text-slate-900">
-            <span class="text-xs">[1]</span>
+        <!-- Bottom Navigation Bar (Minimalist Wireframe) -->
+        <div class="border-t-2 border-slate-700 bg-white px-2 py-1.5 flex justify-around text-[10px] font-mono font-bold text-slate-700 shrink-0">
+          <button onclick="showScreen(1)" class="flex flex-col items-center">
+            <span>[1]</span>
             <span>Home</span>
           </button>
-          <button onclick="showScreen(2)" class="flex flex-col items-center nav-icon-2 text-slate-500">
-            <span class="text-xs">[2]</span>
+          <button onclick="showScreen(2)" class="flex flex-col items-center">
+            <span>[2]</span>
             <span>Cari</span>
           </button>
-          <button onclick="showScreen(5)" class="flex flex-col items-center nav-icon-5 text-slate-500">
-            <span class="text-xs">[3]</span>
+          <button onclick="showScreen(5)" class="flex flex-col items-center">
+            <span>[3]</span>
             <span>Status</span>
           </button>
-          <button onclick="showScreen(7)" class="flex flex-col items-center nav-icon-7 text-slate-500">
-            <span class="text-xs">[4]</span>
+          <button onclick="showScreen(7)" class="flex flex-col items-center">
+            <span>[4]</span>
             <span>Bebas</span>
           </button>
         </div>
-
-        <!-- Home Indicator Bar -->
-        <div class="w-32 h-1 bg-slate-300 rounded-full mx-auto my-1 shrink-0"></div>
       </div>
 
-      <!-- Screen Description Card Beside Phone -->
-      <div id="screenMeta" class="bg-slate-900 border border-slate-700 p-6 rounded-xl max-w-sm text-sm font-mono">
-        <!-- Injected by JS -->
+      <!-- Description Beside Phone -->
+      <div id="screenMeta" class="p-4 border-2 border-slate-700 bg-slate-950 max-w-xs font-mono text-xs text-slate-300 rounded">
+        <!-- Injected via JS -->
       </div>
     </div>
 
-    <!-- MODE 2: GRID VIEW (7 SCREENS SIDE BY SIDE) -->
-    <div id="gridView" class="hidden w-full max-w-7xl">
+    <!-- MODE 2: GRID VIEW (7 SCREENS) -->
+    <div id="gridView" class="hidden w-full max-w-6xl">
       <div class="text-center mb-6">
-        <h2 class="text-xl font-bold text-white font-mono">✦ ARSITEKTUR LENGKAP 7 LAYAR MOBILE LOW-FIDELITY</h2>
-        <p class="text-xs text-slate-400 mt-1 font-mono">Struktur wireframe mobile berbasis kotak, garis, dan teks placeholder sesuai standar HCI</p>
+        <h2 class="text-xl font-bold text-white font-mono">✦ SKETSA WIREFRAME MOBILE (7 LAYAR)</h2>
+        <p class="text-xs text-slate-400 mt-1 font-mono">Tata letak sederhana berbasis kotak, garis, dan teks placeholder</p>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="gridContainer">
-        <!-- Rendered by JS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="gridContainer">
+        <!-- Rendered via JS -->
       </div>
     </div>
 
   </main>
 
-  <!-- Wireframe Screens Data & Script -->
   <script>
-    function wireframeImg(label, sublabel = '', heightClass = 'h-28') {
+    function wireframeImg(label, height = "h-20") {
       return `
-        <div class="${heightClass} relative w-full bg-slate-100 border-2 border-dashed border-slate-400 flex flex-col items-center justify-center p-2 overflow-hidden rounded">
+        <div class="${height} border-2 border-dashed border-slate-600 bg-slate-50 flex items-center justify-center relative overflow-hidden">
           <svg class="absolute inset-0 w-full h-full stroke-slate-300 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-            <line x1="0" y1="0" x2="100" y2="100" stroke-width="1.2" />
-            <line x1="100" y1="0" x2="0" y2="100" stroke-width="1.2" />
+            <line x1="0" y1="0" x2="100" y2="100" stroke-width="1.5" />
+            <line x1="100" y1="0" x2="0" y2="100" stroke-width="1.5" />
           </svg>
-          <div class="relative z-10 bg-white/95 border border-slate-500 px-2 py-1 rounded text-center shadow-sm max-w-[90%]">
-            <span class="font-mono text-[10px] font-bold text-slate-800 block">[ X ] ${label}</span>
-            ${sublabel ? `<span class="text-[8px] text-slate-500 font-mono block mt-0.5">${sublabel}</span>` : ''}
-          </div>
+          <span class="relative z-10 px-1.5 py-0.5 bg-white border border-slate-700 font-mono text-[9px] font-bold text-slate-800">
+            [ X ] ${label}
+          </span>
         </div>
       `;
     }
@@ -162,563 +137,313 @@
       1: {
         title: "1. Dashboard Mobile",
         pic: "Asyifa Nur Cahya Kamila",
-        desc: "Halaman beranda saat mahasiswa membuka aplikasi di smartphone. Menyajikan ringkasan statistik dan akses cepat fitur.",
-        points: ["Header pencarian & salam pengguna", "Grid 2x2 metrik inventaris", "4 tombol menu akses cepat", "Tabel ringkas peminjaman terkini"],
+        desc: "Ringkasan metrik inventaris dan tombol akses cepat pada layar HP.",
         html: `
-          <div class="p-3.5 space-y-3 font-mono">
-            <!-- Search bar -->
-            <div class="p-2 rounded border border-slate-400 bg-slate-50 flex items-center justify-between text-xs text-slate-600">
-              <span>[INPUT: Cari barang atau ruang...]</span>
-              <span class="text-[10px] font-bold text-slate-400">[CARI]</span>
+          <!-- Search box -->
+          <div class="p-2 border border-slate-800 bg-slate-50 flex justify-between items-center text-slate-500">
+            <span>[ Cari inventaris... ]</span>
+            <span class="font-bold">[Cari]</span>
+          </div>
+
+          <!-- Greeting -->
+          <div class="p-2 border border-slate-800 bg-white">
+            <span class="font-bold block">Warnisyah Armin</span>
+            <span class="text-[10px] text-slate-500">Mahasiswa JTIK FT UNM</span>
+          </div>
+
+          <!-- 4 Stat Boxes (2x2) -->
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="p-2 border border-slate-800 bg-slate-50">
+              <span class="text-[9px] text-slate-500 block">TOTAL</span>
+              <span class="text-base font-bold">245</span>
             </div>
-
-            <!-- Greeting -->
-            <div class="p-2 rounded border border-slate-300 bg-white">
-              <span class="text-[9px] text-slate-500 block">[USER AKTIF]</span>
-              <h2 class="text-xs font-bold text-slate-900">Warnisyah Armin (Mahasiswa)</h2>
-              <span class="text-[9px] text-slate-500 block">JTIK FT Universitas Negeri Makassar</span>
+            <div class="p-2 border border-slate-800 bg-slate-50">
+              <span class="text-[9px] text-slate-500 block">TERSEDIA</span>
+              <span class="text-base font-bold">180</span>
             </div>
-
-            <!-- Stat Grid 2x2 -->
-            <div class="grid grid-cols-2 gap-2">
-              <div class="p-2 rounded border border-slate-400 bg-slate-50">
-                <span class="text-[9px] text-slate-500 block">[TOTAL]</span>
-                <span class="text-lg font-black text-slate-900">245</span>
-                <span class="text-[8px] text-slate-400 block">Unit Inventaris</span>
-              </div>
-              <div class="p-2 rounded border border-slate-400 bg-slate-50">
-                <span class="text-[9px] text-slate-500 block">[TERSEDIA]</span>
-                <span class="text-lg font-black text-slate-900">180</span>
-                <span class="text-[8px] text-slate-400 block">Siap Dipinjam</span>
-              </div>
-              <div class="p-2 rounded border border-slate-400 bg-slate-50">
-                <span class="text-[9px] text-slate-500 block">[DIPINJAM]</span>
-                <span class="text-lg font-black text-slate-900">52</span>
-                <span class="text-[8px] text-slate-400 block">Aktif Berjalan</span>
-              </div>
-              <div class="p-2 rounded border border-slate-400 bg-slate-50">
-                <span class="text-[9px] text-slate-500 block">[RUSAK]</span>
-                <span class="text-lg font-black text-slate-900">13</span>
-                <span class="text-[8px] text-slate-400 block">Dalam Servis</span>
-              </div>
+            <div class="p-2 border border-slate-800 bg-slate-50">
+              <span class="text-[9px] text-slate-500 block">DIPINJAM</span>
+              <span class="text-base font-bold">52</span>
             </div>
-
-            <!-- Akses Cepat -->
-            <div>
-              <span class="text-[10px] font-bold text-slate-700 block mb-1">[AKSES CEPAT]</span>
-              <div class="grid grid-cols-4 gap-1.5 text-center text-[9px] font-bold">
-                <button onclick="showScreen(2)" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 flex flex-col items-center">
-                  <span class="block mb-0.5">[01]</span>
-                  <span>Cari</span>
-                </button>
-                <button onclick="showScreen(4, 'alat')" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 flex flex-col items-center">
-                  <span class="block mb-0.5">[02]</span>
-                  <span>Alat</span>
-                </button>
-                <button onclick="showScreen(4, 'bangku')" class="p-2 rounded border-2 border-slate-900 bg-slate-100 flex flex-col items-center">
-                  <span class="block mb-0.5">[03]</span>
-                  <span>Bangku</span>
-                </button>
-                <button onclick="showScreen(5)" class="p-2 rounded border border-slate-300 bg-white hover:bg-slate-100 flex flex-col items-center">
-                  <span class="block mb-0.5">[04]</span>
-                  <span>Status</span>
-                </button>
-              </div>
+            <div class="p-2 border border-slate-800 bg-slate-50">
+              <span class="text-[9px] text-slate-500 block">RUSAK</span>
+              <span class="text-base font-bold">13</span>
             </div>
+          </div>
 
-            <!-- Aktivitas Terkini Mobile -->
-            <div class="space-y-1.5 pt-1">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-bold text-slate-800">[AKTIVITAS TERKINI]</span>
-                <button onclick="showScreen(5)" class="text-[9px] font-bold text-slate-600 underline">[SEMUA →]</button>
-              </div>
+          <!-- 4 Tombol Akses Cepat -->
+          <div class="grid grid-cols-2 gap-1.5 font-bold text-[10px]">
+            <button onclick="showScreen(2)" class="p-2 border border-slate-800 text-left bg-white">1. Cari Barang</button>
+            <button onclick="showScreen(4, 'alat')" class="p-2 border border-slate-800 text-left bg-white">2. Pinjam Alat</button>
+            <button onclick="showScreen(4, 'bangku')" class="p-2 border-2 border-slate-800 text-left bg-slate-100">3. Meja &amp; Bangku</button>
+            <button onclick="showScreen(5)" class="p-2 border border-slate-800 text-left bg-white">4. Cek Status</button>
+          </div>
 
-              <div class="space-y-1 text-[10px]">
-                <div class="p-2 rounded border border-slate-300 bg-white flex items-center justify-between">
-                  <div>
-                    <h4 class="font-bold text-slate-900 leading-tight">Laptop ASUS Core i7</h4>
-                    <span class="text-[8px] text-slate-500">15/10/2026 • Lab Komputer 1</span>
-                  </div>
-                  <span class="px-1.5 py-0.5 rounded border border-slate-400 bg-white text-[8px] font-bold text-slate-800">[MENUNGGU]</span>
-                </div>
-
-                <div class="p-2 rounded border border-slate-300 bg-white flex items-center justify-between">
-                  <div>
-                    <h4 class="font-bold text-slate-900 leading-tight">Meja &amp; Bangku Teori</h4>
-                    <span class="text-[8px] text-slate-500">14/10/2026 • TK-02 ➔ TK-03</span>
-                  </div>
-                  <span class="px-1.5 py-0.5 rounded bg-slate-900 text-white text-[8px] font-bold">[DISETUJUI]</span>
-                </div>
-              </div>
+          <!-- Aktivitas Terkini -->
+          <div class="border-t border-slate-300 pt-2 space-y-1">
+            <span class="font-bold block text-[10px]">TRANSAKSI TERKINI:</span>
+            <div class="p-1.5 border border-slate-400 bg-white flex justify-between">
+              <span>Laptop ASUS (1 Unit)</span>
+              <strong>[MENUNGGU]</strong>
+            </div>
+            <div class="p-1.5 border border-slate-400 bg-white flex justify-between">
+              <span>Meja &amp; Bangku (TK-02)</span>
+              <strong>[DISETUJUI]</strong>
             </div>
           </div>
         `
       },
       2: {
-        title: "2. Daftar & Pencarian Barang",
+        title: "2. Inventaris & Cari",
         pic: "Sitti Aisyah Nur Azizah",
-        desc: "Katalog inventaris dengan filter lokasi 3 ruangan praktikum JTIK FT UNM.",
-        points: ["Input pencarian kata kunci", "Filter chips lokasi & kategori", "Card list vertikal dengan thumbnail [X]", "Indikator ketersediaan"],
+        desc: "Katalog daftar barang dengan pencarian dan filter ruangan.",
         html: `
-          <div class="p-3.5 space-y-3 font-mono">
-            <div class="flex items-center justify-between border-b border-slate-300 pb-1">
-              <span class="text-[10px] font-bold text-slate-800">[KATALOG INVENTARIS]</span>
-              <span class="text-[9px] text-slate-500">[245 ITEM]</span>
+          <!-- Header -->
+          <div class="border-b border-slate-800 pb-1 font-bold flex justify-between">
+            <span>KATALOG INVENTARIS</span>
+            <span class="text-[10px] text-slate-500">245 Item</span>
+          </div>
+
+          <!-- Search -->
+          <div class="p-1.5 border border-slate-800 bg-white text-slate-700">
+            [ Input: Laptop Asus ]
+          </div>
+
+          <!-- Filter -->
+          <div class="flex space-x-1 text-[9px] font-bold">
+            <span class="px-2 py-0.5 border border-slate-800 bg-slate-900 text-white">[Semua]</span>
+            <span class="px-2 py-0.5 border border-slate-400">[Lab 1]</span>
+            <span class="px-2 py-0.5 border border-slate-400">[Bengkel]</span>
+            <span class="px-2 py-0.5 border border-slate-400">[TK-02]</span>
+          </div>
+
+          <!-- 3 Item Cards -->
+          <div class="space-y-2">
+            <div onclick="showScreen(3, 'alat')" class="p-2 border border-slate-800 bg-white cursor-pointer space-y-1">
+              ${wireframeImg('FOTO: LAPTOP ASUS', 'h-16')}
+              <div class="flex justify-between font-bold">
+                <span>Laptop ASUS Core i7</span>
+                <span>[TERSEDIA]</span>
+              </div>
+              <span class="text-[10px] text-slate-600 block">Stok: 10 Unit • Lab Komputer 1</span>
             </div>
 
-            <!-- Search -->
-            <div class="p-2 rounded border border-slate-400 bg-slate-50 flex items-center justify-between text-xs text-slate-700">
-              <span>[INPUT: Laptop Asus]</span>
-              <span class="text-[10px] text-slate-400">[CARI]</span>
-            </div>
-
-            <!-- Filter Chips -->
-            <div class="flex space-x-1 overflow-x-auto no-scrollbar text-[9px] font-bold">
-              <span class="px-2 py-0.5 rounded bg-slate-900 text-white shrink-0">[SEMUA]</span>
-              <span class="px-2 py-0.5 rounded border border-slate-300 bg-slate-100 shrink-0">[BENGKEL IT]</span>
-              <span class="px-2 py-0.5 rounded border border-slate-300 bg-slate-100 shrink-0">[LAB KOMPUTER]</span>
-              <span class="px-2 py-0.5 rounded border border-slate-300 bg-slate-100 shrink-0">[RUANG ADMIN]</span>
-            </div>
-
-            <!-- Card List Items with SVG [X] Thumbs -->
-            <div class="space-y-2">
-              <!-- Item 1 -->
-              <div onclick="showScreen(3, 'alat')" class="p-2 rounded border border-slate-300 bg-white flex space-x-2.5 items-center cursor-pointer hover:border-slate-800">
-                <div class="w-14 shrink-0">
-                  ${wireframeImg('FOTO', '', 'h-12')}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-[11px] font-bold text-slate-900 truncate">Laptop ASUS Core i7</h3>
-                    <span class="text-[8px] font-bold px-1.5 py-0.5 rounded bg-slate-900 text-white">[TERSEDIA]</span>
-                  </div>
-                  <span class="text-[9px] text-slate-500 block">Jumlah: 10 • Lab Komputer 1</span>
-                </div>
+            <div onclick="showScreen(3, 'bangku')" class="p-2 border-2 border-slate-800 bg-slate-50 cursor-pointer space-y-1">
+              ${wireframeImg('FOTO: MEJA & BANGKU', 'h-16')}
+              <div class="flex justify-between font-bold">
+                <span>Meja &amp; Bangku Teori</span>
+                <span>[MEBELAIR]</span>
               </div>
-
-              <!-- Item 2 -->
-              <div onclick="showScreen(3, 'alat')" class="p-2 rounded border border-slate-300 bg-white flex space-x-2.5 items-center cursor-pointer hover:border-slate-800">
-                <div class="w-14 shrink-0">
-                  ${wireframeImg('FOTO', '', 'h-12')}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-[11px] font-bold text-slate-900 truncate">Proyektor Epson EB-X</h3>
-                    <span class="text-[8px] font-bold px-1.5 py-0.5 rounded bg-slate-900 text-white">[TERSEDIA]</span>
-                  </div>
-                  <span class="text-[9px] text-slate-500 block">Jumlah: 5 • Ruang Seminar</span>
-                </div>
-              </div>
-
-              <!-- Item 3: Mebelair -->
-              <div onclick="showScreen(3, 'bangku')" class="p-2 rounded border-2 border-slate-900 bg-slate-50 flex space-x-2.5 items-center cursor-pointer">
-                <div class="w-14 shrink-0">
-                  ${wireframeImg('FOTO', '', 'h-12')}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-[11px] font-bold text-slate-900 truncate">Meja &amp; Kursi Chitose</h3>
-                    <span class="text-[8px] font-bold px-1.5 py-0.5 rounded bg-slate-900 text-white">[MEBELAIR]</span>
-                  </div>
-                  <span class="text-[9px] text-slate-600 block">Ruang TK-02 • Maks 12 B, 7 M</span>
-                </div>
-              </div>
-
-              <!-- Item 4 -->
-              <div onclick="showScreen(3, 'alat')" class="p-2 rounded border border-slate-300 bg-white flex space-x-2.5 items-center cursor-pointer hover:border-slate-800">
-                <div class="w-14 shrink-0">
-                  ${wireframeImg('FOTO', '', 'h-12')}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-[11px] font-bold text-slate-900 truncate">Kamera DSLR Canon 80D</h3>
-                    <span class="text-[8px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">[DIPINJAM]</span>
-                  </div>
-                  <span class="text-[9px] text-slate-500 block">Jumlah: 3 • Ruang Admin</span>
-                </div>
-              </div>
+              <span class="text-[10px] text-slate-600 block">Ruang TK-02 • Kuota: Maks 12 B, 7 M</span>
             </div>
           </div>
         `
       },
       3: {
-        title: "3. Detail Barang & Lokasi",
+        title: "3. Detail Barang & Peta",
         pic: "Rezky Awalya",
-        desc: "Informasi detail spesifikasi fisik barang, kuota aman, peta denah penyimpanan, dan tombol pengajuan.",
-        points: ["Kotak gambar utama [X]", "Tabel spesifikasi perangkat/mebelair", "Mini peta denah lokasi rak fisik", "Tombol CTA ajukan peminjaman"],
+        desc: "Rincian spesifikasi fisik barang dan letak denah ruangan.",
         html: `
-          <div class="p-3.5 space-y-3 font-mono">
-            <!-- Back & Title -->
-            <div class="flex items-center justify-between border-b border-slate-300 pb-1 text-xs">
-              <button onclick="showScreen(2)" class="font-bold text-slate-700 hover:underline">[← KEMBALI]</button>
-              <span class="text-[10px] font-bold text-slate-900">[DETAIL INVENTARIS]</span>
-            </div>
-
-            <!-- Big Wireframe Image Box -->
-            ${wireframeImg('FOTO BARANG RESMI', 'Laptop ASUS Core i7 • Lab Komputer 1', 'h-32')}
-
-            <!-- Item Info -->
-            <div class="border-b border-slate-300 pb-2">
-              <div class="flex items-center justify-between">
-                <h2 class="text-xs font-black text-slate-900">Laptop ASUS Core i7</h2>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-slate-900 text-white">[TERSEDIA]</span>
-              </div>
-              <p class="text-[9px] text-slate-500 mt-0.5">Perangkat Komputer Praktikum Mahasiswa JTIK</p>
-            </div>
-
-            <!-- Specifications Table -->
-            <div class="p-2 rounded border border-slate-300 bg-white space-y-1 text-[10px] text-slate-700">
-              <div class="flex justify-between border-b border-slate-100 pb-0.5">
-                <span class="text-slate-500">Jumlah Tersedia:</span>
-                <span class="font-bold text-slate-900">10 Unit</span>
-              </div>
-              <div class="flex justify-between border-b border-slate-100 pb-0.5">
-                <span class="text-slate-500">Kondisi Fisik:</span>
-                <span class="font-bold text-slate-900">Baik &amp; Normal</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-slate-500">Lokasi Standar:</span>
-                <span class="font-bold text-slate-900">Lab Komputer 1 (R. 101)</span>
-              </div>
-            </div>
-
-            <!-- Mini Map Box -->
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-slate-800 block">[DENAH LOKASI RAK: B-02]</span>
-              ${wireframeImg('PETA DENAH RUANGAN', 'Lab Komputer 1 • Lantai 1 JTIK', 'h-16')}
-            </div>
-
-            <!-- CTA Button -->
-            <button onclick="showScreen(4, 'alat')" class="w-full py-2 rounded bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
-              [TOMBOL: AJUKAN PINJAM ALAT INI →]
-            </button>
+          <div class="flex justify-between items-center border-b border-slate-800 pb-1">
+            <button onclick="showScreen(2)" class="font-bold underline">← KEMBALI</button>
+            <span class="font-bold">DETAIL BARANG</span>
           </div>
+
+          ${wireframeImg('FOTO UTAMA BARANG', 'h-24')}
+
+          <div class="p-2 border border-slate-800 bg-white space-y-1">
+            <div class="flex justify-between font-bold">
+              <span>Laptop ASUS Core i7</span>
+              <span>[TERSEDIA]</span>
+            </div>
+            <div class="text-[10px] text-slate-600 space-y-0.5">
+              <div>Jumlah Stok: <strong>10 Unit</strong></div>
+              <div>Kondisi: <strong>Baik &amp; Normal</strong></div>
+              <div>Lokasi: <strong>Lab Komputer 1 (Ruang 101)</strong></div>
+            </div>
+          </div>
+
+          <div>
+            <span class="font-bold block text-[10px] mb-1">DENAH RAK PENYIMPANAN:</span>
+            ${wireframeImg('DENAH RAK B-02 LAB 1', 'h-16')}
+          </div>
+
+          <button onclick="showScreen(4, 'alat')" class="w-full py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold">
+            [ AJUKAN PINJAM ALAT ]
+          </button>
         `
       },
       4: {
         title: "4. Formulir Peminjaman",
         pic: "Warnisyah Armin",
-        desc: "Formulir permohonan pinjam alat praktikum laboratorium atau relokasi meja & bangku kelas.",
-        points: ["Switcher tab Alat Lab vs Meja & Bangku", "Data peminjam tersinkron SIAKAD", "Pilihan ruang asal & info kuota aman", "Checklist komitmen pengembalian"],
+        desc: "Formulir isian permohonan pinjam alat atau mutasi bangku.",
         html: `
-          <div class="p-3.5 space-y-2.5 font-mono">
-            <!-- Back & Switcher -->
-            <div class="flex items-center justify-between border-b border-slate-300 pb-1 text-xs">
-              <button onclick="showScreen(3)" class="font-bold text-slate-700 hover:underline">[← BATAL]</button>
-              <div class="flex space-x-1 text-[9px] font-bold">
-                <button id="mTabAlat" onclick="switchMobileFormTab('alat')" class="px-2 py-0.5 rounded bg-slate-900 text-white">[TAB: ALAT]</button>
-                <button id="mTabBangku" onclick="switchMobileFormTab('bangku')" class="px-2 py-0.5 rounded border border-slate-300 text-slate-700">[TAB: BANGKU]</button>
+          <div class="flex justify-between items-center border-b border-slate-800 pb-1">
+            <button onclick="showScreen(3)" class="font-bold underline">← BATAL</button>
+            <div class="flex space-x-1 text-[9px] font-bold">
+              <button id="mTabAlat" onclick="switchMobileFormTab('alat')" class="px-2 py-0.5 border border-slate-800 bg-slate-900 text-white">Alat</button>
+              <button id="mTabBangku" onclick="switchMobileFormTab('bangku')" class="px-2 py-0.5 border border-slate-800 bg-white">Bangku</button>
+            </div>
+          </div>
+
+          <!-- Panel Form Alat -->
+          <div id="mPanelAlat" class="space-y-2">
+            <div class="p-1.5 border border-slate-800 bg-slate-50 font-bold text-[10px]">
+              Item: Laptop ASUS Core i7 (Lab 1)
+            </div>
+
+            <div class="space-y-1.5">
+              <div>
+                <label class="font-bold block">Jumlah Dipinjam *</label>
+                <div class="p-1.5 border border-slate-800 bg-white">[ 1 Unit ▼ ]</div>
+              </div>
+              <div>
+                <label class="font-bold block">Tujuan Penggunaan *</label>
+                <div class="p-1.5 border border-slate-800 bg-white text-slate-500">[ Praktikum Pemrograman ]</div>
+              </div>
+              <div>
+                <label class="font-bold block">Tanggal Penggunaan *</label>
+                <div class="p-1.5 border border-slate-800 bg-white">[ 15/10/2026 ]</div>
               </div>
             </div>
 
-            <!-- PANEL 1: MOBILE FORM ALAT -->
-            <div id="mPanelAlat" class="space-y-2">
-              <div class="p-2 rounded border border-slate-300 bg-slate-50 flex items-center space-x-2">
-                <div class="w-10 shrink-0">${wireframeImg('X', '', 'h-8')}</div>
-                <div class="text-[10px]">
-                  <h4 class="font-bold text-slate-900">Laptop ASUS Core i7</h4>
-                  <span class="text-slate-500">10 Unit Tersedia • Lab Komputer 1</span>
-                </div>
+            <button onclick="showScreen(5)" class="w-full py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold">
+              Kirim Pengajuan Alat →
+            </button>
+          </div>
+
+          <!-- Panel Form Bangku -->
+          <div id="mPanelBangku" class="space-y-2 hidden">
+            <div class="p-1.5 border-2 border-slate-800 bg-slate-50 font-bold text-[10px]">
+              Relokasi Meja &amp; Bangku Antar-Kelas
+            </div>
+
+            <div class="space-y-1.5">
+              <div>
+                <label class="font-bold block">Ruang Asal Pengambilan *</label>
+                <div class="p-1.5 border border-slate-800 bg-white">[ Ruang TK-02 (Aman: 12 B, 7 M) ▼ ]</div>
               </div>
-
-              <!-- Data Diri Mahasiswa SIAKAD -->
-              <div class="p-2 rounded border border-slate-300 bg-white space-y-1 text-[10px]">
-                <div class="flex justify-between border-b border-slate-200 pb-0.5 font-bold">
-                  <span>[DATA SIAKAD]</span>
-                  <span class="text-slate-600">[✓ TERHUBUNG]</span>
-                </div>
-                <div class="text-slate-700">Nama: <strong>Warnisyah Armin</strong></div>
-                <div class="text-slate-700">NIM: <strong>250210500034</strong></div>
-                <div class="text-slate-700">Dosen PJ: <strong>Ayu Lestari, M.Pd.</strong></div>
+              <div>
+                <label class="font-bold block">Ruang Tujuan *</label>
+                <div class="p-1.5 border border-slate-800 bg-white">[ Ruang TK-03 ▼ ]</div>
               </div>
-
-              <!-- Inputs -->
-              <div class="space-y-1.5 text-[10px]">
+              <div class="grid grid-cols-2 gap-1">
                 <div>
-                  <label class="font-bold text-slate-700 block mb-0.5">Jumlah Dipinjam *</label>
-                  <div class="p-1.5 rounded border border-slate-400 bg-white flex justify-between">
-                    <span>[SELECT: 1 Unit]</span>
-                    <span>▼</span>
-                  </div>
+                  <label class="font-bold block">Bangku *</label>
+                  <div class="p-1.5 border border-slate-800 bg-white">[ 10 Unit ]</div>
                 </div>
-
                 <div>
-                  <label class="font-bold text-slate-700 block mb-0.5">Tujuan Penggunaan *</label>
-                  <div class="p-1.5 rounded border border-slate-400 bg-white text-slate-600">
-                    [INPUT: Praktikum Pemrograman Mobile]
-                  </div>
+                  <label class="font-bold block">Meja *</label>
+                  <div class="p-1.5 border border-slate-800 bg-white">[ 5 Unit ]</div>
                 </div>
-
-                <div>
-                  <label class="font-bold text-slate-700 block mb-0.5">Tanggal &amp; Waktu *</label>
-                  <div class="p-1.5 rounded border border-slate-400 bg-white flex justify-between">
-                    <span>[INPUT: 15/10/2026]</span>
-                    <span>[KALENDER]</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <button onclick="showScreen(3)" class="py-1.5 rounded border border-slate-400 text-slate-700 text-xs font-bold">[BATAL]</button>
-                <button onclick="showScreen(5)" class="py-1.5 rounded bg-slate-900 text-white text-xs font-bold">[KIRIM]</button>
               </div>
             </div>
 
-            <!-- PANEL 2: MOBILE FORM BANGKU -->
-            <div id="mPanelBangku" class="space-y-2 hidden">
-              <div class="p-2 rounded border-2 border-slate-900 bg-slate-50 flex items-center space-x-2">
-                <div class="w-10 shrink-0">${wireframeImg('X', '', 'h-8')}</div>
-                <div class="text-[10px]">
-                  <h4 class="font-bold text-slate-900">Meja &amp; Bangku Teori</h4>
-                  <span class="text-slate-600">Ruang TK-02 • Maks 12 B, 7 M</span>
-                </div>
-              </div>
-
-              <!-- Origin & Quota -->
-              <div class="p-2 rounded border border-slate-400 bg-white space-y-1 text-[10px]">
-                <label class="font-bold text-slate-700 block">Ruang Asal Pengambilan *</label>
-                <select id="mFormRuangAsal" onchange="updateMobileRoomQuota()" class="w-full p-1 rounded border border-slate-300 bg-white font-mono text-[10px]">
-                  <option value="tk02" selected>Ruang TK-02 (Aman: 12 B, 7 M)</option>
-                  <option value="tk01">Ruang TK-01 (Aman: 5 B, 3 M)</option>
-                  <option value="bengkel">Bengkel IT (Aman: 10 K, 4 M)</option>
-                </select>
-
-                <div id="mQuotaNotice" class="p-1.5 rounded border border-slate-300 bg-slate-50 text-[9px] text-slate-600">
-                  <span id="mQuotaTitle" class="font-bold text-slate-900 block">[TK-02: 42 B &amp; 22 M]</span>
-                  <span id="mQuotaDesc">Batas aman 30 B &amp; 15 M. Kuota boleh pinjam: maks 12 B, 7 M.</span>
-                </div>
-
-                <label class="font-bold text-slate-700 block pt-1">Ruang Tujuan *</label>
-                <div class="p-1 rounded border border-slate-300 bg-white">Ruang Teori TK-03</div>
-
-                <div class="grid grid-cols-2 gap-1 pt-1">
-                  <div>
-                    <label class="font-bold text-slate-700 block">Bangku *</label>
-                    <div class="p-1 rounded border border-slate-300 bg-white">[10 Unit]</div>
-                  </div>
-                  <div>
-                    <label class="font-bold text-slate-700 block">Meja *</label>
-                    <div class="p-1 rounded border border-slate-300 bg-white">[5 Unit]</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Checklist -->
-              <div class="p-1.5 rounded border border-slate-300 bg-slate-50 flex items-start space-x-1.5 text-[9px] text-slate-700">
-                <span class="font-bold">[X]</span>
-                <span>Wajib mengembalikan &amp; menyusun rapi meja dan bangku ke Ruang TK-02 setelah kegiatan selesai.</span>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <button onclick="showScreen(1)" class="py-1.5 rounded border border-slate-400 text-slate-700 text-xs font-bold">[BATAL]</button>
-                <button onclick="showScreen(5)" class="py-1.5 rounded bg-slate-900 text-white text-xs font-bold">[RELOKASI]</button>
-              </div>
-            </div>
+            <button onclick="showScreen(5)" class="w-full py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold">
+              Kirim Pengajuan Relokasi →
+            </button>
           </div>
         `
       },
       5: {
         title: "5. Status Peminjaman",
         pic: "Sitti Aisyah Nur Azizah",
-        desc: "Monitoring status persetujuan transaksi peminjaman alat laboratorium dan relokasi mebelair.",
-        points: ["Tab filter status", "Card list transaksi terperinci", "Badge status verifikasi", "Aksi tiket izin"],
+        desc: "Monitoring status persetujuan transaksi peminjaman.",
         html: `
-          <div class="p-3.5 space-y-2.5 font-mono">
-            <div class="flex items-center justify-between border-b border-slate-300 pb-1">
-              <span class="text-[10px] font-bold text-slate-800">[STATUS TRANSAKSI]</span>
-              <span class="text-[9px] text-slate-500">[4 PINJAMAN]</span>
-            </div>
-
-            <!-- Status Tabs -->
-            <div class="flex space-x-1 text-[9px] font-bold">
-              <span class="px-2 py-0.5 rounded bg-slate-900 text-white">[SEMUA]</span>
-              <span class="px-2 py-0.5 rounded border border-slate-300">[MENUNGGU]</span>
-              <span class="px-2 py-0.5 rounded border border-slate-300">[DISETUJUI]</span>
-            </div>
-
-            <!-- Card List Transactions -->
-            <div class="space-y-1.5 text-[10px]">
-              <!-- Item 1 -->
-              <div class="p-2 rounded border border-slate-300 bg-white space-y-1">
-                <div class="flex justify-between items-center">
-                  <span class="text-[9px] text-slate-500">#PINJ-001 • 15/10/2026</span>
-                  <span class="px-1.5 py-0.2 rounded border border-slate-400 font-bold text-slate-800">[MENUNGGU]</span>
-                </div>
-                <h4 class="font-bold text-slate-900">Laptop ASUS Core i7 (1 Unit)</h4>
-                <span class="text-[9px] text-slate-500 block">Lab Komputer 1</span>
-              </div>
-
-              <!-- Item 2 -->
-              <div class="p-2 rounded border border-slate-300 bg-white space-y-1">
-                <div class="flex justify-between items-center">
-                  <span class="text-[9px] text-slate-500">#PINJ-002 • 14/10/2026</span>
-                  <span class="px-1.5 py-0.2 rounded bg-slate-900 text-white font-bold">[DISETUJUI]</span>
-                </div>
-                <h4 class="font-bold text-slate-900">Proyektor Epson EB-X (1 Unit)</h4>
-                <span class="text-[9px] text-slate-500 block">Bengkel IT JTIK</span>
-              </div>
-
-              <!-- Item 3: Meja & Bangku -->
-              <div class="p-2 rounded border-2 border-slate-900 bg-slate-50 space-y-1">
-                <div class="flex justify-between items-center">
-                  <span class="text-[9px] text-slate-600 font-bold">#REL-008 • 15/10/2026</span>
-                  <span class="px-1.5 py-0.2 rounded bg-slate-900 text-white font-bold">[DISETUJUI]</span>
-                </div>
-                <h4 class="font-bold text-slate-900">Meja &amp; Bangku Teori (10 B, 5 M)</h4>
-                <span class="text-[9px] text-slate-600 block">Ruang TK-02 ➔ Ruang TK-03</span>
-              </div>
-            </div>
-
-            <!-- Action to return -->
-            <button onclick="showScreen(6)" class="w-full py-2 rounded border border-slate-400 bg-slate-100 text-slate-900 text-xs font-bold hover:bg-slate-200 mt-2">
-              [KEMBALIKAN BARANG AKTIF →]
-            </button>
+          <div class="border-b border-slate-800 pb-1 font-bold">
+            STATUS PEMINJAMAN
           </div>
+
+          <div class="space-y-1.5">
+            <div class="p-2 border border-slate-800 bg-white space-y-0.5">
+              <div class="flex justify-between font-bold">
+                <span>Laptop ASUS Core i7</span>
+                <span>[MENUNGGU]</span>
+              </div>
+              <span class="text-[10px] text-slate-500 block">#PINJ-001 • 15/10/2026</span>
+            </div>
+
+            <div class="p-2 border-2 border-slate-800 bg-slate-50 space-y-0.5">
+              <div class="flex justify-between font-bold">
+                <span>Meja &amp; Bangku Teori</span>
+                <span>[DISETUJUI]</span>
+              </div>
+              <span class="text-[10px] text-slate-600 block">#REL-008 • Rute: TK-02 ➔ TK-03</span>
+            </div>
+          </div>
+
+          <button onclick="showScreen(6)" class="w-full py-2 border border-slate-800 bg-slate-100 font-bold hover:bg-slate-200">
+            Form Pengembalian Barang →
+          </button>
         `
       },
       6: {
-        title: "6. Laporan Penggunaan & Pengembalian",
+        title: "6. Pengembalian & Bukti",
         pic: "Asyifa Nur Cahya Kamila",
-        desc: "Formulir laporan kondisi fisik dan upload foto serah terima pengembalian ke teknisi lab.",
-        points: ["Pilih transaksi pinjaman aktif", "Kondisi fisik saat kembali", "Upload foto bukti serah terima [X]", "No. BAST otomatis"],
+        desc: "Laporan fisik pengembalian dan upload foto bukti serah terima.",
         html: `
-          <div class="p-3.5 space-y-2.5 font-mono">
-            <div class="flex items-center justify-between border-b border-slate-300 pb-1 text-xs">
-              <button onclick="showScreen(5)" class="font-bold text-slate-700 hover:underline">[← BATAL]</button>
-              <span class="text-[10px] font-bold text-slate-900">[FORMULIR PENGEMBALIAN]</span>
-            </div>
+          <div class="flex justify-between items-center border-b border-slate-800 pb-1">
+            <button onclick="showScreen(5)" class="font-bold underline">← BATAL</button>
+            <span class="font-bold">PENGEMBALIAN</span>
+          </div>
 
-            <!-- Pilih Pinjaman Aktif -->
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-slate-700 block uppercase">[PILIH BARANG AKTIF:]</span>
-              <div class="grid grid-cols-2 gap-1.5">
-                <button id="mBtnRetLaptop" onclick="switchMobileReturn('laptop')" class="p-1.5 rounded border-2 border-slate-900 bg-slate-100 text-left">
-                  <div class="font-bold text-[10px] text-slate-900 truncate">Laptop ASUS</div>
-                  <span class="text-[8px] text-slate-600 block">#PINJ-001</span>
-                </button>
-                <button id="mBtnRetBangku" onclick="switchMobileReturn('bangku')" class="p-1.5 rounded border border-slate-300 bg-white text-left">
-                  <div class="font-bold text-[10px] text-slate-900 truncate">Meja &amp; Bangku</div>
-                  <span class="text-[8px] text-slate-600 block">#REL-008</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Panel Return Laptop Mobile -->
-            <div id="mPanelRetLaptop" class="space-y-2 text-[10px]">
-              <div class="p-1.5 rounded border border-slate-300 bg-white">
-                <div class="flex justify-between"><span>Penyerahan:</span><strong>Meja Teknisi Lab 1</strong></div>
-                <div class="flex justify-between"><span>Jatuh Tempo:</span><strong>16/05/2026</strong></div>
-              </div>
-
-              <div>
-                <label class="font-bold text-slate-700 block mb-0.5">Kondisi Fisik Saat Kembali *</label>
-                <div class="p-1.5 rounded border border-slate-400 bg-white flex justify-between">
-                  <span>[SELECT: Baik &amp; Lengkap]</span>
-                  <span>▼</span>
-                </div>
-              </div>
-
-              <!-- Upload Foto Bukti Pengembalian -->
-              <div class="p-2 rounded border-2 border-dashed border-slate-400 bg-slate-50 space-y-1">
-                <span class="font-bold text-slate-800 text-[10px] block">[FOTO BUKTI SERAH TERIMA LAB] *</span>
-                ${wireframeImg('FOTO SERAH TERIMA', 'bukti_laptop_lab1.jpg • 1.4 MB', 'h-16')}
-              </div>
-
-              <div class="p-1.5 rounded border border-slate-300 bg-white space-y-0.5">
-                <div class="flex justify-between"><span>Teknisi Penerima:</span><strong>Ahmad Dahlan, S.T.</strong></div>
-                <div class="flex justify-between"><span>No. BAST Kembali:</span><strong class="text-slate-900 font-bold">BAST-20261016-042</strong></div>
-              </div>
-
-              <div class="flex items-start space-x-1.5 pt-0.5 text-[9px] text-slate-700">
-                <span class="font-bold">[X]</span>
-                <span>Saya telah menyerahkan fisik barang ke teknisi laboratorium.</span>
-              </div>
-
-              <button onclick="alert('Bukti pengembalian Laptop terverifikasi!\nNo. BAST: BAST-20261016-042\nPenerima: Ahmad Dahlan, S.T.'); showScreen(7);" class="w-full py-2 rounded bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
-                [KIRIM BUKTI &amp; SELESAIKAN →]
-              </button>
-            </div>
-
-            <!-- Panel Return Bangku Mobile -->
-            <div id="mPanelRetBangku" class="space-y-2 text-[10px] hidden">
-              <div class="p-1.5 rounded border border-slate-300 bg-white">
-                <div class="flex justify-between"><span>Ruang Asal:</span><strong>Ruang Teori TK-02</strong></div>
-                <div class="flex justify-between"><span>Jumlah:</span><strong>10 Bangku, 5 Meja</strong></div>
-              </div>
-
-              <div>
-                <label class="font-bold text-slate-700 block mb-0.5">Kondisi Saat Kembali *</label>
-                <div class="p-1.5 rounded border border-slate-400 bg-white flex justify-between">
-                  <span>[SELECT: Lengkap &amp; Kokoh]</span>
-                  <span>▼</span>
-                </div>
-              </div>
-
-              <!-- Upload Foto Bukti Restorasi Kelas -->
-              <div class="p-2 rounded border-2 border-dashed border-slate-400 bg-slate-50 space-y-1">
-                <span class="font-bold text-slate-800 text-[10px] block">[FOTO BUKTI RESTORASI KELAS TK-02] *</span>
-                ${wireframeImg('FOTO RESTORASI TK-02', 'restorasi_TK02.jpg • 2.1 MB', 'h-16')}
-              </div>
-
-              <div class="p-1.5 rounded border border-slate-300 bg-white space-y-0.5">
-                <div class="flex justify-between"><span>Verifikator:</span><strong>Baharuddin, S.Pd.</strong></div>
-                <div class="flex justify-between"><span>No. BAST Restorasi:</span><strong class="text-slate-900 font-bold">BAST-20261015-019</strong></div>
-              </div>
-
-              <div class="flex items-start space-x-1.5 pt-0.5 text-[9px] text-slate-700">
-                <span class="font-bold">[X]</span>
-                <span>Saya menjamin seluruh fasilitas telah disusun rapi di ruang asal.</span>
-              </div>
-
-              <button onclick="alert('Bukti restorasi mebelair terverifikasi!\nNo. BAST: BAST-20261015-019\nVerifikator: Baharuddin, S.Pd.'); showScreen(7);" class="w-full py-2 rounded bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
-                [KIRIM BUKTI &amp; RESTORASI SELESAI →]
-              </button>
+          <!-- Pilih Pinjaman -->
+          <div class="space-y-1">
+            <span class="font-bold text-[10px] block">PILIH BARANG DIPINJAM:</span>
+            <div class="p-2 border-2 border-slate-800 bg-slate-100 font-bold flex justify-between">
+              <span>Laptop ASUS (#PINJ-001)</span>
+              <span>[DIPILIH]</span>
             </div>
           </div>
+
+          <!-- Form Pengembalian -->
+          <div class="p-2 border border-slate-800 bg-white space-y-2">
+            <div>
+              <label class="font-bold block">Kondisi Fisik Saat Kembali *</label>
+              <div class="p-1.5 border border-slate-800 bg-white">[ Baik &amp; Lengkap ▼ ]</div>
+            </div>
+
+            <div>
+              <label class="font-bold block">Foto Bukti Penyerahan Lab *</label>
+              ${wireframeImg('FOTO PENYERAHAN LAB 1', 'h-16')}
+            </div>
+
+            <div class="text-[10px] space-y-0.5 pt-1 border-t border-slate-200">
+              <div>Penerima: <strong>Ahmad Dahlan, S.T.</strong></div>
+              <div>No. BAST: <strong>BAST-20261016-042</strong></div>
+            </div>
+          </div>
+
+          <button onclick="alert('Bukti Pengembalian Berhasil Terbit!'); showScreen(7);" class="w-full py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold">
+            Selesaikan Pengembalian →
+          </button>
         `
       },
       7: {
-        title: "7. Bukti Bebas Peminjaman",
+        title: "7. Bebas Sarpras",
         pic: "Rezky Awalya",
-        desc: "Status penyelesaian seluruh tanggungan sarpras untuk syarat yudisium/wisuda mahasiswa.",
-        points: ["Badge centang bebas tanggungan", "Teks keterangan bebas sarpras", "Daftar BAST yang terverifikasi", "Tombol unduh PDF surat keterangan"],
+        desc: "Surat keterangan bebas tanggungan sarana dan prasarana.",
         html: `
-          <div class="p-4 flex flex-col justify-center items-center text-center my-auto min-h-[480px] font-mono">
-            <!-- Big Checkmark Box -->
-            <div class="w-16 h-16 rounded-full border-4 border-slate-900 bg-slate-100 flex items-center justify-center text-2xl font-black mb-3">
+          <div class="p-4 border-2 border-slate-800 bg-slate-50 text-center space-y-3 my-auto">
+            <div class="w-12 h-12 rounded-full border-2 border-slate-800 bg-white flex items-center justify-center font-bold text-lg mx-auto">
               [✓]
             </div>
 
-            <span class="text-[9px] font-bold text-slate-500 uppercase block">[STATUS: BEBAS SARPRAS]</span>
-            <h2 class="text-sm font-black text-slate-900 mt-1 mb-1">Bebas Peminjaman Sarana Prasarana</h2>
-            <p class="text-[10px] text-slate-600 max-w-xs leading-relaxed mb-3 font-sans">
-              Seluruh fasilitas laboratorium dan mebelair perkuliahan telah dikembalikan lengkap dengan Berita Acara Serah Terima (BAST) yang sah.
-            </p>
-
-            <!-- Mini Box BAST Terverifikasi Mobile -->
-            <div class="w-full max-w-xs p-2 rounded border border-slate-400 bg-white text-left space-y-1 mb-4 text-[9px]">
-              <div class="flex justify-between border-b border-slate-200 pb-0.5 font-bold">
-                <span>[BAST TERVERIFIKASI]</span>
-                <span class="text-slate-500">[2 DOKUMEN]</span>
-              </div>
-              <div class="flex justify-between text-slate-700">
-                <span>• Laptop ASUS (BAST-042)</span>
-                <span class="font-bold">[DITERIMA]</span>
-              </div>
-              <div class="flex justify-between text-slate-700">
-                <span>• Meja &amp; Bangku (BAST-019)</span>
-                <span class="font-bold">[RESTORASI]</span>
-              </div>
+            <div>
+              <h3 class="font-bold text-sm">Bebas Peminjaman Sarpras</h3>
+              <p class="text-[10px] text-slate-600 mt-0.5">
+                Seluruh barang alat lab dan mebelair perkuliahan telah dikembalikan lunas.
+              </p>
             </div>
 
-            <div class="w-full space-y-2 max-w-xs">
-              <button onclick="alert('Bukti Bebas Sarpras Mobile (PDF) berhasil diunduh!')" class="w-full py-2.5 rounded bg-slate-900 text-white text-xs font-bold hover:bg-slate-800">
-                [UNDUH SURAT BEBAS SARPRAS (PDF)]
-              </button>
-              <button onclick="showScreen(1)" class="w-full py-2 rounded border border-slate-400 text-slate-700 text-xs font-bold hover:bg-slate-100">
-                [KEMBALI KE BERANDA]
-              </button>
+            <div class="p-2 border border-slate-800 bg-white text-left text-[10px] space-y-0.5">
+              <div>• Laptop ASUS: <strong>BAST-042 (Sah)</strong></div>
+              <div>• Meja &amp; Bangku: <strong>BAST-019 (Sah)</strong></div>
             </div>
+
+            <button onclick="alert('Surat Bebas Sarpras (PDF) Terunduh!')" class="w-full py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold">
+              [ UNDUH SURAT PDF ]
+            </button>
           </div>
         `
       }
@@ -729,43 +454,27 @@
 
     function showScreen(num, submode) {
       currentScreen = num;
-      if (num === 4 && submode) {
-        currentMobileTab = submode;
-      }
+      if (num === 4 && submode) currentMobileTab = submode;
 
       const data = screens[num];
-
-      // Update inner phone
       document.getElementById('phoneInner').innerHTML = data.html;
 
-      // Update side meta
       document.getElementById('screenMeta').innerHTML = `
-        <div class="flex items-center space-x-2 mb-2 font-mono">
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-200 border border-slate-700">[LAYAR 0${num}]</span>
-          <span class="text-xs font-bold text-slate-300">PIC: ${data.pic}</span>
-        </div>
-        <h3 class="text-base font-bold text-white mb-1 font-mono">${data.title}</h3>
-        <p class="text-xs text-slate-400 mb-4 leading-relaxed font-sans">${data.desc}</p>
-        
-        <div class="space-y-1 text-xs text-slate-400 border-t border-slate-800 pt-3 font-mono">
-          <strong class="text-slate-200 block mb-1">[KOMPONEN UTAMA]:</strong>
-          ${data.points.map(p => `<div>• ${p}</div>`).join('')}
-        </div>
+        <span class="px-1.5 py-0.5 bg-white text-slate-900 font-bold text-[9px] uppercase">Layar 0${num}</span>
+        <h3 class="font-bold text-sm text-white mt-1">${data.title}</h3>
+        <span class="text-[10px] text-slate-400 block mb-2">PIC: ${data.pic}</span>
+        <p class="text-[11px] text-slate-300">${data.desc}</p>
       `;
 
-      // Update nav pills
       document.querySelectorAll('.nav-pill').forEach(btn => {
         if (parseInt(btn.getAttribute('data-screen')) === num) {
-          btn.className = 'nav-pill px-3 py-1.5 rounded font-bold transition bg-white text-slate-950 border border-white';
+          btn.className = 'nav-pill px-3 py-1 rounded font-bold bg-white text-slate-950';
         } else {
-          btn.className = 'nav-pill px-3 py-1.5 rounded font-medium transition bg-slate-800 text-slate-400 hover:text-white border border-slate-700';
+          btn.className = 'nav-pill px-3 py-1 rounded font-medium bg-slate-800 text-slate-400 hover:text-white';
         }
       });
 
-      // Restore active tab on screen 4
-      if (num === 4) {
-        switchMobileFormTab(currentMobileTab);
-      }
+      if (num === 4) switchMobileFormTab(currentMobileTab);
     }
 
     function switchMobileFormTab(tab) {
@@ -774,58 +483,18 @@
       const pBangku = document.getElementById('mPanelBangku');
       const bAlat = document.getElementById('mTabAlat');
       const bBangku = document.getElementById('mTabBangku');
-
       if (!pAlat || !pBangku) return;
 
       if (tab === 'bangku') {
         pAlat.classList.add('hidden');
         pBangku.classList.remove('hidden');
-        if (bBangku) bBangku.className = 'px-2 py-0.5 rounded bg-slate-900 text-white';
-        if (bAlat) bAlat.className = 'px-2 py-0.5 rounded border border-slate-300 text-slate-700';
+        if (bBangku) bBangku.className = 'px-2 py-0.5 border border-slate-800 bg-slate-900 text-white';
+        if (bAlat) bAlat.className = 'px-2 py-0.5 border border-slate-800 bg-white text-slate-800';
       } else {
         pBangku.classList.add('hidden');
         pAlat.classList.remove('hidden');
-        if (bAlat) bAlat.className = 'px-2 py-0.5 rounded bg-slate-900 text-white';
-        if (bBangku) bBangku.className = 'px-2 py-0.5 rounded border border-slate-300 text-slate-700';
-      }
-    }
-
-    function switchMobileReturn(item) {
-      const pLaptop = document.getElementById('mPanelRetLaptop');
-      const pBangku = document.getElementById('mPanelRetBangku');
-      const bLaptop = document.getElementById('mBtnRetLaptop');
-      const bBangku = document.getElementById('mBtnRetBangku');
-      if (!pLaptop || !pBangku) return;
-
-      if (item === 'laptop') {
-        pLaptop.classList.remove('hidden');
-        pBangku.classList.add('hidden');
-        if (bLaptop) bLaptop.className = 'p-1.5 rounded border-2 border-slate-900 bg-slate-100 text-left';
-        if (bBangku) bBangku.className = 'p-1.5 rounded border border-slate-300 bg-white text-left';
-      } else {
-        pBangku.classList.remove('hidden');
-        pLaptop.classList.add('hidden');
-        if (bBangku) bBangku.className = 'p-1.5 rounded border-2 border-slate-900 bg-slate-100 text-left';
-        if (bLaptop) bLaptop.className = 'p-1.5 rounded border border-slate-300 bg-white text-left';
-      }
-    }
-
-    function updateMobileRoomQuota() {
-      const select = document.getElementById('mFormRuangAsal');
-      const title = document.getElementById('mQuotaTitle');
-      const desc = document.getElementById('mQuotaDesc');
-      if (!select || !title || !desc) return;
-
-      const val = select.value;
-      if (val === 'tk02') {
-        title.innerText = '[TK-02: 42 B & 22 M]';
-        desc.innerText = 'Batas aman 30 B & 15 M. Kuota boleh pinjam: maks 12 B, 7 M.';
-      } else if (val === 'tk01') {
-        title.innerText = '[TK-01: 35 B & 18 M]';
-        desc.innerText = 'Batas aman 30 B & 15 M. Kuota boleh pinjam: maks 5 B, 3 M.';
-      } else {
-        title.innerText = '[BENGKEL: 25 K & 10 M]';
-        desc.innerText = 'Batas cadangan 15 K & 6 M. Kuota boleh pinjam: maks 10 K, 4 M.';
+        if (bAlat) bAlat.className = 'px-2 py-0.5 border border-slate-800 bg-slate-900 text-white';
+        if (bBangku) bBangku.className = 'px-2 py-0.5 border border-slate-800 bg-white text-slate-800';
       }
     }
 
@@ -834,15 +503,15 @@
         document.getElementById('deviceView').classList.remove('hidden');
         document.getElementById('gridView').classList.add('hidden');
         document.getElementById('screenNavPills').classList.remove('hidden');
-        document.getElementById('btnDeviceMode').className = 'px-3 py-1.5 rounded text-xs font-mono font-bold bg-white text-slate-950 border border-white transition';
-        document.getElementById('btnGridMode').className = 'px-3 py-1.5 rounded text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+        document.getElementById('btnDeviceMode').className = 'px-3 py-1.5 rounded font-bold bg-white text-slate-950 border border-white';
+        document.getElementById('btnGridMode').className = 'px-3 py-1.5 rounded font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700';
         showScreen(currentScreen);
       } else {
         document.getElementById('deviceView').classList.add('hidden');
         document.getElementById('gridView').classList.remove('hidden');
         document.getElementById('screenNavPills').classList.add('hidden');
-        document.getElementById('btnDeviceMode').className = 'px-3 py-1.5 rounded text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
-        document.getElementById('btnGridMode').className = 'px-3 py-1.5 rounded text-xs font-mono font-bold bg-white text-slate-950 border border-white transition';
+        document.getElementById('btnDeviceMode').className = 'px-3 py-1.5 rounded font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700';
+        document.getElementById('btnGridMode').className = 'px-3 py-1.5 rounded font-bold bg-white text-slate-950 border border-white';
         renderGrid();
       }
     }
@@ -852,29 +521,23 @@
       container.innerHTML = Object.keys(screens).map(key => {
         const s = screens[key];
         return `
-          <div class="bg-slate-900 border border-slate-700 rounded-xl p-4 flex flex-col justify-between">
-            <div class="mb-3 font-mono">
-              <div class="flex items-center justify-between text-[10px] mb-1">
-                <span class="text-slate-400">[LAYAR 0${key}]</span>
-                <span class="text-slate-300 font-bold">${s.pic}</span>
-              </div>
-              <h3 class="font-bold text-sm text-white">${s.title}</h3>
+          <div class="border-2 border-slate-700 bg-slate-950 p-2.5 rounded font-mono">
+            <div class="flex justify-between items-center text-[10px] mb-1.5">
+              <span class="text-white font-bold">${s.title}</span>
+              <span class="text-slate-400">${s.pic}</span>
             </div>
-            
-            <!-- Mini Screen Preview Container -->
-            <div class="bg-white rounded overflow-hidden border border-slate-400 text-slate-900 mb-3" style="min-height: 420px;">
+            <div class="bg-white p-2.5 border-2 border-slate-800 text-slate-900 rounded-sm mb-2" style="min-height: 380px;">
               ${s.html}
             </div>
-
-            <button onclick="setMode('device'); showScreen(${key});" class="w-full py-2 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-mono font-bold text-white transition">
-              [BUKA DI SIMULATOR HP →]
+            <button onclick="setMode('device'); showScreen(${key});" class="w-full py-1 border border-slate-600 bg-slate-800 text-white text-[11px] hover:bg-slate-700">
+              Buka di HP →
             </button>
           </div>
         `;
       }).join('');
     }
 
-    // Initialize on load
+    // Init
     showScreen(1);
   </script>
 </body>
