@@ -661,40 +661,99 @@
               <span>Laporan Pengembalian</span>
             </div>
 
-            <!-- Form -->
-            <div class="space-y-2.5 text-xs">
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Pilih Barang Pinjaman *</label>
-                <div class="p-2 rounded-lg border border-slate-300 bg-white flex justify-between items-center text-slate-800">
-                  <span>Meja &amp; Bangku Teori (10 B, 5 M)</span>
-                  <span>▼</span>
-                </div>
-              </div>
-
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Kondisi Saat Ini *</label>
-                <div class="p-2 rounded-lg border border-slate-300 bg-white flex justify-between items-center text-slate-800">
-                  <span>Lengkap 10 Bangku &amp; 5 Meja</span>
-                  <span>▼</span>
-                </div>
-              </div>
-
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Catatan Pengembalian / Restorasi</label>
-                <div class="p-2 h-16 rounded-lg border border-slate-300 bg-white text-slate-700 text-[11px]">
-                  Seluruh 10 bangku &amp; 5 meja telah dikembalikan utuh dan disusun rapi ke Ruang Teori TK-02.
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-2 pt-1 text-[11px] text-slate-600">
-                <input type="checkbox" checked class="mt-0.5 rounded border-slate-300">
-                <span>Saya memastikan fasilitas telah direstorasi ke ruang asal.</span>
+            <!-- Pilih Pinjaman Aktif -->
+            <div class="space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-700 block uppercase">Pilih Barang Pinjaman Aktif:</span>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button id="mBtnRetLaptop" onclick="switchMobileReturn('laptop')" class="p-2 rounded-xl border-2 border-slate-900 bg-slate-100 text-left transition">
+                  <span class="text-xs">💻</span>
+                  <div class="font-bold text-[10px] text-slate-900 truncate">Laptop ASUS</div>
+                  <span class="text-[8px] text-slate-500 font-mono">#PINJ-001</span>
+                </button>
+                <button id="mBtnRetBangku" onclick="switchMobileReturn('bangku')" class="p-2 rounded-xl border border-slate-300 bg-white text-left transition">
+                  <span class="text-xs">🪑</span>
+                  <div class="font-bold text-[10px] text-slate-900 truncate">Meja &amp; Bangku</div>
+                  <span class="text-[8px] text-slate-500 font-mono">#REL-008</span>
+                </button>
               </div>
             </div>
 
-            <button onclick="showScreen(7)" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
-              Kirim Laporan & Verifikasi Selesai
-            </button>
+            <!-- Panel Return Laptop Mobile -->
+            <div id="mPanelRetLaptop" class="space-y-2.5 text-xs">
+              <div class="p-2 rounded-lg border border-slate-300 bg-slate-50 text-[10px] space-y-0.5">
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Tujuan Kembali:</span>
+                  <span class="font-bold text-slate-900">Meja Teknisi Lab 1</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Jatuh Tempo:</span>
+                  <span class="font-bold text-slate-900">16/05/2026</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1 text-[10px]">Kondisi Fisik Saat Kembali *</label>
+                <select class="w-full p-2 rounded-lg border border-slate-300 bg-white text-[11px] font-semibold text-slate-800">
+                  <option selected>Baik &amp; Lengkap (Unit, Charger, Tas)</option>
+                  <option>Ada Kerusakan Fisik / Lecet</option>
+                  <option>Kendala Software / Hang</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1 text-[10px]">Catatan Penggunaan</label>
+                <div class="p-2 h-14 rounded-lg border border-slate-300 bg-white text-slate-700 text-[10px]">
+                  Laptop digunakan normal untuk praktikum, fungsi keyboard &amp; charger baik.
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-1.5 pt-0.5 text-[10px] text-slate-600">
+                <input type="checkbox" checked class="mt-0.5 rounded border-slate-300">
+                <span>Saya menyerahkan fisik barang ke teknisi laboratorium.</span>
+              </div>
+
+              <button onclick="alert('Pengembalian Laptop ASUS berhasil diverifikasi!'); showScreen(7);" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow">
+                Selesaikan Pengembalian Laptop →
+              </button>
+            </div>
+
+            <!-- Panel Return Bangku Mobile -->
+            <div id="mPanelRetBangku" class="space-y-2.5 text-xs hidden">
+              <div class="p-2 rounded-lg border border-slate-300 bg-slate-50 text-[10px] space-y-0.5">
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Ruang Asal:</span>
+                  <span class="font-bold text-slate-900">Ruang Teori TK-02</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Jumlah:</span>
+                  <span class="font-bold text-slate-900">10 Bangku, 5 Meja</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1 text-[10px]">Kondisi Saat Kembali *</label>
+                <select class="w-full p-2 rounded-lg border border-slate-300 bg-white text-[11px] font-semibold text-slate-800">
+                  <option selected>Lengkap &amp; Kokoh (10 B, 5 M)</option>
+                  <option>Ada Kerusakan Meja/Bangku</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="font-bold text-slate-700 block mb-1 text-[10px]">Catatan Restorasi</label>
+                <div class="p-2 h-14 rounded-lg border border-slate-300 bg-white text-slate-700 text-[10px]">
+                  Seluruh 10 bangku &amp; 5 meja telah dikembalikan rapi ke Ruang TK-02.
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-1.5 pt-0.5 text-[10px] text-slate-600">
+                <input type="checkbox" checked class="mt-0.5 rounded border-slate-300">
+                <span>Saya menjamin seluruh fasilitas telah disusun rapi di ruang asal.</span>
+              </div>
+
+              <button onclick="alert('Restorasi Meja &amp; Bangku ke Ruang TK-02 berhasil diverifikasi!'); showScreen(7);" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow">
+                Konfirmasi Restorasi Selesai →
+              </button>
+            </div>
           </div>
         `
       },
@@ -791,6 +850,26 @@
         pAlat.classList.remove('hidden');
         if (bAlat) bAlat.className = 'px-2 py-1 rounded bg-slate-900 text-white font-bold transition';
         if (bBangku) bBangku.className = 'px-2 py-1 rounded text-slate-700 hover:text-slate-900 font-bold transition';
+      }
+    }
+
+    function switchMobileReturn(item) {
+      const pLaptop = document.getElementById('mPanelRetLaptop');
+      const pBangku = document.getElementById('mPanelRetBangku');
+      const bLaptop = document.getElementById('mBtnRetLaptop');
+      const bBangku = document.getElementById('mBtnRetBangku');
+      if (!pLaptop || !pBangku) return;
+
+      if (item === 'laptop') {
+        pLaptop.classList.remove('hidden');
+        pBangku.classList.add('hidden');
+        if (bLaptop) bLaptop.className = 'p-2 rounded-xl border-2 border-slate-900 bg-slate-100 text-left transition';
+        if (bBangku) bBangku.className = 'p-2 rounded-xl border border-slate-300 bg-white text-left transition';
+      } else {
+        pBangku.classList.remove('hidden');
+        pLaptop.classList.add('hidden');
+        if (bBangku) bBangku.className = 'p-2 rounded-xl border-2 border-slate-900 bg-slate-100 text-left transition';
+        if (bLaptop) bLaptop.className = 'p-2 rounded-xl border border-slate-300 bg-white text-left transition';
       }
     }
 

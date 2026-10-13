@@ -935,69 +935,172 @@
         url: "sisapras.jtik.unm.ac.id/pengembalian",
         pic: "Asyifa Nur Cahya Kamila",
         body: `
-          <div class="space-y-6">
-            <h2 class="text-base font-extrabold text-slate-900">Laporan Penggunaan dan Pengembalian</h2>
+          <div class="space-y-5">
+            <div>
+              <h2 class="text-base font-extrabold text-slate-900">Laporan Penggunaan dan Pengembalian</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Pilih transaksi dari daftar barang yang sedang Anda pinjam untuk mengisi laporan kondisi fisik dan menyelesaikan pengembalian.</p>
+            </div>
 
-            <!-- Form Laporan -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-xl border border-slate-200 bg-slate-50">
-              <div class="space-y-3 text-xs">
-                <div>
-                  <label class="font-bold text-slate-700 block mb-1">Barang Yang Digunakan *</label>
-                  <div class="p-2.5 rounded-lg border border-slate-300 bg-white flex justify-between">
-                    <span>Pilih barang...</span>
-                    <span>▼</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label class="font-bold text-slate-700 block mb-1">Kondisi Saat Digunakan *</label>
-                  <div class="p-2.5 rounded-lg border border-slate-300 bg-white flex justify-between">
-                    <span>Pilih kondisi...</span>
-                    <span>▼</span>
-                  </div>
-                </div>
+            <!-- BAGIAN 1: PILIH DARI DAFTAR PINJAMAN AKTIF MAHASISWA -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800 uppercase tracking-wide">1. Pilih Barang dari Pinjaman Aktif Anda (2 Transaksi)</span>
+                <span class="text-[11px] text-slate-500 font-medium">Hanya memuat barang yang sedang Anda pinjam</span>
               </div>
 
-              <div class="space-y-3 text-xs flex flex-col justify-between">
-                <div>
-                  <label class="font-bold text-slate-700 block mb-1">Catatan Penggunaan</label>
-                  <div class="p-2.5 h-20 rounded-lg border border-slate-300 bg-white text-slate-400">
-                    Tulis catatan kondisi alat atau kendala saat pemakaian...
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Card 1: Laptop -->
+                <div id="cardReturnLaptop" onclick="switchDesktopReturnItem('laptop')" class="p-4 rounded-xl border-2 border-slate-900 bg-slate-50 cursor-pointer transition shadow-sm">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center space-x-2.5">
+                      <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center text-lg">💻</div>
+                      <div>
+                        <h4 class="font-bold text-xs text-slate-900">Laptop ASUS Core i7</h4>
+                        <span class="text-[10px] text-slate-500 font-mono">#PINJ-20261012-001</span>
+                      </div>
+                    </div>
+                    <span id="badgeReturnLaptop" class="px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-bold">Dipilih</span>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] space-y-1 text-slate-600">
+                    <div class="flex justify-between"><span>Jumlah:</span><span class="font-bold text-slate-800">1 Unit</span></div>
+                    <div class="flex justify-between"><span>Tanggal Pinjam:</span><span class="font-bold text-slate-800">12/05/2026</span></div>
+                    <div class="flex justify-between"><span>Jatuh Tempo:</span><span class="font-bold text-slate-800">16/05/2026</span></div>
+                    <div class="flex justify-between"><span>Lokasi Pengembalian:</span><span class="font-bold text-slate-800">Meja Teknisi Lab 1</span></div>
                   </div>
                 </div>
-                <div class="flex justify-end">
-                  <button class="px-5 py-2 rounded-lg bg-slate-900 text-white font-bold">Simpan Laporan</button>
+
+                <!-- Card 2: Meja & Bangku -->
+                <div id="cardReturnBangku" onclick="switchDesktopReturnItem('bangku')" class="p-4 rounded-xl border border-slate-300 bg-white hover:border-slate-500 cursor-pointer transition">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center space-x-2.5">
+                      <div class="w-9 h-9 rounded-lg bg-slate-200 text-slate-800 flex items-center justify-center text-lg">🪑</div>
+                      <div>
+                        <h4 class="font-bold text-xs text-slate-900">Meja &amp; Bangku Teori</h4>
+                        <span class="text-[10px] text-slate-500 font-mono">#REL-20261014-008</span>
+                      </div>
+                    </div>
+                    <span id="badgeReturnBangku" class="px-2 py-0.5 rounded border border-slate-300 bg-slate-100 text-slate-600 text-[10px] font-bold">Pilih</span>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] space-y-1 text-slate-600">
+                    <div class="flex justify-between"><span>Jumlah:</span><span class="font-bold text-slate-800">10 Bangku, 5 Meja</span></div>
+                    <div class="flex justify-between"><span>Tanggal Pinjam:</span><span class="font-bold text-slate-800">15/10/2026</span></div>
+                    <div class="flex justify-between"><span>Rute Relokasi:</span><span class="font-bold text-slate-800">TK-02 ➔ TK-03</span></div>
+                    <div class="flex justify-between"><span>Restorasi ke:</span><span class="font-bold text-slate-800">Ruang Teori TK-02</span></div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Bagian Pengembalian Fisik -->
-            <div class="p-4 rounded-xl border border-slate-200 bg-white space-y-3 text-xs">
-              <h3 class="font-bold text-slate-900">Pengembalian Barang Fisik</h3>
-              <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-lg border border-slate-200 bg-slate-50">
-                <div>
-                  <span class="font-bold text-slate-900 block">Laptop ASUS Core i7 (1 Unit)</span>
-                  <span class="text-[10px] text-slate-500">Dipinjam: 12/05/2026 • Jatuh Tempo: 16/05/2026</span>
+            <!-- BAGIAN 2: FORMULIR LAPORAN PENGGUNAAN & PENGEMBALIAN FISIK (TERVALIDASI SESUAI BARANG TERPILIH) -->
+            <div>
+              <span class="text-xs font-bold text-slate-800 uppercase tracking-wide block mb-2">2. Formulir Laporan Kondisi &amp; Konfirmasi Pengembalian</span>
+
+              <!-- PANEL FORM LAPTOP -->
+              <div id="panelReturnLaptop" class="p-5 rounded-2xl border border-slate-300 bg-slate-50 space-y-4">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                  <div>
+                    <span class="text-[10px] font-mono font-bold text-slate-500 uppercase">Terkunci dari Pinjaman Aktif #PINJ-20261012-001</span>
+                    <h3 class="text-sm font-black text-slate-900">Pengembalian: Laptop ASUS Core i7 (1 Unit)</h3>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-slate-900 text-white text-[10px] font-bold">Lab Komputer 1</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <div class="p-2 rounded border border-slate-300 bg-white text-[11px]">Kondisi: Baik ▼</div>
-                  <button onclick="goToDesktopScreen(7)" class="px-4 py-2 rounded bg-slate-900 text-white font-bold">Ajukan Pengembalian</button>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs bg-white p-3 rounded-xl border border-slate-200">
+                  <div>
+                    <span class="text-slate-500 text-[10px] block">Peminjam:</span>
+                    <span class="font-bold text-slate-900">Warnisyah Armin (250210500034)</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 text-[10px] block">Mata Kuliah / Keperluan:</span>
+                    <span class="font-bold text-slate-900">Praktikum Pemrograman Mobile</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 text-[10px] block">Meja Penyerahan Fisik:</span>
+                    <span class="font-bold text-slate-900">Meja Teknisi Lab 1 (Ruang 101)</span>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-1">Kondisi Fisik Saat Dikembalikan *</label>
+                    <select class="w-full p-2.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
+                      <option selected>Baik &amp; Lengkap (Unit Laptop, Charger, Tas)</option>
+                      <option>Ada Kerusakan Fisik / Lecet</option>
+                      <option>Kendala Software / Hang</option>
+                      <option>Aksesoris / Kabel Charger Hilang</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-1">Catatan Penggunaan &amp; Kendala Pemakaian</label>
+                    <textarea class="w-full p-2.5 h-20 rounded-lg border border-slate-300 bg-white text-slate-700 text-xs leading-relaxed" placeholder="Tuliskan catatan...">Laptop digunakan normal selama kegiatan praktikum berlangsung, sistem operasi dan charger berjalan baik tanpa kendala.</textarea>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded-lg border border-slate-300 bg-white flex items-start space-x-2 text-xs text-slate-700">
+                  <input type="checkbox" checked class="mt-0.5 rounded border-slate-400">
+                  <span>Saya menyatakan unit laptop fisik beserta charger telah diserahkan langsung ke meja teknisi Lab Komputer 1.</span>
+                </div>
+
+                <div class="flex justify-end space-x-2 pt-1">
+                  <button onclick="goToDesktopScreen(5)" class="px-5 py-2 rounded-lg border border-slate-300 text-slate-700 font-bold hover:bg-slate-100 text-xs">Batal</button>
+                  <button onclick="alert('Laporan tersimpan &amp; Pengembalian Laptop ASUS Core i7 berhasil diverifikasi!'); goToDesktopScreen(7);" class="px-6 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow">
+                    Serahkan &amp; Selesaikan Pengembalian Laptop →
+                  </button>
                 </div>
               </div>
 
-              <!-- Item Pengembalian Meja & Bangku -->
-              <div class="flex flex-wrap items-center justify-between gap-4 p-3 rounded-lg border-2 border-slate-800 bg-slate-50">
-                <div>
-                  <div class="flex items-center space-x-1.5">
-                    <span class="font-bold text-slate-900">🪑 🪵 Meja &amp; Bangku Kuliah Teori (10 Bangku, 5 Meja)</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-900 text-white font-bold">Relokasi Mebelair</span>
+              <!-- PANEL FORM MEJA & BANGKU -->
+              <div id="panelReturnBangku" class="p-5 rounded-2xl border-2 border-slate-900 bg-slate-50 space-y-4 hidden">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                  <div>
+                    <span class="text-[10px] font-mono font-bold text-slate-500 uppercase">Terkunci dari Relokasi Aktif #REL-20261014-008</span>
+                    <h3 class="text-sm font-black text-slate-900">Restorasi: Meja &amp; Bangku Teori (10 Bangku, 5 Meja)</h3>
                   </div>
-                  <span class="text-[10px] text-slate-600 block mt-0.5">Rute: Ruang Teori TK-02 ➔ Ruang Teori TK-03 • Dipinjam: 15/10/2026</span>
-                  <span class="text-[10px] text-slate-700 font-semibold block mt-0.5">☑️ Telah dikembalikan lengkap (10 bangku &amp; 5 meja) dan disusun rapi ke Ruang Teori TK-02</span>
+                  <span class="px-2.5 py-1 rounded bg-slate-900 text-white text-[10px] font-bold">Relokasi Antar-Kelas</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <div class="p-2 rounded border border-slate-300 bg-white text-[11px]">Kondisi: Lengkap (10 B, 5 M) ▼</div>
-                  <button onclick="alert('Pengembalian &amp; restorasi 10 bangku dan 5 meja ke Ruang TK-02 berhasil diverifikasi!'); goToDesktopScreen(7);" class="px-4 py-2 rounded bg-slate-900 text-white font-bold">Konfirmasi Restorasi</button>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs bg-white p-3 rounded-xl border border-slate-200">
+                  <div>
+                    <span class="text-slate-500 text-[10px] block">Penanggung Jawab:</span>
+                    <span class="font-bold text-slate-900">Warnisyah Armin (250210500034)</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 text-[10px] block">Rute Penggunaan:</span>
+                    <span class="font-bold text-slate-900">Ruang TK-02 ➔ Ruang TK-03</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 text-[10px] block">Ruang Tujuan Pengembalian:</span>
+                    <span class="font-bold text-slate-900">Ruang Teori TK-02 (Lantai 2 JTIK)</span>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-1">Kondisi Mebelair Saat Dikembalikan *</label>
+                    <select class="w-full p-2.5 rounded-lg border border-slate-300 bg-white font-semibold text-slate-800 text-xs">
+                      <option selected>Lengkap &amp; Kokoh (10 Bangku Lipat &amp; 5 Meja)</option>
+                      <option>Ada Meja / Bangku Rusak atau Goyang</option>
+                      <option>Jumlah Kurang (Ada yang tertinggal di Ruang TK-03)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-1">Catatan Pengembalian / Restorasi Ruang</label>
+                    <textarea class="w-full p-2.5 h-20 rounded-lg border border-slate-300 bg-white text-slate-700 text-xs leading-relaxed" placeholder="Tuliskan catatan...">Seluruh 10 bangku lipat Chitose dan 5 meja telah selesai dipakai untuk perkuliahan di TK-03 dan telah dikembalikan utuh serta disusun rapi ke Ruang TK-02.</textarea>
+                  </div>
+                </div>
+
+                <div class="p-3 rounded-lg border-2 border-slate-800 bg-white flex items-start space-x-2 text-xs text-slate-700">
+                  <input type="checkbox" checked class="mt-0.5 rounded border-slate-400">
+                  <span>Saya menjamin seluruh 10 bangku &amp; 5 meja telah dikembalikan dan disusun rapi ke Ruang Teori TK-02 agar fasilitas kelas asal tetap aman.</span>
+                </div>
+
+                <div class="flex justify-end space-x-2 pt-1">
+                  <button onclick="goToDesktopScreen(5)" class="px-5 py-2 rounded-lg border border-slate-300 text-slate-700 font-bold hover:bg-slate-100 text-xs">Batal</button>
+                  <button onclick="alert('Restorasi 10 bangku dan 5 meja ke Ruang TK-02 berhasil diverifikasi!'); goToDesktopScreen(7);" class="px-6 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow">
+                    Konfirmasi Restorasi Meja &amp; Bangku Selesai →
+                  </button>
                 </div>
               </div>
             </div>
@@ -1049,6 +1152,7 @@
     let currentDesktopScreen = 1;
     let currentFormTab = 'alat';
     let currentDetailTab = 'alat';
+    let currentReturnItem = 'laptop';
 
     function goToDesktopScreen(num, submode) {
       currentDesktopScreen = num;
@@ -1057,6 +1161,9 @@
       }
       if (num === 3 && submode) {
         currentDetailTab = submode;
+      }
+      if (num === 6 && submode) {
+        currentReturnItem = submode;
       }
 
       const data = dScreens[num];
@@ -1103,6 +1210,11 @@
       if (num === 3) {
         switchDesktopDetail(currentDetailTab);
       }
+
+      // Restore active return view on Screen 6
+      if (num === 6) {
+        switchDesktopReturnItem(currentReturnItem);
+      }
     }
 
     function switchDesktopFormTab(tab) {
@@ -1146,6 +1258,46 @@
         viewAlat.classList.remove('hidden');
         if (btnAlat) btnAlat.className = 'px-3 py-1 rounded-lg bg-slate-900 text-white transition';
         if (btnBangku) btnBangku.className = 'px-3 py-1 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300 transition';
+      }
+    }
+
+    function switchDesktopReturnItem(item) {
+      currentReturnItem = item;
+      const cardLaptop = document.getElementById('cardReturnLaptop');
+      const cardBangku = document.getElementById('cardReturnBangku');
+      const badgeLaptop = document.getElementById('badgeReturnLaptop');
+      const badgeBangku = document.getElementById('badgeReturnBangku');
+      const panelLaptop = document.getElementById('panelReturnLaptop');
+      const panelBangku = document.getElementById('panelReturnBangku');
+
+      if (!cardLaptop || !cardBangku || !panelLaptop || !panelBangku) return;
+
+      if (item === 'laptop') {
+        cardLaptop.className = 'p-4 rounded-xl border-2 border-slate-900 bg-slate-50 cursor-pointer transition shadow-sm';
+        cardBangku.className = 'p-4 rounded-xl border border-slate-300 bg-white hover:border-slate-500 cursor-pointer transition';
+        if (badgeLaptop) {
+          badgeLaptop.className = 'px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-bold';
+          badgeLaptop.innerText = 'Dipilih';
+        }
+        if (badgeBangku) {
+          badgeBangku.className = 'px-2 py-0.5 rounded border border-slate-300 bg-slate-100 text-slate-600 text-[10px] font-bold';
+          badgeBangku.innerText = 'Pilih';
+        }
+        panelLaptop.classList.remove('hidden');
+        panelBangku.classList.add('hidden');
+      } else {
+        cardBangku.className = 'p-4 rounded-xl border-2 border-slate-900 bg-slate-50 cursor-pointer transition shadow-sm';
+        cardLaptop.className = 'p-4 rounded-xl border border-slate-300 bg-white hover:border-slate-500 cursor-pointer transition';
+        if (badgeBangku) {
+          badgeBangku.className = 'px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-bold';
+          badgeBangku.innerText = 'Dipilih';
+        }
+        if (badgeLaptop) {
+          badgeLaptop.className = 'px-2 py-0.5 rounded border border-slate-300 bg-slate-100 text-slate-600 text-[10px] font-bold';
+          badgeLaptop.innerText = 'Pilih';
+        }
+        panelBangku.classList.remove('hidden');
+        panelLaptop.classList.add('hidden');
       }
     }
 
