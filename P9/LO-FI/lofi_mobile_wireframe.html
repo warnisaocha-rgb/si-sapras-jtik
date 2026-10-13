@@ -210,12 +210,15 @@
             </div>
 
             <!-- Banner Lapor Bangku Cepat -->
-            <div class="p-3 rounded-xl border border-slate-800 bg-slate-100 flex items-center justify-between text-xs">
+            <div class="p-3 rounded-xl border-2 border-slate-900 bg-slate-100 flex items-center justify-between text-xs">
               <div>
-                <span class="font-bold text-slate-900 block">Lapor Mutasi Bangku</span>
-                <span class="text-[10px] text-slate-500">Pindah kursi antar-kelas teori</span>
+                <div class="flex items-center space-x-1.5">
+                  <span class="font-bold text-slate-900">🪑 Lapor Mutasi Bangku</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-900 text-white font-bold">FITUR</span>
+                </div>
+                <span class="text-[10px] text-slate-600 block mt-0.5">Ruang TK-02 (Aman diambil: 12) ➔ TK-03</span>
               </div>
-              <button onclick="showScreen(4)" class="px-2.5 py-1 rounded bg-slate-900 text-white text-[10px] font-bold">Lapor</button>
+              <button onclick="showScreen(4, 'bangku')" class="px-2.5 py-1 rounded bg-slate-900 text-white text-[10px] font-bold">Lapor</button>
             </div>
           </div>
         `
@@ -349,94 +352,187 @@
         html: `
           <div class="p-4 space-y-3">
             <!-- Back & Title -->
-            <div class="flex items-center space-x-2 text-xs font-bold text-slate-800">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-800">
               <button onclick="showScreen(3)" class="p-1 rounded hover:bg-slate-100">← Batal</button>
-              <span>Formulir Peminjaman</span>
-            </div>
-
-            <!-- Selected Item Card -->
-            <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center space-x-2.5">
-              <div class="w-10 h-10 rounded-lg image-placeholder shrink-0"></div>
-              <div class="text-xs">
-                <h4 class="font-bold text-slate-900">Laptop ASUS Core i7</h4>
-                <span class="text-[10px] text-slate-500">Tersedia 10 Unit • Lab Komputer 1</span>
+              <div class="flex items-center space-x-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-[10px]">
+                <button id="mTabAlat" onclick="switchMobileFormTab('alat')" class="px-2 py-1 rounded bg-slate-900 text-white font-bold transition">💻 Alat</button>
+                <button id="mTabBangku" onclick="switchMobileFormTab('bangku')" class="px-2 py-1 rounded text-slate-700 hover:text-slate-900 font-bold transition">🪑 Bangku</button>
               </div>
             </div>
 
-            <!-- Data Diri Mahasiswa Peminjam (Mobile Lo-Fi Revisi) -->
-            <div class="p-2.5 rounded-xl border border-slate-300 bg-slate-50 space-y-1.5 text-[11px]">
-              <div class="flex items-center justify-between">
-                <span class="font-extrabold text-[10px] text-slate-800 uppercase tracking-wide">Data Diri Mahasiswa</span>
-                <span class="text-[9px] text-emerald-700 font-bold">✓ SIAKAD</span>
+            <!-- PANEL 1: MOBILE FORM ALAT -->
+            <div id="mPanelAlat" class="space-y-3">
+              <!-- Selected Item Card -->
+              <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center space-x-2.5">
+                <div class="w-10 h-10 rounded-lg image-placeholder shrink-0 flex items-center justify-center text-xs">💻</div>
+                <div class="text-xs">
+                  <h4 class="font-bold text-slate-900">Laptop ASUS Core i7</h4>
+                  <span class="text-[10px] text-slate-500">Tersedia 10 Unit • Lab Komputer 1</span>
+                </div>
               </div>
-              <div class="grid grid-cols-2 gap-1.5">
+
+              <!-- Data Diri Mahasiswa Peminjam (Mobile Lo-Fi Revisi) -->
+              <div class="p-2.5 rounded-xl border border-slate-300 bg-slate-50 space-y-1.5 text-[11px]">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold text-[10px] text-slate-800 uppercase tracking-wide">Data Diri Mahasiswa</span>
+                  <span class="text-[9px] text-emerald-700 font-bold">✓ SIAKAD</span>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <div class="p-1.5 rounded border border-slate-300 bg-white">
+                    <span class="text-[9px] text-slate-400 block">Nama:</span>
+                    <span class="font-bold text-slate-800 truncate block">Warnisyah Armin</span>
+                  </div>
+                  <div class="p-1.5 rounded border border-slate-300 bg-white">
+                    <span class="text-[9px] text-slate-400 block">NIM:</span>
+                    <span class="font-bold text-slate-800 truncate block">250210500034</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <div class="p-1.5 rounded border border-slate-300 bg-white">
+                    <span class="text-[9px] text-slate-400 block">Prodi:</span>
+                    <span class="text-slate-800 truncate block">Teknik Komputer</span>
+                  </div>
+                  <div class="p-1.5 rounded border border-slate-300 bg-white">
+                    <span class="text-[9px] text-slate-400 block">No. WA:</span>
+                    <span class="text-slate-800 truncate block">0852-9876-5432</span>
+                  </div>
+                </div>
                 <div class="p-1.5 rounded border border-slate-300 bg-white">
-                  <span class="text-[9px] text-slate-400 block">Nama:</span>
-                  <span class="font-bold text-slate-800 truncate block">Warnisyah Armin</span>
-                </div>
-                <div class="p-1.5 rounded border border-slate-300 bg-white">
-                  <span class="text-[9px] text-slate-400 block">NIM:</span>
-                  <span class="font-bold text-slate-800 truncate block">250210500034</span>
+                  <span class="text-[9px] text-slate-400 block">Dosen PJ:</span>
+                  <span class="text-slate-800 truncate block">Ayu Lestari, S.Pd., M.Pd.</span>
                 </div>
               </div>
-              <div class="grid grid-cols-2 gap-1.5">
-                <div class="p-1.5 rounded border border-slate-300 bg-white">
-                  <span class="text-[9px] text-slate-400 block">Prodi:</span>
-                  <span class="text-slate-800 truncate block">Teknik Komputer</span>
+
+              <!-- Inputs -->
+              <div class="space-y-2.5 text-xs">
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1 text-[11px]">Jumlah Dipinjam *</label>
+                  <div class="p-2 rounded-lg border border-slate-300 bg-white flex justify-between items-center text-slate-700">
+                    <span>1 Unit</span>
+                    <span>▼</span>
+                  </div>
                 </div>
-                <div class="p-1.5 rounded border border-slate-300 bg-white">
-                  <span class="text-[9px] text-slate-400 block">No. WA:</span>
-                  <span class="text-slate-800 truncate block">0852-9876-5432</span>
+
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1 text-[11px]">Tujuan Penggunaan *</label>
+                  <div class="p-2 rounded-lg border border-slate-300 bg-white text-slate-400">
+                    Contoh: Praktikum Jaringan Komputer...
+                  </div>
+                </div>
+
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1 text-[11px]">Tanggal Penggunaan *</label>
+                  <div class="p-2 rounded-lg border border-slate-300 bg-white flex justify-between items-center text-slate-700">
+                    <span>15/10/2026</span>
+                    <span>📅</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1 text-[11px]">Catatan Tambahan (Opsional)</label>
+                  <div class="p-2 h-12 rounded-lg border border-slate-300 bg-white text-slate-400 text-[11px]">
+                    Tulis catatan spesifikasi khusus...
+                  </div>
                 </div>
               </div>
-              <div class="p-1.5 rounded border border-slate-300 bg-white">
-                <span class="text-[9px] text-slate-400 block">Dosen PJ:</span>
-                <span class="text-slate-800 truncate block">Ayu Lestari, S.Pd., M.Pd.</span>
+
+              <!-- Action Buttons -->
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showScreen(3)" class="py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100">Batal</button>
+                <button onclick="showScreen(5)" class="py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800">Ajukan Pinjam</button>
               </div>
             </div>
 
-            <!-- Inputs -->
-            <div class="space-y-2.5 text-xs">
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Jumlah Dipinjam *</label>
-                <div class="p-2 rounded-lg border border-slate-300 bg-white flex justify-between items-center text-slate-700">
-                  <span>1 Unit</span>
-                  <span>▼</span>
+            <!-- PANEL 2: MOBILE FORM BANGKU -->
+            <div id="mPanelBangku" class="space-y-3 hidden">
+              <!-- Selected Chair Card -->
+              <div class="p-2.5 rounded-xl border-2 border-slate-900 bg-slate-50 flex items-center space-x-2.5">
+                <div class="w-10 h-10 rounded-lg image-placeholder shrink-0 flex items-center justify-center text-lg">🪑</div>
+                <div class="text-xs">
+                  <div class="flex items-center space-x-1">
+                    <h4 class="font-bold text-slate-900">Kursi Kuliah Teori</h4>
+                    <span class="text-[8px] px-1 py-0.2 rounded bg-slate-900 text-white font-bold">MEBELAIR</span>
+                  </div>
+                  <span class="text-[10px] text-slate-600">Total 42 Unit • Ruang Teori TK-02</span>
                 </div>
               </div>
 
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Tujuan Penggunaan *</label>
-                <div class="p-2 rounded-lg border border-slate-300 bg-white text-slate-400">
-                  Contoh: Praktikum Jaringan Komputer...
+              <!-- Data Diri Mahasiswa Peminjam -->
+              <div class="p-2.5 rounded-xl border border-slate-300 bg-slate-50 space-y-1.5 text-[11px]">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold text-[10px] text-slate-800 uppercase tracking-wide">Data Diri Pemohon</span>
+                  <span class="text-[9px] text-emerald-700 font-bold">✓ SIAKAD</span>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <div class="p-1.5 rounded border border-slate-300 bg-white">
+                    <span class="text-[8px] text-slate-400 block">Nama:</span>
+                    <span class="font-bold text-slate-800 truncate block text-[10px]">Warnisyah Armin</span>
+                  </div>
+                  <div class="p-1.5 rounded border border-slate-300 bg-white">
+                    <span class="text-[8px] text-slate-400 block">NIM:</span>
+                    <span class="font-bold text-slate-800 truncate block text-[10px]">250210500034</span>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Tanggal Penggunaan *</label>
-                <div class="p-2 rounded-lg border border-slate-300 bg-white flex justify-between items-center text-slate-700">
-                  <span>15/10/2026</span>
-                  <span>📅</span>
+              <!-- Relokasi Bangku Antar-Kelas -->
+              <div class="p-2.5 rounded-xl border-2 border-slate-800 bg-white space-y-2 text-xs">
+                <span class="font-bold text-slate-900 block text-[11px] pb-1 border-b border-slate-200">📍 Informasi Asal & Tujuan Bangku</span>
+
+                <div>
+                  <label class="font-bold text-slate-700 block mb-0.5 text-[10px]">1. Ruang Asal Pengambilan *</label>
+                  <select id="mFormRuangAsal" onchange="updateMobileRoomQuota()" class="w-full p-1.5 rounded border border-slate-300 bg-white text-[11px] font-semibold">
+                    <option value="tk02" selected>Ruang Teori TK-02 (Aman diambil: 12)</option>
+                    <option value="tk01">Ruang Teori TK-01 (Aman diambil: 5)</option>
+                    <option value="bengkel">Bengkel IT (Aman diambil: 10)</option>
+                  </select>
+                </div>
+
+                <!-- Safe Quota Alert -->
+                <div id="mQuotaNotice" class="p-2 rounded border border-slate-300 bg-slate-50 text-[10px] space-y-0.5">
+                  <strong class="text-slate-900 block" id="mQuotaTitle">Ruang TK-02 (Surplus 42 Unit)</strong>
+                  <span class="text-slate-600 block" id="mQuotaDesc">Batas aman kelas: 30. Maksimal dipinjam: <strong>12 unit</strong> agar kelas reguler tidak kekurangan kursi.</span>
+                </div>
+
+                <div>
+                  <label class="font-bold text-slate-700 block mb-0.5 text-[10px]">2. Ruang Tujuan Pemindahan *</label>
+                  <select class="w-full p-1.5 rounded border border-slate-300 bg-white text-[11px] font-semibold">
+                    <option selected>Ruang Teori TK-03 (Kelas Kurang Kursi)</option>
+                    <option>Aula FT UNM (Seminar / Kuliah Tamu)</option>
+                    <option>Gazebo JTIK (Rapat Organisasi)</option>
+                  </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-0.5 text-[10px]">Jumlah Unit *</label>
+                    <select class="w-full p-1.5 rounded border border-slate-300 bg-white text-[11px] font-semibold">
+                      <option>2 Unit</option>
+                      <option>5 Unit</option>
+                      <option selected>10 Unit</option>
+                      <option>12 Unit (Maks)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="font-bold text-slate-700 block mb-0.5 text-[10px]">Tanggal *</label>
+                    <div class="p-1.5 rounded border border-slate-300 bg-white text-[11px] font-semibold">
+                      15/10/2026
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label class="font-bold text-slate-700 block mb-1 text-[11px]">Catatan Tambahan (Opsional)</label>
-                <div class="p-2 h-14 rounded-lg border border-slate-300 bg-white text-slate-400 text-[11px]">
-                  Tulis catatan spesifikasi khusus...
-                </div>
+              <!-- Komitmen Restorasi -->
+              <div class="p-2 rounded-lg border border-slate-200 bg-slate-50 text-[10px] text-slate-600 flex items-start space-x-1.5">
+                <input type="checkbox" checked class="mt-0.5">
+                <span>Wajib mengembalikan & menyusun rapi kembali ke Ruang Asal setelah selesai perkuliahan.</span>
               </div>
-            </div>
 
-            <!-- Timer Notice -->
-            <div class="p-2 rounded-lg border border-slate-200 bg-slate-100 text-[10px] text-slate-600 font-medium">
-              ℹ️ Peminjaman memiliki batas waktu ambil 15 menit di meja teknisi.
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="grid grid-cols-2 gap-2 pt-1">
-              <button onclick="showScreen(3)" class="py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100">Batal</button>
-              <button onclick="showScreen(5)" class="py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800">Ajukan Pinjam</button>
+              <!-- Action Buttons -->
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showScreen(1)" class="py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100">Batal</button>
+                <button onclick="showScreen(5)" class="py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800">Ajukan Relokasi</button>
+              </div>
             </div>
           </div>
         `
@@ -577,9 +673,14 @@
     };
 
     let currentScreen = 1;
+    let currentMobileTab = 'alat';
 
-    function showScreen(num) {
+    function showScreen(num, submode) {
       currentScreen = num;
+      if (num === 4 && submode) {
+        currentMobileTab = submode;
+      }
+
       const data = screens[num];
 
       // Update inner phone
@@ -608,6 +709,52 @@
           btn.className = 'nav-pill px-3 py-1.5 rounded-full font-medium transition bg-slate-800 text-slate-400 hover:text-white';
         }
       });
+
+      // Restore active tab on screen 4
+      if (num === 4) {
+        switchMobileFormTab(currentMobileTab);
+      }
+    }
+
+    function switchMobileFormTab(tab) {
+      currentMobileTab = tab;
+      const pAlat = document.getElementById('mPanelAlat');
+      const pBangku = document.getElementById('mPanelBangku');
+      const bAlat = document.getElementById('mTabAlat');
+      const bBangku = document.getElementById('mTabBangku');
+
+      if (!pAlat || !pBangku) return;
+
+      if (tab === 'bangku') {
+        pAlat.classList.add('hidden');
+        pBangku.classList.remove('hidden');
+        if (bBangku) bBangku.className = 'px-2 py-1 rounded bg-slate-900 text-white font-bold transition';
+        if (bAlat) bAlat.className = 'px-2 py-1 rounded text-slate-700 hover:text-slate-900 font-bold transition';
+      } else {
+        pBangku.classList.add('hidden');
+        pAlat.classList.remove('hidden');
+        if (bAlat) bAlat.className = 'px-2 py-1 rounded bg-slate-900 text-white font-bold transition';
+        if (bBangku) bBangku.className = 'px-2 py-1 rounded text-slate-700 hover:text-slate-900 font-bold transition';
+      }
+    }
+
+    function updateMobileRoomQuota() {
+      const select = document.getElementById('mFormRuangAsal');
+      const title = document.getElementById('mQuotaTitle');
+      const desc = document.getElementById('mQuotaDesc');
+      if (!select || !title || !desc) return;
+
+      const val = select.value;
+      if (val === 'tk02') {
+        title.innerText = 'Ruang TK-02 (Surplus 42 Unit)';
+        desc.innerHTML = 'Batas aman kelas: 30. Maksimal dipinjam: <strong>12 unit</strong> agar kelas reguler tidak kekurangan kursi.';
+      } else if (val === 'tk01') {
+        title.innerText = 'Ruang TK-01 (Normal 35 Unit)';
+        desc.innerHTML = 'Batas aman kelas: 30. Maksimal dipinjam: <strong>5 unit</strong> agar kelas reguler tidak kekurangan kursi.';
+      } else {
+        title.innerText = 'Bengkel IT (25 Kursi)';
+        desc.innerHTML = 'Batas cadangan: 15. Maksimal dipinjam: <strong>10 unit kursi</strong>.';
+      }
     }
 
     function setMode(mode) {
